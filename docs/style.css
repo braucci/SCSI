@@ -201,4 +201,20 @@ main {
   .solution-box {
     padding: 20px;
   }
+  .support-section {
+  background: #eef5f3;
+  border: 1px solid #d8e7e2;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+.support-section h2 {
+  margin-top: 0;
+}
+
+.support-card {
+  background: #f7fbfa;
+  border: 1px solid #d8e7e2;
+}
 }
