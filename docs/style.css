@@ -209,6 +209,41 @@ main {
   border: 1px solid #d8e7e2;
 }
 
+/* Box licenza in giallo pastello */
+.license-box {
+  background: #fff8d9;
+  border: 1px solid #eadb96;
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+}
+
+.license-box h2 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: #8a6d1f;
+}
+
+.license-box p {
+  margin-bottom: 12px;
+  color: #5a4a1a;
+}
+
+.license-box p:last-child {
+  margin-bottom: 0;
+}
+
+.license-box a {
+  color: #7a5f16;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.license-box a:hover {
+  text-decoration: underline;
+}
+
 /* Layout semplificato per eventuali pagine minimali */
 .page-simple {
   min-height: 100vh;
@@ -266,7 +301,8 @@ main {
   .card,
   .solution-box,
   .simple-box,
-  .support-section {
+  .support-section,
+  .license-box {
     padding: 20px;
   }
 
@@ -281,37 +317,4 @@ main {
     width: 100%;
     text-align: center;
   }
-  .license-box {
-  background: #fff8d9;
-  border: 1px solid #eadb96;
-  border-radius: 16px;
-  padding: 24px 28px;
-  margin-bottom: 28px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
-}
-
-.license-box h2 {
-  margin-top: 0;
-  margin-bottom: 14px;
-  color: #8a6d1f;
-}
-
-.license-box p {
-  margin-bottom: 12px;
-  color: #5a4a1a;
-}
-
-.license-box p:last-child {
-  margin-bottom: 0;
-}
-
-.license-box a {
-  color: #7a5f16;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.license-box a:hover {
-  text-decoration: underline;
-}
 }
