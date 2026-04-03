@@ -209,25 +209,28 @@ main {
   border: 1px solid #d8e7e2;
 }
 
-/* Box licenza in giallo pastello */
 .license-box {
   background: #fff8d9;
   border: 1px solid #eadb96;
   border-radius: 16px;
-  padding: 24px 28px;
+  padding: 20px 24px;
   margin-bottom: 28px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+  text-align: center;
 }
 
 .license-box h2 {
   margin-top: 0;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: #8a6d1f;
+  font-size: 1.3rem;
 }
 
 .license-box p {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: #5a4a1a;
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 .license-box p:last-child {
