@@ -296,6 +296,11 @@ main {
   background: var(--primary-hover);
 }
 
+.featured-card {
+  background: #eef4ff;
+  border: 1px solid #cddcf7;
+}
+
 @media (max-width: 640px) {
   .site-header {
     padding-top: 52px;
