@@ -3,323 +3,570 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Esami di Stato - Costruzioni Aeronautiche</title>
-  <meta name="description" content="Archivio delle soluzioni delle prove di Costruzioni Aeronautiche per gli Esami di Stato." />
-  <link rel="stylesheet" href="style.css" />
+  <title>Esami di Stato — Costruzioni Aeronautiche · Prof. Ing. B. Raucci</title>
+  <meta name="description" content="Archivio tecnico delle soluzioni delle prove di Costruzioni Aeronautiche per gli Esami di Stato e dei materiali di supporto al corso." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;800;900&family=Share+Tech+Mono&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       FONDAMENTI — palette & tipografia "cockpit aerodinamico"
+       (coerenti con AeroFoil Sim / pagine strumentali Raucci)
+       ============================================================ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg0:#060810;   --bg1:#0b1020;   --bg2:#111928;   --bg3:#172035;
+      --border:#1b3a5e; --border-soft:#13243b; --border-glow:#00cfee44;
+      --cyan:#00cfee;  --cyan-dim:#0090aa;
+      --green:#00e59b; --orange:#ff5733; --yellow:#ffd060; --red:#ff3a3a;
+      --white:#e6f2ff; --muted:#3d6080; --label:#7aaac8;
+      --mono:'Share Tech Mono',monospace;
+      --display:'Orbitron',sans-serif;
+      --body:'Exo 2',sans-serif;
+      --r:6px;
+      --maxw:1160px;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg0);
+      color:var(--white);
+      font-family:var(--body);
+      font-size:15px;
+      line-height:1.6;
+      overflow-x:hidden;
+      /* griglia strumentale di fondo */
+      background-image:
+        radial-gradient(circle at 18% -10%, rgba(0,207,238,.07), transparent 55%),
+        radial-gradient(circle at 92% 8%, rgba(0,229,155,.05), transparent 50%),
+        linear-gradient(var(--border-soft) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+      background-size:auto, auto, 46px 46px, 46px 46px;
+      background-attachment:fixed;
+    }
+    ::-webkit-scrollbar{width:9px;height:9px}
+    ::-webkit-scrollbar-track{background:var(--bg1)}
+    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+    ::-webkit-scrollbar-thumb:hover{background:var(--cyan-dim)}
+    a{color:inherit;text-decoration:none}
+    :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:3px}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+    /* ─── TOP BAR (strip strumentale sticky) ─────────────────── */
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      background:linear-gradient(90deg,rgba(11,16,32,.94),rgba(23,32,53,.94));
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--border-glow);
+    }
+    .topbar .container{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;height:52px;
+    }
+    .brand{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--label)}
+    .brand b{color:var(--cyan)}
+    .topnav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+    .topnav a{
+      font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--muted);
+      padding:6px 11px;border:1px solid transparent;border-radius:var(--r);
+      transition:.18s ease;
+    }
+    .topnav a:hover{color:var(--cyan);border-color:var(--border)}
+    .topnav a.ext{color:var(--label);border-color:var(--border)}
+    .topnav a.ext:hover{color:var(--green);border-color:var(--green)}
+
+    /* ─── HERO / HUD ─────────────────────────────────────────── */
+    .hero{position:relative;padding:70px 0 46px;overflow:hidden}
+    .hero .eyebrow{
+      font-family:var(--mono);font-size:12px;letter-spacing:4px;
+      color:var(--cyan);text-transform:uppercase;
+      display:flex;align-items:center;gap:12px;margin-bottom:22px;
+    }
+    .hero .eyebrow::before{
+      content:'';width:34px;height:1px;background:var(--cyan);
+      box-shadow:0 0 10px var(--cyan);
+    }
+    .hero h1{
+      font-family:var(--display);font-weight:800;
+      font-size:clamp(28px,4.6vw,50px);line-height:1.08;
+      letter-spacing:1px;color:var(--white);max-width:18ch;
+      text-shadow:0 0 32px rgba(0,207,238,.25);
+    }
+    .hero h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 26px var(--cyan)}
+    .hero .lead{
+      margin-top:22px;max-width:62ch;color:var(--label);
+      font-size:16.5px;font-weight:300;
+    }
+    /* riga di stato HUD */
+    .statusbar{
+      margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;
+    }
+    .stat{
+      display:flex;flex-direction:column;gap:2px;
+      padding:10px 16px;background:var(--bg1);
+      border:1px solid var(--border);border-radius:var(--r);
+    }
+    .stat .num{font-family:var(--display);font-weight:700;font-size:22px;color:var(--cyan);line-height:1}
+    .stat .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+    .stat.live{flex-direction:row;align-items:center;gap:9px}
+    .stat.live .lbl{font-size:10px;color:var(--label)}
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);animation:pulse 1.6s ease infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    /* linea di scansione decorativa */
+    .hero .scan{
+      position:absolute;left:0;right:0;top:0;height:2px;pointer-events:none;
+      background:linear-gradient(90deg,transparent,var(--cyan-dim),transparent);
+      opacity:.5;animation:scan 7s linear infinite;
+    }
+    @keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(360px)}}
+
+    /* ─── SEZIONI ────────────────────────────────────────────── */
+    main{padding-bottom:80px}
+    .section{padding-top:54px;scroll-margin-top:64px}
+    .section-head{
+      display:flex;align-items:baseline;gap:14px;
+      padding-bottom:8px;margin-bottom:26px;
+      border-bottom:1px solid var(--border);
+    }
+    .section-head h2{
+      font-family:var(--display);font-weight:600;font-size:15px;
+      letter-spacing:3px;text-transform:uppercase;color:var(--white);
+      display:flex;align-items:center;gap:11px;
+    }
+    .section-head h2::before{
+      content:'';width:4px;height:17px;background:var(--cyan);
+      border-radius:2px;box-shadow:0 0 9px var(--cyan);
+    }
+    .section-head .count{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1.5px;margin-left:auto}
+
+    /* ─── PANNELLO TESTO (intro / licenza / nota) ────────────── */
+    .panel{
+      background:var(--bg1);border:1px solid var(--border-soft);
+      border-radius:10px;padding:26px 28px;position:relative;
+    }
+    .panel + .panel{margin-top:18px}
+    .panel h3{
+      font-family:var(--mono);font-size:12px;letter-spacing:2px;
+      text-transform:uppercase;color:var(--cyan);margin-bottom:14px;
+    }
+    .panel p{color:var(--label);font-weight:300;margin-top:10px}
+    .panel p:first-of-type{margin-top:0}
+    .panel strong{color:var(--white);font-weight:600}
+    .panel a.inline{color:var(--cyan);border-bottom:1px solid var(--cyan-dim)}
+    .panel a.inline:hover{color:var(--green);border-color:var(--green)}
+
+    /* ─── GRIGLIA CARD ───────────────────────────────────────── */
+    .grid{
+      display:grid;gap:18px;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    }
+    .card{
+      position:relative;display:flex;flex-direction:column;
+      background:linear-gradient(180deg,var(--bg2),var(--bg1));
+      border:1px solid var(--border-soft);border-radius:10px;
+      padding:22px 22px 20px;overflow:hidden;
+      transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
+    }
+    .card::after{ /* bezel strumentale (angolo) */
+      content:'';position:absolute;top:10px;right:10px;width:16px;height:16px;
+      border-top:1px solid var(--border);border-right:1px solid var(--border);
+      transition:border-color .2s ease;
+    }
+    .card:hover{
+      border-color:var(--cyan);transform:translateY(-3px);
+      box-shadow:0 10px 34px rgba(0,0,0,.45),0 0 0 1px var(--border-glow);
+    }
+    .card:hover::after{border-color:var(--cyan)}
+    .card .desig{
+      font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;
+      color:var(--cyan-dim);text-transform:uppercase;margin-bottom:4px;
+    }
+    .card .kind{
+      font-family:var(--mono);font-size:9px;letter-spacing:2px;
+      color:var(--muted);text-transform:uppercase;margin-bottom:12px;
+    }
+    .card h3{
+      font-family:var(--body);font-weight:700;font-size:18px;
+      color:var(--white);line-height:1.25;margin-bottom:10px;
+    }
+    .card p{color:var(--label);font-weight:300;font-size:14px;flex:1}
+    .card-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+
+    /* card in evidenza (fascicoli organici) */
+    .featured{grid-column:1/-1;border-color:var(--border)}
+    .featured::before{
+      content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+      background:linear-gradient(180deg,var(--cyan),var(--green));
+      box-shadow:0 0 14px var(--cyan);
+    }
+    .featured .desig{color:var(--cyan)}
+    .featured h3{font-size:20px}
+    @media(min-width:760px){
+      .featured{display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px}
+      .featured .card-actions{margin-top:0}
+    }
+
+    /* ─── PULSANTI ───────────────────────────────────────────── */
+    .btn{
+      font-family:var(--mono);font-size:11.5px;letter-spacing:1.5px;
+      text-transform:uppercase;padding:10px 16px;border-radius:var(--r);
+      border:1px solid var(--cyan-dim);cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+      transition:.18s ease;white-space:nowrap;
+    }
+    .btn .arr{transition:transform .18s ease}
+    .btn:hover .arr{transform:translateX(3px)}
+    .btn-primary{color:var(--cyan);background:rgba(0,207,238,.07)}
+    .btn-primary:hover{background:rgba(0,207,238,.18);border-color:var(--cyan);box-shadow:0 0 16px rgba(0,207,238,.25)}
+    .btn-secondary{color:var(--label);background:transparent;border-color:var(--border)}
+    .btn-secondary:hover{color:var(--green);border-color:var(--green);box-shadow:0 0 14px rgba(0,229,155,.18)}
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    .site-footer{
+      border-top:1px solid var(--border);
+      background:var(--bg1);padding:26px 0;margin-top:30px;
+    }
+    .site-footer .container{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:16px;flex-wrap:wrap;
+    }
+    .site-footer p{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--muted)}
+    .site-footer .sign{color:var(--label)}
+
+    @media(max-width:560px){
+      body{font-size:14px}
+      .hero{padding:48px 0 34px}
+      .topnav a:not(.ext){display:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .scan,.dot{animation:none}
+      .card,.btn,.btn .arr{transition:none}
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
+
+  <!-- ───────────── TOP BAR ───────────── -->
+  <div class="topbar">
     <div class="container">
-      <p class="eyebrow">Archivio didattico</p>
-      <h1>Esami di Stato – Soluzioni delle prove di Costruzioni Aeronautiche</h1>
+      <span class="brand"><b>B·RAUCCI</b> // COSTRUZIONI AERONAUTICHE</span>
+      <nav class="topnav">
+        <a href="#prove">Prove</a>
+        <a href="#supporto">Supporto</a>
+        <a href="#licenza">Licenza</a>
+        <a class="ext" href="https://www.raucci.net/" target="_blank" rel="noopener noreferrer">raucci.net ↗</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ───────────── HERO / HUD ───────────── -->
+  <header class="hero">
+    <div class="scan"></div>
+    <div class="container">
+      <p class="eyebrow">Archivio didattico · Esami di Stato</p>
+      <h1>Soluzioni delle prove di <em>Costruzioni Aeronautiche</em></h1>
       <p class="lead">
         Raccolta ordinata di tracce, svolgimenti, note di commento e materiali di supporto
-        relativi alle prove di Costruzioni Aeronautiche.
+        per la seconda prova scritta dell'indirizzo Trasporti e Logistica — opzione
+        Costruzioni Aeronautiche. Impostazione metodologica, dimostrazioni ed esempi numerici.
       </p>
-
-      <div class="header-actions">
-        <a class="btn btn-primary" href="pdf/esame_2025.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF 2025</a>
-        <a class="btn btn-primary" href="pdf/esame2025_straordinaria.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF straordinaria 2025</a>
-        <a class="btn btn-primary" href="pdf/esame_2024.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF 2024</a>
-        <a class="btn btn-primary" href="pdf/esame_2023.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF 2023</a>
-        <a class="btn btn-primary" href="pdf/SessioneStraordinaria_2023.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF straordinaria 2023</a>
-        <a class="btn btn-primary" href="pdf/esame_2019.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF 2019</a>
-        <a class="btn btn-primary" href="pdf/Ordinaria_2018.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF 2018</a>
-        <a class="btn btn-primary" href="pdf/esame_2016.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF 2016</a>
-        <a class="btn btn-primary" href="pdf/2015_ordinaria.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF ordinaria 2015</a>
-        <a class="btn btn-primary" href="pdf/esercizio_longherone.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF 2015</a>
-        <a class="btn btn-secondary" href="https://www.raucci.net/" target="_blank" rel="noopener noreferrer">
-          Torna a raucci.net
-        </a>
+      <div class="statusbar">
+        <div class="stat"><span class="num">10</span><span class="lbl">Prove svolte</span></div>
+        <div class="stat"><span class="num">08</span><span class="lbl">Materiali di supporto</span></div>
+        <div class="stat"><span class="num">2015–25</span><span class="lbl">Sessioni coperte</span></div>
+        <div class="stat live"><span class="dot"></span><span class="lbl">Archivio in aggiornamento</span></div>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="intro-card">
-      <h2>Presentazione</h2>
-      <p>
-        Questa sezione raccoglie materiali relativi agli Esami di Stato per l’indirizzo
-        Costruzioni Aeronautiche. Sono qui riunite prove d’esame, esercizi commentati,
-        schemi risolutivi e documenti di supporto utili per lo studio e per l’impostazione
-        metodologica dei principali problemi della disciplina.
-      </p>
-      <p>
-        I documenti sono organizzati in due aree principali: da un lato l’archivio delle prove
-        d’esame, dall’altro i materiali di supporto, concepiti come guida operativa per affrontare
-        con maggiore consapevolezza le diverse tipologie di esercizi.
-      </p>
+
+    <!-- ───────────── PRESENTAZIONE ───────────── -->
+    <section class="section" id="presentazione" style="padding-top:30px">
+      <div class="panel">
+        <h3>Presentazione</h3>
+        <p>
+          Questa sezione raccoglie i materiali relativi agli Esami di Stato per l'opzione
+          Costruzioni Aeronautiche: prove d'esame svolte, esercizi commentati, schemi risolutivi
+          e documenti di supporto utili per lo studio e per l'impostazione metodologica dei
+          principali problemi della disciplina.
+        </p>
+        <p>
+          I documenti sono organizzati in due aree: l'<strong>archivio delle prove</strong>, con gli
+          svolgimenti sessione per sessione, e i <strong>materiali di supporto</strong>, concepiti come
+          guida operativa per affrontare con maggiore consapevolezza le diverse tipologie di esercizio.
+        </p>
+      </div>
     </section>
 
-    <section class="archive-section">
-      <h2>Archivio delle prove</h2>
+    <!-- ───────────── ARCHIVIO DELLE PROVE ───────────── -->
+    <section class="section" id="prove">
+      <div class="section-head">
+        <h2>Archivio delle prove</h2>
+        <span class="count">// 10 documenti</span>
+      </div>
 
-      <div class="cards">
+      <div class="grid">
+
         <article class="card">
+          <p class="desig">ES · 2025</p>
+          <p class="kind">Sessione ordinaria · Prova</p>
           <h3>Prova 2025</h3>
-          <p>
-            Compito dell’Esame di Stato 2025 dedicato al dimensionamento del longherone
-            in una struttura alare bilongherone a sezione rettangolare cava.
-          </p>
+          <p>Dimensionamento del longherone in una struttura alare bilongherone a sezione rettangolare cava.</p>
           <div class="card-actions">
-            <a href="pdf/esame_2025.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esame_2025.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
+          <p class="desig">ES · 2025-STR</p>
+          <p class="kind">Sessione straordinaria · Prova</p>
           <h3>Sessione straordinaria 2025</h3>
-          <p>
-            Soluzione completa della seconda prova scritta – sessione straordinaria 2025 di
-            Struttura, Costruzione, Sistemi e Impianti del Mezzo Aereo. Il fascicolo sviluppa
-            la prima parte dedicata al volo librato e al dimensionamento del longherone di un
-            aereo da addestramento leggero / aliante a monolongherone con profilo NACA 2312,
-            con ipotesi motivate e passaggi di calcolo esplicitati.
-          </p>
+          <p>Soluzione completa della seconda prova — volo librato e dimensionamento del longherone di un addestratore leggero / aliante a monolongherone con profilo NACA 2312, con ipotesi motivate e passaggi espliciti.</p>
           <div class="card-actions">
-            <a href="pdf/esame2025_straordinaria.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esame2025_straordinaria.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
+          <p class="desig">ES · 2024</p>
+          <p class="kind">Sessione ordinaria · Prova</p>
           <h3>Prova 2024</h3>
-          <p>
-            Soluzione dell’Esame di Stato 2024 dedicata a un UAV a propulsione elettrica.
-            Il fascicolo sviluppa la polare parabolica del velivolo, le velocità caratteristiche,
-            il bilancio energetico e il dimensionamento di un’ala a monolongherone, con confronto
-            finale tra soluzione in legno e in materiale plastico.
-          </p>
+          <p>UAV a propulsione elettrica: polare parabolica, velocità caratteristiche, bilancio energetico e dimensionamento di un'ala a monolongherone, con confronto finale legno / materiale plastico.</p>
           <div class="card-actions">
-            <a href="pdf/esame_2024.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esame_2024.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
-          <h3>Prova 2023</h3>
-          <p>
-            Soluzione svolta della prova d’Esame 2023 sul Piper PA-18 Super Cub, dedicata
-            al dimensionamento dell’asta di controventatura e dell’accoppiamento a forcella.
-            Il fascicolo sviluppa il caso con coefficiente di Oswald e = 0,9 e propone il
-            confronto con il caso e = 1, includendo le principali verifiche su asta tubolare
-            in lega Al 7075-T6 e perno in acciaio AISI 4130.
-          </p>
+          <p class="desig">ES · 2023</p>
+          <p class="kind">Sessione ordinaria · Prova</p>
+          <h3>Prova 2023 — Piper PA-18</h3>
+          <p>Dimensionamento dell'asta di controventatura e dell'accoppiamento a forcella sul Super Cub. Caso con coefficiente di Oswald e = 0,9 e confronto con e = 1; verifiche su asta tubolare Al 7075-T6 e perno in acciaio AISI 4130.</p>
           <div class="card-actions">
-            <a href="pdf/esame_2023.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esame_2023.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
+          <p class="desig">ES · 2023-STR</p>
+          <p class="kind">Sessione straordinaria · Prova</p>
           <h3>Sessione straordinaria 2023</h3>
-          <p>
-            Soluzione svolta della prima parte dell’Esame di Stato – Sessione Straordinaria 2023,
-            dedicata alla virata standard di un velivolo da trasporto passeggeri alla quota di
-            8000 m e alla velocità di massima efficienza, con calcolo della velocità di volo,
-            del raggio di virata, dell’angolo di bank, del fattore di carico e dell’incremento
-            delle sollecitazioni strutturali alla radice alare.
-          </p>
+          <p>Virata standard di un velivolo da trasporto a 8000 m alla velocità di massima efficienza: velocità di volo, raggio di virata, angolo di bank, fattore di carico e incremento delle sollecitazioni alla radice alare.</p>
           <div class="card-actions">
-            <a href="pdf/SessioneStraordinaria_2023.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/SessioneStraordinaria_2023.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
+          <p class="desig">ES · 2019</p>
+          <p class="kind">Sessione ordinaria · Prova</p>
           <h3>Prova 2019</h3>
-          <p>
-            Documento PDF relativo alla prova d’esame 2019 di Costruzioni Aeronautiche.
-          </p>
+          <p>Documento relativo alla prova d'esame 2019 di Costruzioni Aeronautiche.</p>
           <div class="card-actions">
-            <a href="pdf/esame_2019.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esame_2019.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
+          <p class="desig">ES · 2018</p>
+          <p class="kind">Sessione ordinaria · Prova</p>
           <h3>Sessione ordinaria 2018</h3>
-          <p>
-            Soluzione svolta dell’Esame di Stato 2018 – Sessione Ordinaria, dedicata a un
-            velivolo motoelica ultraleggero. Il fascicolo sviluppa la stima delle velocità
-            caratteristiche e delle autonomie massime, e il dimensionamento di massima della
-            catena di comando dell’equilibratore con verifica a instabilità delle aste.
-          </p>
+          <p>Velivolo motoelica ultraleggero: stima delle velocità caratteristiche e delle autonomie massime, dimensionamento di massima della catena di comando dell'equilibratore con verifica a instabilità delle aste.</p>
           <div class="card-actions">
-            <a href="pdf/Ordinaria_2018.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/Ordinaria_2018.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
+          <p class="desig">ES · 2016</p>
+          <p class="kind">Sessione ordinaria · Prova</p>
           <h3>Prova 2016</h3>
-          <p>
-            Soluzione della sessione ordinaria 2016, dedicata alla corsa di atterraggio di un
-            velivolo leggero biposto e alla verifica strutturale della gamba del carrello,
-            trattata come asta tubolare con controllo a flessione e a carico di punta.
-          </p>
+          <p>Corsa di atterraggio di un velivolo leggero biposto e verifica strutturale della gamba del carrello, trattata come asta tubolare con controllo a flessione e a carico di punta.</p>
           <div class="card-actions">
-            <a href="pdf/esame_2016.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esame_2016.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
+          <p class="desig">ES · 2015</p>
+          <p class="kind">Sessione ordinaria · Prova</p>
           <h3>Sessione ordinaria 2015</h3>
-          <p>
-            Soluzione svolta della prima parte dell’Esame di Stato 2015, dedicata al
-            dimensionamento del rivestimento e del longherone di un’ala monolongherone,
-            con valutazione finale dell’angolo di torsione all’estremità alare.
-          </p>
+          <p>Prima parte della prova 2015: dimensionamento del rivestimento e del longherone di un'ala monolongherone, con valutazione finale dell'angolo di torsione all'estremità alare.</p>
           <div class="card-actions">
-            <a href="pdf/2015_ordinaria.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/2015_ordinaria.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
         <article class="card">
-          <h3>Prova 2015</h3>
-          <p>
-            Documento PDF relativo alla prova d’esame 2015 di Costruzioni Aeronautiche.
-          </p>
+          <p class="desig">ES · 2015-B</p>
+          <p class="kind">Esercizio · Longherone</p>
+          <h3>Prova 2015 — Longherone</h3>
+          <p>Documento relativo alla prova d'esame 2015 di Costruzioni Aeronautiche.</p>
           <div class="card-actions">
-            <a href="pdf/esercizio_longherone.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esercizio_longherone.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
+
       </div>
     </section>
 
-    <section class="archive-section support-section">
-      <h2>Materiali di supporto</h2>
+    <!-- ───────────── MATERIALI DI SUPPORTO ───────────── -->
+    <section class="section" id="supporto">
+      <div class="section-head">
+        <h2>Materiali di supporto</h2>
+        <span class="count">// fascicoli &amp; guide operative</span>
+      </div>
 
-      <div class="cards">
-        <article class="card support-card featured-card">
-          <h3>Raccolta ragionata delle prove ministeriali</h3>
-          <p>
-            Raccolta ragionata delle prove d’esame ministeriali per l’opzione Costruzioni
-            Aeronautiche dell’indirizzo ITCT – Trasporti e Logistica. Per ciascuna sessione
-            sono riportati i quesiti della seconda parte con relative risposte argomentate,
-            dimostrazioni, riferimenti normativi (CS-23, CS-25, FAR, EASA) ed esempi numerici.
-          </p>
+      <div class="grid">
+
+        <!-- NUOVA DISPENSA: in evidenza -->
+        <article class="card featured">
+          <div>
+            <p class="desig">DISP · AERO</p>
+            <p class="kind">Dispensa propedeutica · 56 pp · A.S. 2026/2027</p>
+            <h3>Fondamenti di Aerodinamica</h3>
+            <p>
+              Quadro organico in otto capitoli, propedeutico al corso di Costruzioni Aeronautiche.
+              Dalla forza aerodinamica e l'atmosfera standard al teorema di Bernoulli e al paradosso di
+              d'Alembert; strato limite e resistenza di profilo; genesi della portanza (Kutta–Joukowski),
+              polare e centro aerodinamico; ala finita, resistenza indotta e downwash; superfici di
+              controllo e ipersostentazione; fino all'aerodinamica del comprimibile — ugello di de Laval,
+              onde d'urto, resistenza d'onda, regime transonico, profili supercritici e regola delle aree.
+              Ogni argomento segue lo schema <em>significato fisico → formulazione matematica → interpretazione
+              tecnica</em>, con esempi numerici e appendice sull'atmosfera standard.
+            </p>
+          </div>
           <div class="card-actions">
-            <a href="https://braucci.github.io/EsamiMaturita/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-              Apri la raccolta
-            </a>
+            <a href="pdf/fondamenti_di_aerodinamica.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri la dispensa <span class="arr">→</span></a>
           </div>
         </article>
 
-        <article class="card support-card">
-          <h3>Dimensionamento completo dell’asta di controventatura</h3>
-          <p>
-            Schema metodologico utile per affrontare esercizi di dimensionamento dell’asta di
-            controventatura con il metodo di Eulero. Il documento non costituisce un esercizio svolto,
-            ma un supporto operativo per la risoluzione di problemi di questa tipologia.
-          </p>
+        <!-- RACCOLTA MINISTERIALE: in evidenza -->
+        <article class="card featured">
+          <div>
+            <p class="desig">RIF · MIN</p>
+            <p class="kind">Raccolta ragionata · risorsa web</p>
+            <h3>Raccolta ragionata delle prove ministeriali</h3>
+            <p>
+              Raccolta ragionata delle prove d'esame ministeriali per l'opzione Costruzioni Aeronautiche
+              dell'indirizzo ITCT – Trasporti e Logistica. Per ciascuna sessione sono riportati i quesiti
+              della seconda parte con risposte argomentate, dimostrazioni, riferimenti normativi
+              (CS-23, CS-25, FAR, EASA) ed esempi numerici.
+            </p>
+          </div>
           <div class="card-actions">
-            <a href="pdf/Asta_di_controventatura___schema_completo.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="https://braucci.github.io/EsamiMaturita/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri la raccolta <span class="arr">→</span></a>
           </div>
         </article>
 
-        <article class="card support-card">
-          <h3>Esercizi proposti – Diagramma di manovra</h3>
-          <p>
-            Documento contenente un esercizio commentato passo passo per la determinazione del
-            diagramma di manovra e del diagramma di raffica, con riferimento all’inviluppo di volo.
-            Il materiale è pensato come guida operativa per l’impostazione e lo svolgimento di
-            esercizi di questa tipologia.
-          </p>
+        <article class="card">
+          <p class="desig">MET · ASTA</p>
+          <p class="kind">Schema metodologico</p>
+          <h3>Dimensionamento dell'asta di controventatura</h3>
+          <p>Schema operativo per il dimensionamento dell'asta di controventatura con il metodo di Eulero. Non un esercizio svolto, ma un supporto metodologico per la risoluzione di problemi di questa tipologia.</p>
           <div class="card-actions">
-            <a href="pdf/Esercizi_proposti__Diagramma_Manovra.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/Asta_di_controventatura___schema_completo.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
-        <article class="card support-card">
-          <h3>Rivetti – Dimensionamento completo di una giunzione rivettata</h3>
-          <p>
-            Fascicolo didattico dedicato al dimensionamento di una giunzione rivettata, sviluppato
-            come percorso operativo in 6 fasi. Il materiale richiama i principali modi di rottura
-            della giunzione, i criteri geometrici di progetto e la scelta dei rivetti pieni AN 430
-            e AN 426, con esempi numerici guidati utili per lo studio e per l’allenamento sugli
-            esercizi.
-          </p>
+        <article class="card">
+          <p class="desig">ESR · MANOVRA</p>
+          <p class="kind">Esercizi proposti</p>
+          <h3>Diagramma di manovra e di raffica</h3>
+          <p>Esercizio commentato passo passo per la determinazione del diagramma di manovra e del diagramma di raffica, con riferimento all'inviluppo di volo. Guida operativa all'impostazione e allo svolgimento.</p>
           <div class="card-actions">
-            <a href="pdf/Rivetti.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/Esercizi_proposti__Diagramma_Manovra.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
-        <article class="card support-card">
+        <article class="card">
+          <p class="desig">ESR · RIVETTI</p>
+          <p class="kind">Fascicolo didattico · 6 fasi</p>
+          <h3>Dimensionamento di una giunzione rivettata</h3>
+          <p>Percorso operativo in 6 fasi: modi di rottura della giunzione, criteri geometrici di progetto e scelta dei rivetti pieni AN 430 e AN 426, con esempi numerici guidati.</p>
+          <div class="card-actions">
+            <a href="pdf/Rivetti.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="desig">ESR · POLARE</p>
+          <p class="kind">Esercizi svolti</p>
           <h3>Esercizi sulla polare aerodinamica</h3>
-          <p>
-            Raccolta di esercizi svolti sulla polare aerodinamica, con applicazioni al calcolo di
-            portanza, resistenza, momento aerodinamico ed efficienza per ali rettangolari e trapezie.
-            Il fascicolo comprende anche esercizi sulla polare parabolica di Prandtl e di Oswald,
-            sull’efficienza massima e sull’interpretazione di dati sperimentali di galleria del vento.
-          </p>
+          <p>Calcolo di portanza, resistenza, momento ed efficienza per ali rettangolari e trapezie; polare parabolica di Prandtl e di Oswald, efficienza massima e interpretazione di dati di galleria del vento.</p>
           <div class="card-actions">
-            <a href="pdf/esercizi_polare.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/esercizi_polare.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
-        <article class="card support-card">
-          <h3>Esercizi proposti – Le eliche</h3>
-          <p>
-            Fascicolo di supporto dedicato alle eliche, costruito come raccolta di esercizi svolti
-            e richiami teorici. Il materiale guida lo studente nello studio del gruppo motopropulsore,
-            delle potenze e dei rendimenti, dei coefficienti adimensionali e delle principali
-            applicazioni numeriche relative a trazione, coppia, salita e compensazione della coppia
-            di reazione.
-          </p>
+        <article class="card">
+          <p class="desig">ESR · ELICHE</p>
+          <p class="kind">Esercizi svolti · richiami teorici</p>
+          <h3>Le eliche</h3>
+          <p>Gruppo motopropulsore, potenze e rendimenti, coefficienti adimensionali e applicazioni numeriche su trazione, coppia, salita e compensazione della coppia di reazione.</p>
           <div class="card-actions">
-            <a href="pdf/Esercizi_proposti__Eliche-2.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/Esercizi_proposti__Eliche-2.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
 
-        <article class="card support-card">
+        <article class="card">
+          <p class="desig">DISP · PROFILI</p>
+          <p class="kind">Articolo tecnico-didattico</p>
           <h3>Sul funzionamento dei profili alari</h3>
-          <p>
-            Articolo tecnico-didattico dedicato allo studio dell’aerodinamica delle sezioni alari.
-            Il fascicolo introduce la geometria dei profili, le famiglie NACA, il legame tra angolo
-            d’attacco e portanza, la distribuzione di pressione e la genesi della portanza con un
-            approccio fisicamente rigoroso. Ampio spazio è riservato agli effetti viscosi dello
-            strato limite, alla transizione, alla separazione, allo stallo e all’influenza di
-            spessore, curvatura e numero di Reynolds, fino a un esempio applicativo sul NACA 2412
-            impiegato sul Cessna 172.
-          </p>
+          <p>Geometria dei profili e famiglie NACA, legame angolo d'attacco–portanza, distribuzione di pressione e genesi della portanza; effetti viscosi dello strato limite, transizione, separazione, stallo e influenza di spessore, curvatura e Reynolds, fino al NACA 2412 sul Cessna 172.</p>
           <div class="card-actions">
-            <a href="pdf/profili.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri il PDF</a>
+            <a href="pdf/profili.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
         </article>
+
       </div>
     </section>
 
-    <section class="license-box">
-      <h2>Licenza d’uso dei materiali</h2>
-      <p>
-        Salvo ove diversamente indicato, i materiali pubblicati in questa sezione sono concessi in licenza
-        <strong>Creative Commons Attribuzione – Non commerciale – Non opere derivate 4.0 Internazionale (CC BY-NC-ND 4.0)</strong>.
-      </p>
-      <p>
-        È consentita la consultazione e la condivisione dei materiali esclusivamente con
-        <strong>citazione dell’autore</strong>, senza modifiche e per finalità non commerciali.
-      </p>
-      <p>
-        Autore: <strong>Prof. Ing. Biagio Raucci</strong>.
-        Licenza:
-        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer">
-          CC BY-NC-ND 4.0
-        </a>
-      </p>
+    <!-- ───────────── LICENZA ───────────── -->
+    <section class="section" id="licenza">
+      <div class="section-head">
+        <h2>Licenza &amp; note</h2>
+      </div>
+
+      <div class="panel">
+        <h3>Licenza d'uso dei materiali</h3>
+        <p>
+          Salvo ove diversamente indicato, i materiali pubblicati in questa sezione sono concessi in licenza
+          <strong>Creative Commons Attribuzione – Non commerciale – Non opere derivate 4.0 Internazionale
+          (CC BY-NC-ND 4.0)</strong>.
+        </p>
+        <p>
+          È consentita la consultazione e la condivisione dei materiali esclusivamente con
+          <strong>citazione dell'autore</strong>, senza modifiche e per finalità non commerciali.
+        </p>
+        <p>
+          Autore: <strong>Prof. Ing. Biagio Raucci</strong> · Licenza:
+          <a class="inline" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-ND 4.0</a>
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Nota metodologica</h3>
+        <p>
+          I materiali pubblicati hanno finalità esclusivamente didattica. Le soluzioni e gli schemi
+          proposti offrono un supporto allo studio, al ripasso e alla comprensione del metodo risolutivo.
+          In presenza di più approcci corretti, viene privilegiato quello più chiaro, ordinato e coerente
+          con l'impostazione tipica della disciplina.
+        </p>
+      </div>
     </section>
 
-    <section class="intro-card">
-      <h2>Nota metodologica</h2>
-      <p>
-        I materiali pubblicati in questa pagina hanno finalità esclusivamente didattica.
-        Le soluzioni e gli schemi proposti intendono offrire un supporto allo studio,
-        al ripasso e alla comprensione del metodo risolutivo. In presenza di più approcci
-        corretti, viene privilegiato quello maggiormente chiaro, ordinato e coerente con
-        l’impostazione tipica della disciplina.
-      </p>
-    </section>
   </main>
 
+  <!-- ───────────── FOOTER ───────────── -->
   <footer class="site-footer">
     <div class="container">
-      <p>© Biagio Raucci – Archivio didattico di Costruzioni Aeronautiche</p>
+      <p class="sign">© Biagio Raucci — Archivio didattico di Costruzioni Aeronautiche</p>
+      <p>ITIS «E. Majorana» · Cassino (FR)</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
