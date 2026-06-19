@@ -189,7 +189,7 @@
       font-family:var(--body);font-weight:700;font-size:18px;
       color:var(--white);line-height:1.25;margin-bottom:10px;
     }
-    .card p{color:var(--label);font-weight:300;font-size:14px;flex:1}
+    .card p:not(.desig):not(.kind){color:var(--label);font-weight:300;font-size:14px;flex:1}
     .card-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
 
     /* card in evidenza (fascicoli organici) */
@@ -304,7 +304,7 @@
     <section class="section" id="prove">
       <div class="section-head">
         <h2>Archivio delle prove</h2>
-        <span class="count">// 10 documenti</span>
+        <span class="count">// 11 documenti</span>
       </div>
 
       <div class="grid">
@@ -313,7 +313,7 @@
           <p class="desig">ES · 2026</p>
           <p class="kind">Sessione ordinaria · Prova</p>
           <h3>Sessione ordinaria 2026 — Alettone</h3>
-          <p>Progetto preliminare strutturale dell'alettone di un bireattore di linea in crociera a 9000 m (M ≈ 0,76). Dal carico aerodinamico di manovra (deflessione massima, coefficiente di robustezza n = 2,5) allo schema statico su due cerniere con diagrammi di taglio e momento, fino al dimensionamento delle solette di un longherone a «C» e dello spessore minimo dell'anima a taglio (criterio di Von Mises). Quesiti teorici: aileron reversal, leghe di alluminio contro compositi, attuazione fly-by-wire, ispezione delle cerniere e PND.</p>
+          <p>Progetto preliminare di un alettone a sbalzo in lega 2024-T3 per un bireattore di linea in crociera: carico di manovra, schema su due cerniere, dimensionamento di solette e anima del longherone a «C». Quesiti su aileron reversal, compositi, fly-by-wire e PND.</p>
           <div class="card-actions">
             <a href="pdf/ordinara_2026.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Apri PDF <span class="arr">→</span></a>
           </div>
