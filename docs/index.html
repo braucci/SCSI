@@ -97,8 +97,12 @@
   .code{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:.72rem;letter-spacing:.07em;
     color:var(--accent);background:var(--accent-tint);padding:.22rem .5rem;border-radius:7px;white-space:nowrap}
   .meta{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.02em;color:var(--muted);text-align:right;flex:1;min-width:0}
-  .card h3{font-size:1.14rem;font-weight:600;line-height:1.25;margin:.1rem 0 0}
-  .desc{margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.62}
+  .card h3{font-size:1.14rem;font-weight:600;line-height:1.25;margin:.1rem 0 0;
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+    min-height:calc(2 * 1.25em);min-height:calc(2 * 1lh)}
+  .desc{--lines:4;margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.62;
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--lines);overflow:hidden;
+    min-height:calc(var(--lines) * 1.62em);min-height:calc(var(--lines) * 1lh)}
   .desc em{font-style:italic;color:var(--ink)}
   .open{margin-top:auto;padding-top:.35rem;font-family:"IBM Plex Mono",monospace;font-size:.8rem;
     letter-spacing:.03em;color:var(--accent);display:inline-flex;align-items:center;gap:.45rem;align-self:flex-start}
@@ -108,7 +112,8 @@
 
   .card.feat{padding:1.4rem 1.5rem 1.25rem}
   .card.feat h3{font-size:1.34rem;letter-spacing:-.015em}
-  .card.feat .desc{font-size:.96rem;line-height:1.68;color:var(--ink-2)}
+  .card.feat .desc{--lines:6;font-size:.96rem;line-height:1.68;color:var(--ink-2);
+    min-height:calc(var(--lines) * 1.68em);min-height:calc(var(--lines) * 1lh)}
 
   /* ---------- license ---------- */
   .panels{display:grid;gap:1.2rem;grid-template-columns:1.4fr 1fr;margin-top:1.5rem}
