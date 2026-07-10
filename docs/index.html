@@ -447,6 +447,44 @@
           <a class="open" href="pdf/resistenza_e_polare.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
         <article class="card feat" tabindex="-1">
+          <div class="card-top"><span class="code">MON · AVANPROGETTO</span><span class="meta">Monografia didattica · 41 pp · Aerodinamica &amp; Avanprogetto</span></div>
+          <h3>Stima della polare di avanprogetto di un aeromobile</h3>
+          <p class="desc">Articolo monografico dedicato al problema inverso rispetto a quello della monografia
+              precedente: non <em>leggere</em> una polare assegnata, ma <em>costruirla</em> quando il velivolo
+              non esiste ancora e non c'è nulla da mettere in galleria del vento. Si presenta in forma completa
+              e autoconsistente il metodo semi-empirico di <em>build-up per componenti</em> di derivazione NASA,
+              che scompone la resistenza parassita nella somma dei contributi di ala, fusoliera, impennaggi e
+              gondole (<em>C<sub>Dk</sub> = C<sub>fk</sub>·(S<sub>wet,k</sub>/S<sub>W</sub>)·FF<sub>k</sub>·IF<sub>k</sub></em>),
+              e ne costruisce i quattro ingredienti: il <em>coefficiente d'attrito</em> di lastra piana turbolenta
+              con le correzioni di comprimibilità <em>t</em> ed <em>f</em>, il <em>Reynolds di cut-off</em> legato
+              alla rugosità ammissibile — il vero cuore fisico del metodo, con la sua analogia con il diagramma di
+              Moody — le <em>aree bagnate</em>, i <em>fattori di forma</em> per fusoliera, gondole e superfici
+              portanti (serie NACA 4 e 6, biconvessi, supercritici) e i <em>fattori di interferenza</em>
+              (<em>R<sub>W−B</sub></em>, <em>R<sub>LS</sub></em>, fattore di cerniera), con resistenza di base e
+              maggiorazione forfettaria per le resistenze aggiuntive. Una sezione autonoma è dedicata al
+              <em>fattore di Oswald</em>, affrontato con tre stime indipendenti — dato statistico di classe,
+              correlazioni empiriche di Raymer e <em>decomposizione viscosa</em>
+              (<em>1/e = 1/e<sub>inv</sub> + 0,38·C<sub>D0</sub>·π·AR</em>) — messe a confronto e discusse anche
+              là dove si contraddicono, per insegnare a riconoscere una correlazione usata fuori dal suo dominio.
+              Segue la lettura della polare in termini di prestazioni, con le dimostrazioni complete
+              dell'<em>efficienza massima</em> (<em>C<sub>Di</sub> = C<sub>D0</sub></em>) e della condizione di
+              <em>minima potenza necessaria</em> (<em>C<sub>Di</sub> = 3·C<sub>D0</sub></em>, con i rapporti
+              universali <em>E<sub>Π</sub> = 0,866·E<sub>max</sub></em> e <em>V<sub>Π</sub> = 0,760·V*</em>) e la
+              decomposizione grafica della curva <em>D(V)</em>. Il metodo è poi applicato per intero, passo dopo
+              passo, a due velivoli agli antipodi tecnologici — un monomotore di aviazione generale a 2500 m e un
+              bimotore a getto in crociera transonica a 11 000 m — ottenendo
+              <em>C<sub>D</sub> = 0,0234 + 0,0546·C<sub>L</sub>²</em> e
+              <em>C<sub>D</sub> = 0,0189 + 0,0412·C<sub>L</sub>²</em>, entrambe superate al collaudo statistico.
+              Chiudono la dichiarazione esplicita dei quattro limiti del modello e il modo di superarli:
+              <em>resistenza d'onda</em> con l'equazione di Korn e il modello
+              <em>C<sub>Dw</sub> = 20·(M − M<sub>cc</sub>)⁴</em>, polare ad asse traslato, incrementi
+              <em>ΔC<sub>D0</sub></em> di configurazione (carrello, flap, aerofreni) e resistenza di equilibratura.
+              Con implementazione Python completa, due studi parametrici (finitura superficiale e snellezza di
+              fusoliera), appendice sull'atmosfera standard e la legge di Sutherland e formulario riassuntivo in
+              nove passi. Ogni valore numerico del testo è stato verificato in modo indipendente per via numerica.</p>
+          <a class="open" href="pdf/Stima_della_polare_di_avanprogetto.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
+        </article>
+        <article class="card feat" tabindex="-1">
           <div class="card-top"><span class="code">MON · PUNTI</span><span class="meta">Monografia didattica · 35 pp · Aerodinamica &amp; Meccanica del volo</span></div>
           <h3>Punti caratteristici e polari tecniche</h3>
           <p class="desc">Dalla polare alla «geografia» delle prestazioni del velivolo. Si parte dalla
