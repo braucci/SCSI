@@ -332,7 +332,7 @@
         <p class="lead">Tracce e svolgimenti commentati della seconda prova — opzione Costruzioni Aeronautiche — insieme a una biblioteca di monografie, guide di laboratorio ed esercizi svolti. Ogni materiale è autoconsistente: intuizione fisica, dimostrazione ed esempio numerico.</p>
         <div class="stats">
           <div class="stat"><b>11</b><span>Prove d'esame</span></div>
-          <div class="stat"><b>38</b><span>Materiali & monografie</span></div>
+          <div class="stat"><b>39</b><span>Materiali & monografie</span></div>
           <div class="stat"><b>2015–26</b><span>Sessioni coperte</span></div>
         </div>
         <p class="status-chip"><i aria-hidden="true"></i>Archivio in aggiornamento</p>
@@ -352,7 +352,7 @@
           <input id="q" type="search" placeholder="Cerca nell'archivio — es. «longherone», «polare», «Bernoulli»&hellip;" aria-label="Cerca nell'archivio" autocomplete="off">
           <button class="clear" id="clear" type="button" aria-label="Cancella la ricerca">&times;</button>
         </div>
-        <span class="count" id="count" aria-live="polite"><b>54</b> documenti</span>
+        <span class="count" id="count" aria-live="polite"><b>55</b> documenti</span>
       </div>
       <div class="chips" id="chips" role="group" aria-label="Filtra per area">
         <button class="chip" data-area="all" aria-pressed="true">Tutti</button>
@@ -458,7 +458,7 @@
 
   <section id="supporto" class="wrap filterable" data-label="supporto">
     <div class="sec-head">
-      <p class="tag">Biblioteca · 35 tra monografie, guide ed esercizi</p>
+      <p class="tag">Biblioteca · 36 tra monografie, guide ed esercizi</p>
       <h2>Materiali di supporto al corso</h2>
       <hr class="rule">
       <p class="sec-note">Monografie autoconsistenti, guide di laboratorio ed esercizi svolti che accompagnano l'intero arco del corso: fondamenti, aerodinamica, meccanica del volo, strutture, propulsione e impianti. Usa la console qui sopra per filtrare per area o cercare un argomento.</p>
@@ -546,6 +546,31 @@
               tutti verificati numericamente. È la porta d'ingresso al corso: completa nell'argomentazione ma narrata
               con chiarezza, per costruire basi teoriche e operative solide prima delle Costruzioni Aeronautiche.</p>
           <a class="open" href="pdf/Monografia_Fluidodinamica.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
+        </article>
+<article class="card feat" data-area="fondamenti" tabindex="-1">
+          <div class="card-top"><span class="code">MON · ISA</span><span class="meta">Statica dei fluidi applicata · aria tipo (ISA) · 29 pp · Fondamenti</span></div>
+          <h3>L'atmosfera standard — il palcoscenico del volo</h3>
+          <p class="desc">Il «palcoscenico del volo»: prima di studiare come vola un velivolo occorre conoscere il
+              mezzo in cui vola. La monografia costruisce l'<em>atmosfera standard</em> (aria tipo) un mattone alla volta,
+              partendo dall'<em>equazione idrostatica</em> (<em>dp = −ρg·dh</em>) — una semplice condizione di equilibrio
+              dell'elementino di fluido, valida per l'aria come per l'acqua di un serbatoio (il primo esercizio è proprio
+              la legge di <em>Stevino</em> e la spinta su una parete). Si distinguono le sei «quote» dell'ingegneria
+              aeronautica (geometrica, assoluta, <em>geopotenziale</em>, di pressione, di temperatura e di densità) e si
+              spiega l'artificio della quota geopotenziale che rende costante <em>g</em>. Dal profilo termico
+              convenzionale a strati (troposfera a gradiente <em>−6,5&nbsp;°C/km</em>, tropopausa a 216,65&nbsp;K, strati
+              isotermi e a gradiente) si derivano le quattro formule fondamentali per <em>p(h)</em> e <em>ρ(h)</em> —
+              esponenziale negli isotermi, a potenza nei gradienti — «incollando» gli strati come una cordata che riparte
+              da ogni campo base. Seguono l'<em>interpolazione lineare</em> (diretta, inversa e bilineare) per leggere le
+              tabelle con la stima dell'errore, il modello di atmosfera esponenziale con i suoi limiti di taratura, le
+              <em>quote convenzionali</em> di pressione, densità e temperatura (con l'ambiguità di quest'ultima), il
+              principio del <em>variometro</em> (<em>dp/dt = −ρg₀V<sub>v</sub></em>) e persino le atmosfere di altri
+              pianeti tramite la scala di altezza <em>H = RT/g</em>. Chiudono un cenno storico (la retta di
+              <em>Toussaint</em>, 1920), un formulario essenziale con i <em>limiti di validità</em> e una <em>tabella
+              ISA</em> pronta all'uso. Ogni passaggio è verificato con esercizi interamente svolti in unità SI (script
+              Python di verifica in <em>scripts/</em>) e calato nel contesto: pressurizzazione di cabina, quota di densità
+              e sicurezza al decollo, riduzione dei dati di prova di volo e di galleria del vento. Rielaborazione
+              didattica originale.</p>
+          <a class="open" href="pdf/Statica_dei_fluidi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
 <article class="card feat" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">DISP · AERO</span><span class="meta">Dispensa propedeutica · 56 pp · A.S. 2026/2027</span></div>
