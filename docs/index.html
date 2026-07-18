@@ -171,6 +171,17 @@
   .open:hover{color:var(--accent-2)}
   .arr{transition:transform .2s ease;display:inline-block}
   .open:hover .arr{transform:translateX(4px)}
+  .byline{margin:-.15rem 0 .1rem;font-size:.9rem;font-style:italic;color:var(--muted);line-height:1.4}
+  .card-links{margin-top:auto;padding-top:.55rem;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap}
+  .card-links .open{margin-top:0;padding-top:0}
+  .open.sub{color:var(--muted)}
+  .open.sub:hover{color:var(--accent)}
+  .dl{display:inline-block;transition:transform .2s ease}
+  .open:hover .dl{transform:translateY(2px)}
+  .callout{margin-top:1.4rem;background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:.9rem 1.1rem;color:var(--ink-2);font-size:.92rem;line-height:1.6}
+  .callout b{color:var(--ink)}
+  .callout em{font-style:italic;color:var(--ink)}
 
   .card.feat{padding:1.4rem 1.5rem 1.25rem}
   .card.feat h3{font-size:1.32rem;letter-spacing:-.012em}
@@ -295,6 +306,7 @@
       <a href="#prove" data-spy="prove">Prove</a>
       <a href="#supporto" data-spy="supporto">Materiali</a>
       <a href="#approfondimenti" data-spy="approfondimenti">Approfondimenti</a>
+      <a href="#fonti" data-spy="fonti">Fonti</a>
       <a href="#licenza" data-spy="licenza">Licenza</a>
       <a class="ext" href="https://www.raucci.net/" target="_blank" rel="noopener noreferrer">raucci.net ↗</a>
     </nav>
@@ -320,7 +332,7 @@
         <p class="lead">Tracce e svolgimenti commentati della seconda prova — opzione Costruzioni Aeronautiche — insieme a una biblioteca di monografie, guide di laboratorio ed esercizi svolti. Ogni materiale è autoconsistente: intuizione fisica, dimostrazione ed esempio numerico.</p>
         <div class="stats">
           <div class="stat"><b>11</b><span>Prove d'esame</span></div>
-          <div class="stat"><b>37</b><span>Materiali & monografie</span></div>
+          <div class="stat"><b>38</b><span>Materiali & monografie</span></div>
           <div class="stat"><b>2015–26</b><span>Sessioni coperte</span></div>
         </div>
         <p class="status-chip"><i aria-hidden="true"></i>Archivio in aggiornamento</p>
@@ -340,7 +352,7 @@
           <input id="q" type="search" placeholder="Cerca nell'archivio — es. «longherone», «polare», «Bernoulli»&hellip;" aria-label="Cerca nell'archivio" autocomplete="off">
           <button class="clear" id="clear" type="button" aria-label="Cancella la ricerca">&times;</button>
         </div>
-        <span class="count" id="count" aria-live="polite"><b>48</b> documenti</span>
+        <span class="count" id="count" aria-live="polite"><b>54</b> documenti</span>
       </div>
       <div class="chips" id="chips" role="group" aria-label="Filtra per area">
         <button class="chip" data-area="all" aria-pressed="true">Tutti</button>
@@ -354,6 +366,7 @@
         <button class="chip" data-area="laboratorio" aria-pressed="false">Laboratorio</button>
         <button class="chip" data-area="esercizi" aria-pressed="false">Esercizi</button>
         <button class="chip" data-area="approfondimenti" aria-pressed="false">Approfondimenti</button>
+        <button class="chip" data-area="fonti" aria-pressed="false">Fonti storiche</button>
       </div>
     </div>
   </div>
@@ -445,12 +458,35 @@
 
   <section id="supporto" class="wrap filterable" data-label="supporto">
     <div class="sec-head">
-      <p class="tag">Biblioteca · 34 tra monografie, guide ed esercizi</p>
+      <p class="tag">Biblioteca · 35 tra monografie, guide ed esercizi</p>
       <h2>Materiali di supporto al corso</h2>
       <hr class="rule">
       <p class="sec-note">Monografie autoconsistenti, guide di laboratorio ed esercizi svolti che accompagnano l'intero arco del corso: fondamenti, aerodinamica, meccanica del volo, strutture, propulsione e impianti. Usa la console qui sopra per filtrare per area o cercare un argomento.</p>
     </div>
     <div class="grid-feat">
+        <article class="card feat" data-area="fondamenti" tabindex="-1">
+          <div class="card-top"><span class="code">MON · STORIA</span><span class="meta">Monografia introduttiva al corso · 52 pp · Dalle origini al 1908</span></div>
+          <h3>Storia dell'Aeronautica — dalle ali di Icaro al Flyer dei Wright</h3>
+          <p class="desc">La prima monografia del corso e la più «rilassata»: non contiene travi da dimensionare né
+              profili da analizzare, ma racconta come l'umanità sia arrivata a volare — dal mito di Icaro al Flyer dei
+              fratelli Wright. Il percorso è insieme narrativo e metodologico, perché ogni formula dei tre anni successivi
+              (portanza, resistenza, carico alare, rendimento dell'elica) nasce da un secolo di tentativi, errori e
+              intuizioni geniali. Si parte dal volo del <em>17 dicembre 1903</em> a Kill Devil Hills, si torna ai precursori
+              (Leonardo e gli ornitotteri, i palloni dei <em>Montgolfier</em> del 1783), si incontra Sir George
+              <em>Cayley</em> — il padre dell'aeroplano, che nel 1799 separa portanza e propulsione sul celebre disco
+              d'argento — e l'«interregno» dell'Ottocento (Henson, Stringfellow, Du Temple, Mozhaiski) con il criterio di
+              <em>Gibbs-Smith</em> su che cosa significhi «aver volato». Poi gli uomini dell'aria — <em>Lilienthal</em> e
+              Pilcher, la filosofia dell'<em>airman</em> contro quella dello <em>chauffeur</em> — l'arrivo in America con
+              Chanute e <em>Langley</em> (il motore di Manly, il doppio tuffo nel Potomac), i fratelli <em>Wright</em> come
+              primi veri ingegneri (svergolamento, galleria del vento, elica) e il «triangolo aeronautico» con
+              <em>Curtiss</em>, fino al collo di bottiglia della propulsione e alla corsa a volare «più veloci e più in
+              alto» dall'X-15 alle capsule Apollo. Ogni tappa è verificata con la calcolatrice: velocità all'aria e al
+              suolo del primo volo, efficienza <em>E = d/h</em> di un aliante, carico alare e <em>C<sub>L</sub></em> del
+              Flyer, rendimento dell'elica, rapporto potenza/peso dei motori pionieristici. Costruita sul primo capitolo di
+              <em>Anderson</em> (Introduction to Flight) e pensata come «mappa» dell'intero corso: i personaggi che qui
+              incontrate torneranno, dimostrati, in tutte le monografie successive. Rielaborazione didattica originale.</p>
+          <a class="open" href="pdf/storia_aeronautica.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
+        </article>
         <article class="card feat" data-area="fondamenti" tabindex="-1">
           <div class="card-top"><span class="code">MON · SEGRETO</span><span class="meta">Monografia di inizio corso · 53 pp · Storia dell'aerodinamica</span></div>
           <h3>Il segreto dell'ala — da Newton a Prandtl</h3>
@@ -1015,6 +1051,54 @@
     </div>
   </section>
 
+
+  <section id="fonti" class="wrap filterable" data-label="fonti">
+    <div class="sec-head">
+      <p class="tag">Documenti originali &middot; 5 fonti</p>
+      <h2>Fonti storiche originali</h2>
+      <hr class="rule">
+      <p class="sec-note">I lavori che hanno fondato l'aerodinamica e le costruzioni aeronautiche moderne, nei loro <strong>testi originali</strong> &mdash; tutti di pubblico dominio (rapporti NACA/NASA: <em>Work of the US Gov.</em>). Leggerli in originale &egrave; il modo migliore per capire da dove vengono le formule che studiamo a lezione.</p>
+    </div>
+    <div class="grid-feat">
+        <article class="card feat" data-area="fonti" tabindex="-1">
+          <div class="card-top"><span class="code">FONTE · 01</span><span class="meta">Aerodinamica · Testo originale · 1923</span></div>
+          <h3>Applications of Modern Hydrodynamics to Aeronautics</h3>
+          <p class="byline">L. Prandtl &mdash; NACA Report No. 116, 1923</p>
+          <p class="desc">Il testo con cui Prandtl presenta al mondo la <em>teoria della linea portante</em> e la resistenza indotta: la base dell'ala finita che studiamo nel corso. Contiene anche l'estensione alle eliche. Una delle pietre miliari assolute dell'aerodinamica.</p>
+          <div class="card-links"><a class="open" href="https://ntrs.nasa.gov/citations/19930091180" target="_blank" rel="noopener noreferrer">Scheda NTRS <span class="arr">&rarr;</span></a><a class="open sub" href="https://ntrs.nasa.gov/api/citations/19930091180/downloads/19930091180.pdf" target="_blank" rel="noopener noreferrer">PDF <span class="dl">&darr;</span></a></div>
+        </article>
+<article class="card feat" data-area="fonti" tabindex="-1">
+          <div class="card-top"><span class="code">FONTE · 02</span><span class="meta">Aerodinamica · Testo originale · 1923</span></div>
+          <h3>The Minimum Induced Drag of Aerofoils</h3>
+          <p class="byline">M. M. Munk &mdash; NACA Report No. 121, 1923</p>
+          <p class="desc">L'allievo di Prandtl dimostra che la resistenza indotta minima si ottiene con distribuzione di portanza <em>ellittica</em>: il risultato che spiega perch&eacute; le ali "migliori" hanno quella forma (Spitfire compreso). Breve, elegante, fondamentale.</p>
+          <div class="card-links"><a class="open" href="https://ntrs.nasa.gov/citations/19930091456" target="_blank" rel="noopener noreferrer">Scheda NTRS <span class="arr">&rarr;</span></a><a class="open sub" href="https://ntrs.nasa.gov/api/citations/19930091456/downloads/19930091456.pdf" target="_blank" rel="noopener noreferrer">PDF <span class="dl">&darr;</span></a></div>
+        </article>
+<article class="card feat" data-area="fonti" tabindex="-1">
+          <div class="card-top"><span class="code">FONTE · 03</span><span class="meta">Aerodinamica · Testo originale · 1933</span></div>
+          <h3>The Characteristics of 78 Related Airfoil Sections</h3>
+          <p class="byline">Jacobs, Ward, Pinkerton &mdash; NACA Report No. 460, 1933</p>
+          <p class="desc">La nascita dei <em>profili NACA a 4 cifre</em>: 78 profili provati nella galleria a densit&agrave; variabile. &Egrave; il documento che introduce la nomenclatura (es. NACA 2412) e le polari che usiamo ancora oggi per scegliere un profilo.</p>
+          <div class="card-links"><a class="open" href="https://ntrs.nasa.gov/citations/19930091108" target="_blank" rel="noopener noreferrer">Scheda NTRS <span class="arr">&rarr;</span></a><a class="open sub" href="https://ntrs.nasa.gov/api/citations/19930091108/downloads/19930091108.pdf" target="_blank" rel="noopener noreferrer">PDF <span class="dl">&darr;</span></a></div>
+        </article>
+<article class="card feat" data-area="fonti" tabindex="-1">
+          <div class="card-top"><span class="code">FONTE · 04</span><span class="meta">Aerodinamica · Strutture · Testo originale · 1945</span></div>
+          <h3>Summary of Airfoil Data</h3>
+          <p class="byline">Abbott, Von Doenhoff, Stivers &mdash; NACA Report No. 824, 1945</p>
+          <p class="desc">Il "manuale dei profili" per eccellenza: dati completi di portanza, resistenza e momento per centinaia di profili NACA, comprese le <em>serie laminari 6</em> del P-51 Mustang. Un riferimento di lavoro che userete nelle esercitazioni di dimensionamento.</p>
+          <div class="card-links"><a class="open" href="https://ntrs.nasa.gov/citations/19930090976" target="_blank" rel="noopener noreferrer">Scheda NTRS <span class="arr">&rarr;</span></a><a class="open sub" href="https://ntrs.nasa.gov/api/citations/19930090976/downloads/19930090976.pdf" target="_blank" rel="noopener noreferrer">PDF <span class="dl">&darr;</span></a></div>
+        </article>
+<article class="card feat" data-area="fonti" tabindex="-1">
+          <div class="card-top"><span class="code">FONTE · 05</span><span class="meta">Storia · Testo originale · 1913</span></div>
+          <h3>How We Made the First Flight</h3>
+          <p class="byline">Orville Wright &mdash; 1913 / 1918 (edizione FAA)</p>
+          <p class="desc">Il racconto <em>in prima persona</em> di Orville Wright del volo del 17 dicembre 1903: preparativi, motore, primo tentativo di Wilbur, il volo storico. Il complemento perfetto alla nostra monografia di storia dell'aeronautica.</p>
+          <div class="card-links"><a class="open" href="https://www.faa.gov/sites/faa.gov/files/education/educators/curriculum/k12/K-12_How_We_Made_the_First_Flight_Orville_Wright.pdf" target="_blank" rel="noopener noreferrer">PDF (FAA) <span class="dl">&darr;</span></a></div>
+        </article>
+    </div>
+    <p class="callout"><b>Nota per lo studente.</b> Il portale NTRS della NASA offre due indirizzi per ogni rapporto: la <em>scheda</em> (con abstract e riferimenti, il link pi&ugrave; stabile) e il <em>PDF</em> a scaricamento diretto. Se un PDF non si aprisse, apri la scheda e cerca &laquo;Available Downloads&raquo;. I rapporti NACA elencati sono liberamente riproducibili (<em>Public Use Permitted</em>): citali sempre con autore, titolo e numero di report.</p>
+  </section>
+
   <section id="licenza" class="wrap">
     <div class="sec-head">
       <p class="tag">Note · licenza d'uso</p>
@@ -1154,6 +1238,7 @@
     chips.forEach(function(x){ x.setAttribute('aria-pressed', x.dataset.area==='all'?'true':'false'); });
     apply(); window.scrollTo({top:0,behavior:'smooth'});
   });
+  apply(); /* inizializza il contatore in modo coerente al caricamento */
 
   /* scroll-spy nav */
   var spies = Array.prototype.slice.call(document.querySelectorAll('.nav a[data-spy]'));
