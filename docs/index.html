@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Esami di Stato — Costruzioni Aeronautiche · Prof. Ing. B. Raucci</title>
-<meta name="description" content="Archivio didattico delle soluzioni delle prove di Costruzioni Aeronautiche per gli Esami di Stato e dei materiali di supporto al corso. Prof. Ing. Biagio Raucci.">
+<title>Costruzioni Aeronautiche — Archivio didattico · Prof. Ing. B. Raucci</title>
+<meta name="description" content="Archivio didattico di Costruzioni Aeronautiche: soluzioni delle prove d'Esame di Stato, monografie, guide di laboratorio ed esercizi svolti. Prof. Ing. Biagio Raucci — ITIS «E. Majorana», Somma Vesuviana (NA).">
+<meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    --paper:#f6f4ef;
-    --paper-2:#fbfaf6;
-    --surface:#ffffff;
-    --ink:#1b2a33;
-    --ink-2:#3f4d56;
-    --muted:#6b7780;
-    --line:#e6e1d6;
-    --accent:#16697a;
-    --accent-2:#0e4c5a;
-    --accent-tint:#e8f0f1;
-    --shadow:0 1px 2px rgba(27,42,51,.04), 0 10px 28px -18px rgba(27,42,51,.22);
-    --maxw:1160px;
-    --r:14px;
+    --paper:#f5f2ec; --paper-2:#faf8f3; --surface:#ffffff;
+    --ink:#15242c; --ink-2:#3c4a53; --muted:#6c7880;
+    --line:#e5e0d4; --line-2:#efeadf;
+    --accent:#16697a; --accent-2:#0e4c5a; --accent-tint:#e6eff0;
+    --blueprint:rgba(22,105,122,.055);
+    --shadow:0 1px 2px rgba(21,36,44,.05), 0 18px 40px -26px rgba(21,36,44,.28);
+    --maxw:1180px; --r:14px;
+  }
+  :root[data-theme="dark"]{
+    --paper:#0e1a20; --paper-2:#122129; --surface:#17282f;
+    --ink:#eef3f1; --ink-2:#c3ced3; --muted:#8ba0a7;
+    --line:#26404a; --line-2:#203540;
+    --accent:#57bccd; --accent-2:#8ad8e4; --accent-tint:#123039;
+    --blueprint:rgba(120,200,215,.05);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 20px 44px -26px rgba(0,0,0,.7);
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -31,89 +34,152 @@
     font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     font-size:1.0625rem; line-height:1.65; font-weight:400;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    transition:background .35s ease,color .35s ease;
   }
   ::selection{background:var(--accent-tint)}
   a{color:var(--accent);text-decoration:none}
   h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;color:var(--ink);margin:0;letter-spacing:-.01em}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.4rem)}
   .mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:4px}
+  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:5px}
 
   /* ---------- top bar ---------- */
-  .topbar{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.86);
+  .topbar{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--paper) 84%,transparent);
     backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
-  .topbar .wrap{display:flex;align-items:center;gap:1.2rem;min-height:62px}
+  .topbar .wrap{display:flex;align-items:center;gap:1.1rem;min-height:64px}
   .brand{display:flex;align-items:baseline;gap:.55rem;margin-right:auto}
-  .brand b{font-family:"Fraunces",serif;font-weight:600;font-size:1.18rem;color:var(--ink);letter-spacing:-.01em}
-  .brand span{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  .nav{display:flex;align-items:center;gap:1.35rem}
-  .nav a{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.04em;color:var(--ink-2);padding:.3rem 0;border-bottom:1.5px solid transparent;transition:color .18s,border-color .18s}
+  .brand .mk{font-family:"Fraunces",serif;font-weight:600;font-size:1.2rem;color:var(--ink);letter-spacing:-.01em}
+  .brand .mk b{color:var(--accent);font-weight:600}
+  .brand span{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .nav{display:flex;align-items:center;gap:1.3rem}
+  .nav a{font-family:"IBM Plex Mono",monospace;font-size:.77rem;letter-spacing:.04em;color:var(--ink-2);
+    padding:.3rem 0;border-bottom:1.5px solid transparent;transition:color .18s,border-color .18s}
   .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.active{color:var(--accent);border-color:var(--accent)}
   .nav a.ext{color:var(--muted)}
-  .nav a.ext:hover{color:var(--accent)}
-  @media(max-width:720px){.brand span{display:none}.nav{gap:.9rem}.nav a.ext{display:none}}
+  .icon-btn{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer;
+    transition:color .18s,border-color .18s,background .18s,transform .18s}
+  .icon-btn:hover{color:var(--accent);border-color:var(--accent)}
+  .icon-btn:active{transform:scale(.94)}
+  .icon-btn svg{width:18px;height:18px}
+  .icon-btn .moon{display:none} :root[data-theme="dark"] .icon-btn .sun{display:none}
+  :root[data-theme="dark"] .icon-btn .moon{display:block}
+  @media(max-width:820px){.brand span{display:none}.nav{gap:.85rem}.nav a.ext{display:none}}
+  @media(max-width:560px){.nav a:not(.active):not(.ext){display:none}}
 
   /* ---------- hero ---------- */
-  .hero{background:linear-gradient(180deg,var(--paper-2),var(--paper));border-bottom:1px solid var(--line)}
-  .hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:2.4rem;align-items:center;
-    padding-top:clamp(2.6rem,6vw,4.6rem);padding-bottom:clamp(2.4rem,5vw,4rem)}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-  .hero h1{font-size:clamp(2.15rem,4.6vw,3.5rem);line-height:1.06;font-weight:500;max-width:14ch}
-  .hero .lead{margin:1.15rem 0 0;font-size:1.12rem;color:var(--ink-2);max-width:54ch;line-height:1.6}
-  .stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:1.6rem;margin-top:1.9rem}
-  .stat{display:flex;flex-direction:column;gap:.1rem}
-  .stat b{font-family:"Fraunces",serif;font-weight:500;font-size:1.55rem;color:var(--ink);line-height:1}
-  .stat span{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .status-chip{display:inline-flex;align-items:center;gap:.5rem;margin:1.1rem 0 0;
-    font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .status-chip i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-tint)}
-  .heroart{width:100%;max-width:520px;justify-self:end}
+  .hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden;
+    background:linear-gradient(180deg,var(--paper-2),var(--paper))}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--blueprint) 1px,transparent 1px),linear-gradient(90deg,var(--blueprint) 1px,transparent 1px);
+    background-size:34px 34px;mask-image:radial-gradient(120% 90% at 78% 12%,#000,transparent 70%)}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .85fr;gap:2.6rem;align-items:center;
+    padding-top:clamp(2.8rem,6vw,4.8rem);padding-bottom:clamp(2.6rem,5vw,4.2rem)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--accent)}
+  .hero h1{font-size:clamp(2.2rem,4.7vw,3.6rem);line-height:1.05;font-weight:500;max-width:15ch}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero .lead{margin:1.15rem 0 0;font-size:1.13rem;color:var(--ink-2);max-width:52ch;line-height:1.6}
+  .stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:1.8rem;margin-top:2rem}
+  .stat{display:flex;flex-direction:column;gap:.15rem}
+  .stat b{font-family:"Fraunces",serif;font-weight:500;font-size:1.7rem;color:var(--ink);line-height:1}
+  .stat span{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .status-chip{display:inline-flex;align-items:center;gap:.5rem;margin:1.3rem 0 0;
+    font-family:"IBM Plex Mono",monospace;font-size:.71rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .status-chip i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-tint);animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--accent-tint)}50%{box-shadow:0 0 0 7px transparent}}
+  .heroart{position:relative;width:100%;max-width:500px;justify-self:end;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.4rem 1.5rem 1.1rem;box-shadow:var(--shadow)}
+  .heroart .ticks{position:absolute;inset:.5rem;border:1px dashed var(--line);border-radius:9px;pointer-events:none}
   .heroart img{width:100%;height:auto;display:block}
-  @media(max-width:860px){
-    .hero .wrap{grid-template-columns:1fr;gap:1.6rem}
+  @media(max-width:880px){
+    .hero .wrap{grid-template-columns:1fr;gap:1.8rem}
     .heroart{max-width:420px;order:-1;justify-self:start}
-    .hero h1{max-width:18ch}
+    .hero h1{max-width:20ch}
   }
 
+  /* ---------- console (signature) ---------- */
+  .console{position:sticky;top:64px;z-index:40;background:color-mix(in srgb,var(--paper) 90%,transparent);
+    backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+  .console .wrap{padding-top:1rem;padding-bottom:1rem}
+  .console-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+  .search{position:relative;flex:1 1 300px;min-width:230px}
+  .search svg{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted)}
+  .search input{width:100%;font-family:"Source Sans 3",sans-serif;font-size:1rem;color:var(--ink);
+    background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:.7rem .9rem .7rem 2.5rem;
+    transition:border-color .18s,box-shadow .18s}
+  .search input::placeholder{color:var(--muted)}
+  .search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+  .search .clear{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);border:0;background:transparent;
+    color:var(--muted);cursor:pointer;font-size:1.15rem;line-height:1;padding:.25rem .4rem;border-radius:7px;display:none}
+  .search .clear:hover{color:var(--accent)}
+  .count{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
+  .count b{color:var(--accent);font-weight:600}
+  .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+  .chip{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.03em;color:var(--ink-2);
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.34rem .78rem;cursor:pointer;
+    transition:color .16s,border-color .16s,background .16s}
+  .chip:hover{border-color:var(--accent);color:var(--accent)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  :root[data-theme="dark"] .chip[aria-pressed="true"]{color:#08171c}
+
   /* ---------- sections ---------- */
-  main section{padding-top:clamp(3rem,6vw,4.6rem);scroll-margin-top:78px}
-  main section:last-of-type{padding-bottom:clamp(3rem,6vw,4.6rem)}
-  .sec-head{margin-bottom:1.6rem}
-  .sec-head .tag{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-  .sec-head h2{font-size:clamp(1.7rem,3vw,2.25rem);margin:.35rem 0 .9rem}
+  main section{padding-top:clamp(3rem,6vw,4.4rem);scroll-margin-top:132px}
+  main section:last-of-type{padding-bottom:clamp(3rem,6vw,4.4rem)}
+  section.is-empty{display:none}
+  .sec-head{margin-bottom:1.5rem}
+  .sec-head .tag{font-family:"IBM Plex Mono",monospace;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);display:flex;align-items:center;gap:.55rem}
+  .sec-head .tag::before{content:"§";opacity:.7}
+  .sec-head h2{font-size:clamp(1.75rem,3vw,2.3rem);margin:.4rem 0 .9rem}
   .rule{height:1px;background:var(--line);border:0;margin:0}
-  .sec-note{color:var(--muted);font-size:.95rem;margin:.7rem 0 0;max-width:60ch}
+  .sec-note{color:var(--muted);font-size:.95rem;margin:.75rem 0 0;max-width:64ch}
+  .approf .sec-head .tag{color:var(--ink-2)}
 
   /* ---------- cards ---------- */
   .grid{display:grid;gap:1.05rem;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));margin-top:1.5rem}
-  .grid-feat{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));margin-top:1.5rem}
+  .grid-feat{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fill,minmax(392px,1fr));margin-top:1.5rem}
   @media(max-width:560px){.grid,.grid-feat{grid-template-columns:1fr}}
+  .card.is-hidden{display:none}
 
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-    padding:1.15rem 1.25rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;position:relative;
-    transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;outline:none}
-  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#cfd8d6}
+    padding:1.15rem 1.25rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden;
+    transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);
+    transform:scaleY(0);transform-origin:top;transition:transform .25s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+  .card:hover::before{transform:scaleY(1)}
   .card-top{display:flex;align-items:baseline;justify-content:space-between;gap:.7rem;flex-wrap:wrap}
-  .code{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:.72rem;letter-spacing:.07em;
-    color:var(--accent);background:var(--accent-tint);padding:.22rem .5rem;border-radius:7px;white-space:nowrap}
-  .meta{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.02em;color:var(--muted);text-align:right;flex:1;min-width:0}
-  .card h3{font-size:1.14rem;font-weight:600;line-height:1.25;margin:.1rem 0 0;
-    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
-    min-height:calc(2 * 1.25em);min-height:calc(2 * 1lh)}
-  .desc{--lines:4;margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.62;
-    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--lines);overflow:hidden;
-    min-height:calc(var(--lines) * 1.62em);min-height:calc(var(--lines) * 1lh)}
+  .code{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:.71rem;letter-spacing:.06em;
+    color:var(--accent);background:var(--accent-tint);padding:.24rem .52rem;border-radius:7px;white-space:nowrap}
+  .meta{font-family:"IBM Plex Mono",monospace;font-size:.67rem;letter-spacing:.02em;color:var(--muted);text-align:right;flex:1;min-width:0}
+  .card h3{font-size:1.14rem;font-weight:600;line-height:1.28;margin:.12rem 0 0}
+  .desc{--lines:4;margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.62;position:relative;
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--lines);overflow:hidden}
   .desc em{font-style:italic;color:var(--ink)}
-  .open{margin-top:auto;padding-top:.35rem;font-family:"IBM Plex Mono",monospace;font-size:.8rem;
-    letter-spacing:.03em;color:var(--accent);display:inline-flex;align-items:center;gap:.45rem;align-self:flex-start}
+  .card.expanded .desc{-webkit-line-clamp:unset;display:block}
+  .toggle{align-self:flex-start;margin-top:-.1rem;border:0;background:transparent;padding:0;cursor:pointer;
+    font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.04em;color:var(--muted);display:none}
+  .toggle:hover{color:var(--accent)}
+  .card.clampable .toggle{display:inline-flex;align-items:center;gap:.35rem}
+  .open{margin-top:auto;padding-top:.5rem;font-family:"IBM Plex Mono",monospace;font-size:.8rem;
+    letter-spacing:.03em;color:var(--accent);display:inline-flex;align-items:center;gap:.45rem;align-self:flex-start;font-weight:500}
   .open:hover{color:var(--accent-2)}
   .arr{transition:transform .2s ease;display:inline-block}
   .open:hover .arr{transform:translateX(4px)}
 
   .card.feat{padding:1.4rem 1.5rem 1.25rem}
-  .card.feat h3{font-size:1.34rem;letter-spacing:-.015em}
-  .card.feat .desc{--lines:6;font-size:.96rem;line-height:1.68;color:var(--ink-2);
-    min-height:calc(var(--lines) * 1.68em);min-height:calc(var(--lines) * 1lh)}
+  .card.feat h3{font-size:1.32rem;letter-spacing:-.012em}
+  .card.feat .desc{--lines:6;font-size:.955rem;line-height:1.68}
+
+  /* ---------- empty state ---------- */
+  .empty{display:none;text-align:center;padding:3.5rem 1rem;color:var(--muted)}
+  .empty.show{display:block}
+  .empty h3{font-size:1.3rem;color:var(--ink);margin-bottom:.5rem}
+  .empty button{margin-top:1rem;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--accent);
+    background:var(--surface);border:1px solid var(--accent);border-radius:10px;padding:.5rem .9rem;cursor:pointer}
 
   /* ---------- license ---------- */
   .panels{display:grid;gap:1.2rem;grid-template-columns:1.4fr 1fr;margin-top:1.5rem}
@@ -121,13 +187,21 @@
   .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.3rem 1.4rem}
   .panel h3{font-size:1.12rem;font-weight:600;margin:0 0 .55rem}
   .panel p{margin:.55rem 0 0;color:var(--ink-2);font-size:.96rem;line-height:1.6}
-  .panel a.inline,.panel a{color:var(--accent);border-bottom:1px solid var(--accent-tint)}
+  .panel a{color:var(--accent);border-bottom:1px solid var(--accent-tint)}
   .panel a:hover{border-color:var(--accent)}
   .panel strong{color:var(--ink);font-weight:600}
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line);margin-top:1rem;background:var(--paper-2)}
-  footer .wrap{padding:1.8rem 0;color:var(--muted);font-size:.85rem;font-family:"IBM Plex Mono",monospace;letter-spacing:.02em;line-height:1.6}
+  footer .wrap{padding:1.9rem 0;color:var(--muted);font-size:.85rem;font-family:"IBM Plex Mono",monospace;letter-spacing:.02em;line-height:1.7}
+  footer .sign{color:var(--ink-2)}
+
+  /* ---------- back to top ---------- */
+  .totop{position:fixed;right:1.3rem;bottom:1.3rem;z-index:70;width:44px;height:44px;border-radius:12px;
+    border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer;box-shadow:var(--shadow);
+    display:grid;place-items:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
+  .totop.show{opacity:1;transform:none;pointer-events:auto}
+  .totop svg{width:20px;height:20px}
 
   /* ---------- motion ---------- */
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
@@ -135,7 +209,7 @@
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .reveal{opacity:1;transform:none;transition:none}
-    .card,.arr,.open .arr{transition:none}
+    .card,.arr,.open .arr,.status-chip i{transition:none;animation:none}
   }
 </style>
 </head>
@@ -143,13 +217,20 @@
 
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="B. Raucci — Costruzioni Aeronautiche"><b>B.&nbsp;Raucci</b><span>Costruzioni Aeronautiche</span></a>
+    <a class="brand" href="#top" aria-label="B. Raucci — Costruzioni Aeronautiche">
+      <span class="mk">B.&nbsp;<b>Raucci</b></span><span>Costruzioni Aeronautiche</span>
+    </a>
     <nav class="nav" aria-label="Navigazione principale">
-      <a href="#prove">Prove</a>
-      <a href="#supporto">Materiali</a>
-      <a href="#licenza">Licenza</a>
+      <a href="#prove" data-spy="prove">Prove</a>
+      <a href="#supporto" data-spy="supporto">Materiali</a>
+      <a href="#approfondimenti" data-spy="approfondimenti">Approfondimenti</a>
+      <a href="#licenza" data-spy="licenza">Licenza</a>
       <a class="ext" href="https://www.raucci.net/" target="_blank" rel="noopener noreferrer">raucci.net ↗</a>
     </nav>
+    <button class="icon-btn" id="theme" type="button" aria-label="Cambia tema chiaro/scuro" title="Tema chiaro/scuro">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.2 4.2l1.5 1.5M18.3 18.3l1.5 1.5M2 12h2M20 12h2M4.2 19.8l1.5-1.5M18.3 5.7l1.5-1.5"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 7 7 0 1 0 20 14.5z"/></svg>
+    </button>
   </div>
 </header>
 
@@ -158,90 +239,125 @@
     <div class="wrap">
       <div>
         <p class="eyebrow">Archivio didattico · Esami di Stato</p>
-        <h1>Soluzioni delle prove di Costruzioni Aeronautiche</h1>
-        <p class="lead">Raccolta ordinata di tracce, svolgimenti, note di commento e materiali di supporto per la seconda prova scritta dell'indirizzo Trasporti e Logistica — opzione Costruzioni Aeronautiche. Impostazione metodologica, dimostrazioni ed esempi numerici.</p>
+        <h1>Dal <em>volo</em> al <em>calcolo</em>: le Costruzioni Aeronautiche</h1>
+        <p class="lead">Tracce e svolgimenti commentati della seconda prova — opzione Costruzioni Aeronautiche — insieme a una biblioteca di monografie, guide di laboratorio ed esercizi svolti. Ogni materiale è autoconsistente: intuizione fisica, dimostrazione ed esempio numerico.</p>
         <div class="stats">
-          <div class="stat"><b>11</b><span>Prove svolte</span></div>
-          <div class="stat"><b>33</b><span>Materiali di supporto</span></div>
+          <div class="stat"><b>11</b><span>Prove d'esame</span></div>
+          <div class="stat"><b>37</b><span>Materiali & monografie</span></div>
           <div class="stat"><b>2015–26</b><span>Sessioni coperte</span></div>
         </div>
         <p class="status-chip"><i aria-hidden="true"></i>Archivio in aggiornamento</p>
       </div>
-      <div class="heroart">
+      <figure class="heroart">
+        <span class="ticks" aria-hidden="true"></span>
         <img src="img/copertina_velivolo.png" alt="Disegno tecnico di un velivolo bireattore — copertina delle monografie di Costruzioni Aeronautiche" loading="eager" decoding="async">
-      </div>
+      </figure>
     </div>
   </section>
 
-  <section id="prove" class="wrap">
+  <div class="console" role="search">
+    <div class="wrap">
+      <div class="console-row">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="q" type="search" placeholder="Cerca nell'archivio — es. «longherone», «polare», «Bernoulli»&hellip;" aria-label="Cerca nell'archivio" autocomplete="off">
+          <button class="clear" id="clear" type="button" aria-label="Cancella la ricerca">&times;</button>
+        </div>
+        <span class="count" id="count" aria-live="polite"><b>48</b> documenti</span>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filtra per area">
+        <button class="chip" data-area="all" aria-pressed="true">Tutti</button>
+        <button class="chip" data-area="prove" aria-pressed="false">Prove d'esame</button>
+        <button class="chip" data-area="fondamenti" aria-pressed="false">Fondamenti</button>
+        <button class="chip" data-area="aerodinamica" aria-pressed="false">Aerodinamica</button>
+        <button class="chip" data-area="meccanica" aria-pressed="false">Meccanica del volo</button>
+        <button class="chip" data-area="strutture" aria-pressed="false">Strutture</button>
+        <button class="chip" data-area="propulsione" aria-pressed="false">Propulsione</button>
+        <button class="chip" data-area="impianti" aria-pressed="false">Impianti</button>
+        <button class="chip" data-area="laboratorio" aria-pressed="false">Laboratorio</button>
+        <button class="chip" data-area="esercizi" aria-pressed="false">Esercizi</button>
+        <button class="chip" data-area="approfondimenti" aria-pressed="false">Approfondimenti</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty" id="empty">
+    <div class="wrap">
+      <h3>Nessun documento trovato</h3>
+      <p>Prova con un altro termine o rimuovi i filtri attivi.</p>
+      <button id="reset" type="button">Azzera ricerca e filtri</button>
+    </div>
+  </div>
+
+  <section id="prove" class="wrap filterable" data-label="prove">
     <div class="sec-head">
       <p class="tag">Archivio · 11 documenti</p>
-      <h2>Archivio delle prove</h2>
+      <h2>Archivio delle prove d'esame</h2>
       <hr class="rule">
-      <p class="sec-note">Tracce e svolgimenti commentati delle sessioni d'esame, dalla più recente alle storiche.</p>
+      <p class="sec-note">Tracce e svolgimenti commentati delle sessioni d'esame, dalla più recente alle storiche. Impostazione metodologica, ipotesi motivate ed esempi numerici.</p>
     </div>
     <div class="grid">
-        <article class="card" tabindex="-1">
+        <article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2026</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Sessione ordinaria 2026 — Alettone</h3>
           <p class="desc">Progetto preliminare di un alettone a sbalzo in lega 2024-T3 per un bireattore di linea in crociera: carico di manovra, schema su due cerniere, dimensionamento di solette e anima del longherone a «C». Quesiti su aileron reversal, compositi, fly-by-wire e PND.</p>
           <a class="open" href="pdf/ordinara_2026.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2025</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Prova 2025</h3>
           <p class="desc">Dimensionamento del longherone in una struttura alare bilongherone a sezione rettangolare cava.</p>
           <a class="open" href="pdf/esame_2025.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2025-STR</span><span class="meta">Sessione straordinaria · Prova</span></div>
           <h3>Sessione straordinaria 2025</h3>
           <p class="desc">Soluzione completa della seconda prova — volo librato e dimensionamento del longherone di un addestratore leggero / aliante a monolongherone con profilo NACA 2312, con ipotesi motivate e passaggi espliciti.</p>
           <a class="open" href="pdf/esame2025_straordinaria.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2024</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Prova 2024</h3>
           <p class="desc">UAV a propulsione elettrica: polare parabolica, velocità caratteristiche, bilancio energetico e dimensionamento di un'ala a monolongherone, con confronto finale legno / materiale plastico.</p>
           <a class="open" href="pdf/esame_2024.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2023</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Prova 2023 — Piper PA-18</h3>
           <p class="desc">Dimensionamento dell'asta di controventatura e dell'accoppiamento a forcella sul Super Cub. Caso con coefficiente di Oswald e = 0,9 e confronto con e = 1; verifiche su asta tubolare Al 7075-T6 e perno in acciaio AISI 4130.</p>
           <a class="open" href="pdf/esame_2023.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2023-STR</span><span class="meta">Sessione straordinaria · Prova</span></div>
           <h3>Sessione straordinaria 2023</h3>
           <p class="desc">Virata standard di un velivolo da trasporto a 8000 m alla velocità di massima efficienza: velocità di volo, raggio di virata, angolo di bank, fattore di carico e incremento delle sollecitazioni alla radice alare.</p>
           <a class="open" href="pdf/SessioneStraordinaria_2023.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2019</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Prova 2019</h3>
           <p class="desc">Documento relativo alla prova d'esame 2019 di Costruzioni Aeronautiche.</p>
           <a class="open" href="pdf/esame_2019.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2018</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Sessione ordinaria 2018</h3>
           <p class="desc">Velivolo motoelica ultraleggero: stima delle velocità caratteristiche e delle autonomie massime, dimensionamento di massima della catena di comando dell'equilibratore con verifica a instabilità delle aste.</p>
           <a class="open" href="pdf/Ordinaria_2018.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2016</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Prova 2016</h3>
           <p class="desc">Corsa di atterraggio di un velivolo leggero biposto e verifica strutturale della gamba del carrello, trattata come asta tubolare con controllo a flessione e a carico di punta.</p>
           <a class="open" href="pdf/esame_2016.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2015</span><span class="meta">Sessione ordinaria · Prova</span></div>
           <h3>Sessione ordinaria 2015</h3>
           <p class="desc">Prima parte della prova 2015: dimensionamento del rivestimento e del longherone di un'ala monolongherone, con valutazione finale dell'angolo di torsione all'estremità alare.</p>
           <a class="open" href="pdf/2015_ordinaria.pdf" target="_blank" rel="noopener noreferrer">Apri il PDF <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="prove" tabindex="-1">
           <div class="card-top"><span class="code">ES · 2015-B</span><span class="meta">Esercizio · Longherone</span></div>
           <h3>Prova 2015 — Longherone</h3>
           <p class="desc">Documento relativo alla prova d'esame 2015 di Costruzioni Aeronautiche.</p>
@@ -250,28 +366,50 @@
     </div>
   </section>
 
-  <section id="supporto" class="wrap">
+  <section id="supporto" class="wrap filterable" data-label="supporto">
     <div class="sec-head">
-      <p class="tag">Supporto · monografie &amp; guide</p>
-      <h2>Materiali di supporto</h2>
+      <p class="tag">Biblioteca · 34 tra monografie, guide ed esercizi</p>
+      <h2>Materiali di supporto al corso</h2>
       <hr class="rule">
-      <p class="sec-note">Dispense, monografie e fascicoli operativi che accompagnano il corso: fondamenti matematici, aerodinamica, prestazioni, propulsione, strutture e laboratorio.</p>
+      <p class="sec-note">Monografie autoconsistenti, guide di laboratorio ed esercizi svolti che accompagnano l'intero arco del corso: fondamenti, aerodinamica, meccanica del volo, strutture, propulsione e impianti. Usa la console qui sopra per filtrare per area o cercare un argomento.</p>
     </div>
     <div class="grid-feat">
-        <article class="card feat" tabindex="-1">
+        <article class="card feat" data-area="fondamenti" tabindex="-1">
+          <div class="card-top"><span class="code">MON · SEGRETO</span><span class="meta">Monografia di inizio corso · 53 pp · Storia dell'aerodinamica</span></div>
+          <h3>Il segreto dell'ala — da Newton a Prandtl</h3>
+          <p class="desc">Monografia di inizio corso che racconta come, in poco più di due secoli, l'ala sia passata
+              da mistero a oggetto di calcolo — dalla <em>legge del seno quadrato</em> di Newton alla <em>teoria della
+              linea portante</em> di Prandtl. Il percorso è insieme cronologico e logico, attorno a un principio che
+              vale per tutta l'ingegneria: <em>non si progetta ciò che non si comprende</em>. Si parte dal modello a
+              urti di <em>Newton</em> (1687), dimensionalmente corretto ma fisicamente errato — con la sua «giustizia
+              postuma» nel flusso ipersonico; si passa alla prova sperimentale dei profili curvi di <em>Lilienthal</em>
+              (1889, «il dorso lavora») e al fatto compiuto dei <em>fratelli Wright</em> (1903), tra coefficiente di
+              Smeaton e imbardata avversa. L'indizio dell'<em>effetto Magnus</em> apre alla <em>circolazione</em>:
+              <em>Kutta</em> e le trasformazioni conformi (1902), il meccanismo fisico che la genera (viscosità, vortice
+              d'avviamento, teorema di <em>Kelvin</em>), il teorema fondamentale di <em>Kutta–Joukowski</em>
+              (<em>L' = ρV<sub>∞</sub>Γ</em>, 1906) e la retta di portanza della lastra piana (<em>C<sub>l</sub> = 2πα</em>).
+              Con <em>Lanchester</em> (1907) e le leggi dei vortici di <em>Helmholtz</em> e <em>Biot–Savart</em> si arriva
+              all'ala di apertura finita, fino alla sintesi di <em>Prandtl</em> (1918): linea portante, downwash, angolo
+              indotto (<em>α<sub>i</sub> = C<sub>L</sub>/(π·AR)</em>) e resistenza indotta, con la distribuzione ellittica
+              di <em>Munk</em>. Chiudono l'epilogo sui profili a flusso laminare, una cronologia sinottica e due appendici
+              di derivazione. Ogni tappa è accompagnata dalla sua formalizzazione e da esempi numerici svolti: le formule
+              del corso — retta di portanza, polare parabolica, angolo indotto — non sono ricette, ma i <em>punti
+              d'arrivo</em> di questa storia. Rielaborazione didattica originale.</p>
+          <a class="open" href="pdf/Il_segreto_dell_ala.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
+        </article>
+<article class="card feat" data-area="fondamenti" tabindex="-1">
           <div class="card-top"><span class="code">MON · VETTORI</span><span class="meta">Monografia didattica · 48 pp · Fondamenti matematici</span></div>
           <h3>Teoria dei vettori</h3>
           <p class="desc">Monografia propedeutica pensata come primo “mattone” del terzo anno: introduce la notazione vettoriale e costruisce, con progressione operativa, il passaggio dalle grandezze scalari alle grandezze vettoriali. Il percorso affronta rappresentazione grafica, versori, terne cartesiane, somma e differenza di vettori, prodotto per scalare, componenti cartesiane e coseni direttori. La parte centrale consolida prodotto scalare e prodotto vettoriale, collegandoli a proiezioni, lavoro, aree e momenti; la parte finale porta gli strumenti dentro il corso di strutture: risultante di sistemi di forze, scomposizione dei carichi lungo assi strutturali, reazioni vincolari, coppie, momento di trasporto e teorema di Varignon. Chiudono un tema d’esame svolto, esercizi di consolidamento e un’appendice sull’alfabeto greco. È un fascicolo di fondazione: non un ripasso accessorio, ma la grammatica minima necessaria per affrontare equilibrio, sollecitazioni e meccanica del volo con ordine e autonomia.</p>
           <a class="open" href="pdf/Teoria_dei_vettori.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="fondamenti" tabindex="-1">
           <div class="card-top"><span class="code">MON · VELIVOLO</span><span class="meta">Monografia didattica · 68 pp · A.S. 2026/2027</span></div>
           <h3>Il velivolo — classificazione, architettura e componenti</h3>
           <p class="desc">Monografia introduttiva al corso di <em>Costruzioni Aeronautiche</em>: costruisce il vocabolario tecnico necessario prima di affrontare calcolo strutturale, impianti, prestazioni e dimensionamento. Il percorso parte dalla classificazione degli aeromobili — aerostati, aerodine, velivoli civili e militari — e passa all'architettura generale dell'aeroplano, con assi corpo, moti fondamentali e sistemi di riferimento. La parte centrale è dedicata all'ala: forme in pianta, apertura, superficie, rastremazione, corda media geometrica e aerodinamica, allungamento, carico alare, freccia, diedro, svergolamento e configurazioni rispetto alla fusoliera; segue la geometria dei profili alari, con elementi caratteristici, classificazione e serie NACA. Completano il quadro fusoliera, organi di stabilizzazione e controllo, carrello, propulsori, disposizione dei motori e campi di utilizzo. Chiude una sezione di autoverifica con domande di teoria ed esercizi numerici. È pensata come mappa iniziale del corso: nomi, funzioni e relazioni tra le parti del velivolo, prima di entrare nel dettaglio delle verifiche e del progetto.</p>
           <a class="open" href="pdf/Il_velivolo.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="fondamenti" tabindex="-1">
           <div class="card-top"><span class="code">MON · FLUIDODINAMICA</span><span class="meta">Monografia didattica · 37 pp · Fluidodinamica · III anno</span></div>
           <h3>Il linguaggio dell'aerodinamica</h3>
           <p class="desc">Monografia introduttiva alla fluidodinamica, pensata su misura per il <em>terzo anno</em>:
@@ -296,78 +434,7 @@
               con chiarezza, per costruire basi teoriche e operative solide prima delle Costruzioni Aeronautiche.</p>
           <a class="open" href="pdf/Monografia_Fluidodinamica.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-
-        <article class="card feat" tabindex="-1">
-          <div class="card-top"><span class="code">MON · FLUIDI</span><span class="meta">Monografia didattica · 83 pp · Fluidodinamica · taglio universitario</span></div>
-          <h3>Generalità sui Fluidi</h3>
-          <p class="desc"><em>Nota sul livello: monografia di taglio universitario, pensata come approfondimento
-              avanzato e non come materiale di base per l'istituto tecnico. Per una prima introduzione al terzo anno
-              si rimanda a</em> «Il linguaggio dell'aerodinamica». <em>Questo fascicolo resta disponibile per chi
-              voglia spingersi oltre.</em><br>
-              Monografia propedeutica che fissa il linguaggio e le proprietà fondamentali dei fluidi,
-              base comune per aerodinamica, propulsione e meccanica del volo. Si parte dalla <em>definizione
-              fenomenologica</em> di fluido (deformazione continua sotto sforzo di taglio, velocità di
-              deformazione) e dalla sua spiegazione microscopica sul potenziale di <em>Lennard–Jones</em>.
-              Segue l'<em>ipotesi del continuo</em>, costruita passo dopo passo fino al criterio quantitativo
-              del <em>numero di Knudsen</em> (<em>Kn = λ/L</em>) e del libero cammino medio molecolare. Si
-              affrontano poi le proprietà di stato e costitutive: <em>densità</em> ed espansione termica
-              (coefficiente isobaro <em>α</em>, <em>α = −1/T</em> per il gas perfetto, anomalia dell'acqua,
-              distribuzione di Maxwell–Boltzmann); <em>comprimibilità</em> (modulo <em>E</em>, trasformazioni
-              isoterma e isentropica, <em>E = kp</em>); <em>viscosità</em> e sforzi tangenziali (legge di
-              Newton <em>τ = μ·dU/dy</em>, fluidi newtoniani e non, viscosità cinematica). Chiudono due
-              proprietà d'interfaccia dei liquidi: la <em>tensione di vapore</em>, con ebollizione e
-              <em>cavitazione</em> (di grande interesse per pompe ed eliche), e la <em>tensione superficiale</em>,
-              con legge di <em>Laplace</em> (<em>Δp = 2σ/R<sub>m</sub></em>), capillarità e legge di Jurin,
-              equazione di <em>Young</em> ed effetto loto. Un capitolo di esercizi svolti costruisce la
-              sensibilità agli ordini di grandezza. Impostazione <em>significato fisico → formulazione
-              matematica → interpretazione tecnica</em>, con esempi numerici e appendice sui simboli.</p>
-          <a class="open" href="pdf/Generalita_sui_Fluidi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
-        </article>
-        <article class="card feat" tabindex="-1">
-          <div class="card-top"><span class="code">MON · STATICA</span><span class="meta">Monografia didattica · 37 pp · Fluidodinamica</span></div>
-          <h3>Statica dei fluidi</h3>
-          <p class="desc">Secondo capitolo del corso di Fluidodinamica: lo studio delle azioni esercitate da un
-              fluido in quiete — o in moto rigido, privo di sforzi di taglio. Si parte dalla natura
-              microscopica della <em>pressione</em> (bombardamento molecolare nei gas, colonna di fluido nei
-              liquidi) per dimostrare, dall'equilibrio di un elemento prismatico, l'<em>isotropia</em> dello
-              sforzo di pressione — il <em>principio di Pascal</em> — con la digressione sull'<em>effetto
-              scala</em> (forze di superficie ∝ <em>l²</em>, di volume ∝ <em>l³</em>). Dall'equilibrio di un
-              elemento infinitesimo si ricava l'<em>equazione fondamentale della fluidostatica</em>
-              (<em>−∇p + ρf = ρa</em>) e, come casi particolari, la <em>legge di Stevino</em> per i liquidi a
-              densità costante e la distribuzione di pressione nei gas: <em>atmosfera isoterma</em>
-              (esponenziale) e <em>atmosfera standard</em> nella troposfera (legge di potenza,
-              <em>p/p<sub>0</sub> = ((T<sub>0</sub>−τz)/T<sub>0</sub>)<sup>g/Rτ</sup></em>). Segue il problema
-              centrale per le applicazioni: le <em>forze di pressione su superfici piane</em> (centroide,
-              momento di figura, teorema di Huygens, centro di pressione sotto il centroide) e
-              <em>curve</em> (metodo del volume isolato). Si giunge alla <em>spinta di Archimede</em> e alla
-              <em>stabilità del galleggiamento</em> (centro di spinta e <em>metacentro</em>), per chiudere con
-              i <em>misuratori di pressione</em> — barometro di Torricelli, manometri a tubo, a U e inclinato,
-              tubo di Bourdon e trasduttori piezoelettrici. Molti esempi di ambito aeronautico (pressurizzazione
-              di cabina, densità in quota, spinta aerostatica) e un capitolo finale di esercizi svolti.</p>
-          <a class="open" href="pdf/statica_dei_fluidi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
-        </article>
-        <article class="card feat" tabindex="-1">
-          <div class="card-top"><span class="code">MON · CINEM</span><span class="meta">Monografia didattica · 28 pp · Fluidodinamica</span></div>
-          <h3>Cinematica dei Fluidi</h3>
-          <p class="desc">Terzo capitolo del corso di Fluidodinamica: la descrizione del moto, propedeutica alla
-              dinamica. Si parte dal confronto tra <em>descrizione lagrangiana</em> (si segue la particella) ed
-              <em>euleriana</em> (si osserva un punto fisso nello spazio), e dal perché quest'ultima — sensata
-              solo grazie all'<em>ipotesi di continuo</em> — sia la scelta operativa della fluidodinamica. Si
-              distinguono poi le <em>linee caratteristiche</em> del campo di moto — traiettorie, linee di
-              corrente e streaklines — con la loro coincidenza nei flussi stazionari, e la <em>funzione di
-              corrente</em> <em>ψ</em> come strumento per il calcolo diretto della portata
-              (<em>Q = ψ<sub>B</sub> − ψ<sub>A</sub></em>). Nucleo del capitolo è la <em>derivata materiale</em>
-              <em>Du/Dt = ∂u/∂t + u·∇u</em>: la sua costruzione dal punto di vista euleriano, la distinzione tra
-              accelerazione <em>locale</em> e <em>convettiva</em> — perché l'aria acceleri sul dorso di un
-              profilo anche in volo stazionario — e l'esperimento ideale dello <em>schermo con il foro</em>, che
-              mostra come l'accelerazione dipenda dal gradiente e non sia apprezzabile in un punto isolato.
-              Chiude l'analisi cinematica nell'intorno di un punto: decomposizione del gradiente di velocità in
-              parte isotropa (dilatazione), antisimmetrica (rotazione rigida, isomorfa alla <em>vorticità
-              ω</em>) e simmetrica a traccia nulla (deformazione angolare) — quest'ultima all'origine, in un
-              fluido newtoniano, degli <em>sforzi viscosi</em> e dello strato limite.</p>
-          <a class="open" href="pdf/cinematica_dei_fluidi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
-        </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">DISP · AERO</span><span class="meta">Dispensa propedeutica · 56 pp · A.S. 2026/2027</span></div>
           <h3>Fondamenti di Aerodinamica</h3>
           <p class="desc">Quadro organico in otto capitoli, propedeutico al corso di Costruzioni Aeronautiche.
@@ -380,7 +447,7 @@
               tecnica</em>, con esempi numerici e appendice sull'atmosfera standard.</p>
           <a class="open" href="pdf/fondamenti_di_aerodinamica.pdf" target="_blank" rel="noopener noreferrer">Apri la dispensa <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="fondamenti" tabindex="-1">
           <div class="card-top"><span class="code">MON · NEWTON</span><span class="meta">Monografia didattica · 80 pp · Dalla portanza al velivolo completo</span></div>
           <h3>Una descrizione fisica del volo</h3>
           <p class="desc">Monografia panoramica che racconta l'intero velivolo a partire da un solo fatto fisico —
@@ -403,7 +470,7 @@
               di <em>Understanding Flight</em> di D. Anderson e S. Eberhardt.</p>
           <a class="open" href="pdf/descrizione_fisica_del_volo.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">MON · VOLO</span><span class="meta">Monografia didattica · A.S. 2026</span></div>
           <h3>Principi del Volo — Portanza e Resistenza</h3>
           <p class="desc">Monografia di aerodinamica del velivolo dedicata alle due forze fondamentali. Dai
@@ -417,7 +484,7 @@
               gamba di carrello, lastra in regime laminare/turbolento).</p>
           <a class="open" href="pdf/prestazioni_principi_del_volo.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">MON · ALA</span><span class="meta">Monografia didattica · 40 pp · A.S. 2026</span></div>
           <h3>Caratteristiche dei profili alari e dell'ala finita</h3>
           <p class="desc">Trattazione che conduce dal profilo (ente bidimensionale) all'ala reale di allungamento
@@ -430,7 +497,7 @@
               media aerodinamica, con esempio applicativo completo.</p>
           <a class="open" href="pdf/profili_alari_ala_finita.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">MON · GOCCIA</span><span class="meta">Monografia didattica · 13 pp · Aerodinamica</span></div>
           <h3>La «forma a goccia»: il corpo di minima resistenza</h3>
           <p class="desc">Perché, a parità di volume, il corpo di minima resistenza non è la sfera né un solido
@@ -453,7 +520,7 @@
               verifiche numeriche in Python/SymPy.</p>
           <a class="open" href="pdf/forma_a_goccia_overleaf.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">MON · POLARE</span><span class="meta">Monografia didattica · 40 pp · Aerodinamica &amp; Meccanica del volo</span></div>
           <h3>Resistenza aerodinamica e polare del velivolo</h3>
           <p class="desc">Trattazione organica della resistenza del velivolo completo e della sua sintesi nella
@@ -476,7 +543,7 @@
               finale. Ovunque possibile, interpretazione fisica delle formule ed esempi numerici concreti.</p>
           <a class="open" href="pdf/resistenza_e_polare.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">MON · AVANPROGETTO</span><span class="meta">Monografia didattica · 41 pp · Aerodinamica &amp; Avanprogetto</span></div>
           <h3>Stima della polare di avanprogetto di un aeromobile</h3>
           <p class="desc">Articolo monografico dedicato al problema inverso rispetto a quello della monografia
@@ -514,7 +581,7 @@
               nove passi. Ogni valore numerico del testo è stato verificato in modo indipendente per via numerica.</p>
           <a class="open" href="pdf/Stima_della_polare_di_avanprogetto.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="meccanica" tabindex="-1">
           <div class="card-top"><span class="code">MON · PUNTI</span><span class="meta">Monografia didattica · 35 pp · Aerodinamica &amp; Meccanica del volo</span></div>
           <h3>Punti caratteristici e polari tecniche</h3>
           <p class="desc">Dalla polare alla «geografia» delle prestazioni del velivolo. Si parte dalla
@@ -542,7 +609,7 @@
               esercizio completo su un bimotore a elica a quota zero e in crociera. Esempi numerici verificati.</p>
           <a class="open" href="pdf/Polari_Tecniche.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="meccanica" tabindex="-1">
           <div class="card-top"><span class="code">MON · LIVELLATO</span><span class="meta">Monografia didattica · 32 pp · Meccanica del volo &amp; Prestazioni</span></div>
           <h3>Volo livellato — calcolo delle velocità</h3>
           <p class="desc">Monografia di meccanica del volo dedicata alla più fondamentale delle prestazioni in volo
@@ -568,7 +635,7 @@
               Con web-app companion per le motoeliche e verifiche numeriche.</p>
           <a class="open" href="pdf/volo_livellato.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="meccanica" tabindex="-1">
           <div class="card-top"><span class="code">MON · SALITA</span><span class="meta">Monografia didattica · 43 pp · Meccanica del volo &amp; Prestazioni</span></div>
           <h3>Prestazioni di salita</h3>
           <p class="desc">Monografia di meccanica del volo dedicata alla fase di salita, dal volo uniforme al metodo
@@ -594,7 +661,7 @@
               <em>physics-first</em>, con esempi pratici e interpretazione fisica delle formule.</p>
           <a class="open" href="pdf/prestazioni_di_salita.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="meccanica" tabindex="-1">
           <div class="card-top"><span class="code">MON · LIBRATO</span><span class="meta">Monografia didattica · 17 pp · Meccanica del volo &amp; Prestazioni</span></div>
           <h3>Il volo librato — planata, autonomia e vento</h3>
           <p class="desc">Monografia di meccanica del volo dedicata al <em>volo planato</em> — la condizione
@@ -619,31 +686,31 @@
               <em>raucci.net</em>. Impostazione <em>physics-first</em>, con esempi numerici svolti.</p>
           <a class="open" href="pdf/volo_librato.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="meccanica" tabindex="-1">
           <div class="card-top"><span class="code">MON · AUTONOMIE</span><span class="meta">Monografia didattica · 43 pp · Meccanica del volo &amp; Prestazioni</span></div>
           <h3>Le autonomie del velivolo</h3>
           <p class="desc">Monografia dedicata all'<em>autonomia di durata</em> e all'<em>autonomia di distanza</em>, costruita a partire dal bilancio del combustibile consumato. La trattazione distingue con rigore turbogetti e motoeliche, perché cambiano le grandezze propulsive decisive — spinta, potenza, consumo specifico e rendimento propulsivo — e quindi cambiano anche gli assetti caratteristici per restare in volo più a lungo o percorrere la massima distanza. Dalle relazioni differenziali fondamentali si arriva alle formule di <em>Breguet</em>, allo <em>specific range</em>, alle condotte di crociera a quota, velocità o assetto assegnati e all'interpretazione operativa degli assetti ottimali. Una parte specifica è dedicata all'effetto del vento, distinguendo vento contrario e favorevole, velocità rispetto all'aria e velocità al suolo. Chiude la monografia il collegamento con i pesi di progetto e con il diagramma <em>carico pagante–autonomia</em>, che traduce le formule in vincoli concreti di missione. Impostazione progressiva: significato fisico, formulazione matematica, interpretazione tecnica ed esempi applicativi.</p>
           <a class="open" href="pdf/autonomie.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="meccanica" tabindex="-1">
           <div class="card-top"><span class="code">MON · STAB</span><span class="meta">Monografia didattica · 71 pp · Stabilità &amp; controllabilità</span></div>
           <h3>La stabilità statica dei velivoli — equilibrio, stabilità e controllabilità del volo</h3>
           <p class="desc">Monografia per le classi quinte dedicata al passaggio dal velivolo come punto materiale al velivolo come corpo rigido esteso, capace non solo di traslare ma anche di ruotare intorno ai tre assi corpo. Il percorso distingue con rigore equilibrio e stabilità: dalle equazioni statiche delle forze e dei momenti si arriva al criterio fondamentale della stabilità longitudinale, <em>dM/dα &lt; 0</em>, interpretato come nascita di un momento di richiamo dopo una perturbazione. La trattazione introduce superfici di controllo primarie e secondarie, convenzioni sui segni, trimmaggio, corda media aerodinamica e centraggio in percentuale MAC; affronta poi il ruolo del centro aerodinamico, dell'ala isolata, del piano di coda, del downwash, del punto neutro, del margine statico e dell'equilibratore. Una sezione specifica è dedicata alla configurazione canard, mentre la parte latero-direzionale chiarisce stabilità direzionale e laterale attraverso deriva, effetto diedro, freccia e posizione dell'ala rispetto alla fusoliera. Chiudono esercizi svolti e proposti, soluzioni complete, formulario essenziale e glossario italiano–inglese. È un fascicolo di meccanica del volo orientato alla comprensione progettuale: non basta che il velivolo sia in equilibrio, occorre che sappia reagire nel verso corretto quando viene disturbato.</p>
           <a class="open" href="pdf/La_stabilita_statica_dei_velivoli.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="propulsione" tabindex="-1">
           <div class="card-top"><span class="code">MON · PROP</span><span class="meta">Monografia didattica · 103 pp · Costruzioni e Propulsione aeronautica</span></div>
           <h3>Sistemi propulsivi aeronautici</h3>
           <p class="desc">Monografia ampia e autoconsistente sui propulsori di volo, dal principio comune — la spinta come <em>variazione di quantità di moto</em> — fino al confronto tra le architetture moderne. Si apre con lo scambio fondamentale spinta–rendimento (equazione della spinta, rendimento propulsivo di <em>Froude</em>, spinta specifica e coefficiente di getto) e con la <em>motoelica</em>: ciclo Otto, potenza all'albero e consumo specifico, variazione con velocità e quota, sovralimentazione con compressore e turbocompressore. L'elica è trattata sia come <em>organo costruttivo</em> (architettura della pala, passo fisso e variabile, regolatore a giri costanti, posizioni in bandiera e <em>reverse</em>, materiali e bilanciamento, effetti elica–velivolo: flusso elicoidale, effetto&nbsp;P, coppia di reazione, effetto giroscopico) sia con le <em>teorie aerodinamiche</em>: disco attuatore di Rankine–Froude, elemento di pala, teoria impulsiva con scia rotazionale, teoria vorticosa, ottimo di Betz e coefficienti di Renard, con un esempio completo dal punto di volo al passo dell'elica. Segue un blocco di <em>gasdinamica dei flussi compressibili</em> (velocità del suono, ugello isentropico di de&nbsp;Laval, effetti di attrito e calore, grandezze critiche e strozzamento, onde d'urto normale e obliqua) e il <em>ciclo Brayton</em> come cuore termodinamico delle turbine a gas (ciclo ideale e reale, confronto con Carnot, lavoro utile e potenza). Su questi strumenti si sviluppano i <em>motori a getto</em> — turbogetto, turbofan e turboelica — e i loro componenti (presa d'aria sub/supersonica, compressore centrifugo, assiale e <em>fan</em>, camera di combustione, turbina, ugello), con un riepilogo qualitativo dei modelli propulsivi e appendici sulla lettura dei cicli termodinamici e tabelle di riferimento dei motori. Impostazione <em>physics-first</em> con esempi numerici svolti.</p>
           <a class="open" href="pdf/sistemi_propulsivi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="meccanica" tabindex="-1">
           <div class="card-top"><span class="code">MON · ELICOTTERI</span><span class="meta">Monografia didattica · 61 pp · Ala rotante</span></div>
           <h3>Gli elicotteri — architettura, rotore, comandi, prestazioni e autorotazione</h3>
           <p class="desc">Monografia didattica dedicata all'aerodina ad ala rotante: introduce l'elicottero come macchina nella quale sostentamento, propulsione e controllo sono concentrati nel rotore. Il percorso parte dall'hovering, dal carico sul disco e dalle componenti principali, per poi confrontare le principali architetture — rotore di coda, tandem, coassiale, rotori affiancati, intersecanti e sistemi NOTAR — come diverse soluzioni al problema della coppia di reazione. La parte centrale approfondisce sistema rotore–trasmissione–motore, geometria del rotore, solidità, svergolamento, velocità di estremità, forze centrifughe e movimenti fondamentali della pala: variazione del passo, flappeggio e brandeggio. Seguono i comandi di volo, con piatto oscillante, passo collettivo, passo ciclico, pedaliera, precessione giroscopica e dissimmetria di portanza. Gli ultimi capitoli affrontano hovering e teoria del disco attuatore, volo assiale, vortex ring state, volo traslato, trim, potenza richiesta, prestazioni, autorotazione, stabilità, vibrazioni, materiali e manutenzione. È una mappa tecnica completa dell'elicottero: chiara nell'esposizione fisica, ordinata nelle relazioni fondamentali e orientata alla comprensione costruttiva e operativa della macchina.</p>
           <a class="open" href="pdf/monografia_elicotteri.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="strutture" tabindex="-1">
           <div class="card-top"><span class="code">MON · STRUTTURE</span><span class="meta">Monografia didattica · 195 pp · Costruzioni &amp; Strutture aeronautiche</span></div>
           <h3>Costruzioni Aeronautiche — la trave, i materiali, l'inviluppo di volo</h3>
           <p class="desc">Monografia autoconsistente e più ampia dell'area <em>Costruzioni</em>: il testo di
@@ -672,13 +739,13 @@
               verificati in Python.</p>
           <a class="open" href="pdf/Costruzioni_Aeronautiche.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="strutture" tabindex="-1">
           <div class="card-top"><span class="code">MON · SEZIONI</span><span class="meta">Monografia didattica · 47 pp · Geometria delle sezioni &amp; flussi di taglio</span></div>
           <h3>Geometria delle sezioni e flussi di taglio</h3>
           <p class="desc">Monografia operativa dedicata agli strumenti geometrici e statici indispensabili per il calcolo delle strutture aeronautiche. Il percorso procede dal <em>momento statico</em> e dal calcolo del baricentro al <em>momento d’inerzia</em> e al teorema di Huygens–Steiner; sviluppa quindi la formula di <em>Jourawsky</em>, il flusso di taglio nelle pareti sottili e nelle giunzioni rivettate, il <em>centro di taglio</em> delle sezioni aperte e le formule di <em>Bredt</em> per la torsione delle sezioni chiuse. Diciassette esercizi svolti guidano l’applicazione a sezioni a T e a L, piastre forate, longheroni a doppio T, chiodature, semigusci a correnti, profilati a C, tubi e cassoni alari. Chiudono un esercizio panoramico, un formulario di sintesi e un prontuario delle sezioni notevoli: una vera cassetta degli attrezzi per dimensionamento e verifica strutturale.</p>
           <a class="open" href="pdf/Geometria_delle_sezioni.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="strutture" tabindex="-1">
           <div class="card-top"><span class="code">MON · MATERIALI</span><span class="meta">Monografia didattica · 27 pp · Materiali &amp; Tecnologie</span></div>
           <h3>I materiali aeronautici</h3>
           <p class="desc">Prima monografia dell'area <em>Costruzioni</em>: la scelta del materiale come primo atto
@@ -704,7 +771,7 @@
               ingresso delle monografie di dimensionamento strutturale. Valori numerici verificati in Python.</p>
           <a class="open" href="pdf/materiali_aeronautici.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="strutture" tabindex="-1">
           <div class="card-top"><span class="code">MON · SOLL</span><span class="meta">Monografia didattica · 32 pp · A.S. 2024/2025</span></div>
           <h3>Diagrammi delle sollecitazioni lungo l'ala</h3>
           <p class="desc">Monografia che porta dallo schema di trave inflessa al calcolo dei carichi interni lungo
@@ -728,7 +795,7 @@
               collegata per il confronto «what-if».</p>
           <a class="open" href="pdf/sollecitazione_ala.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="impianti" tabindex="-1">
           <div class="card-top"><span class="code">MON · IMPIANTI</span><span class="meta">Monografia didattica · 174 pp · Impianti &amp; Sistemi di bordo</span></div>
           <h3>Gli impianti di bordo — dall'energia del motore ai sistemi del velivolo</h3>
           <p class="desc">Monografia autoconsistente dedicata ai <em>sistemi di bordo</em> del velivolo,
@@ -758,7 +825,7 @@
               dell'Aria Tipo Internazionale.</p>
           <a class="open" href="pdf/Impianti_di_bordo.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="laboratorio" tabindex="-1">
           <div class="card-top"><span class="code">LAB · XFLR5</span><span class="meta">Guida pratica di laboratorio · 68 pp · A.S. 2026</span></div>
           <h3>XFLR5 — Guida pratica alle esercitazioni</h3>
           <p class="desc">Guida operativa al software libero XFLR5, dal profilo bidimensionale al velivolo completo,
@@ -780,7 +847,7 @@
               genera i carichi, le costruzioni li sopportano.</p>
           <a class="open" href="pdf/monografia_xflr5.pdf" target="_blank" rel="noopener noreferrer">Apri la guida <span class="arr">→</span></a>
         </article>
-        <article class="card feat" tabindex="-1">
+<article class="card feat" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">RIF · MIN</span><span class="meta">Raccolta ragionata · risorsa web</span></div>
           <h3>Raccolta ragionata delle prove ministeriali</h3>
           <p class="desc">Raccolta ragionata delle prove d'esame ministeriali per l'opzione Costruzioni Aeronautiche
@@ -791,53 +858,82 @@
         </article>
     </div>
     <div class="grid" style="margin-top:1.2rem">
-        <article class="card" tabindex="-1">
+        <article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">MET · ASTA</span><span class="meta">Schema metodologico</span></div>
           <h3>Dimensionamento dell'asta di controventatura</h3>
           <p class="desc">Schema operativo per il dimensionamento dell'asta di controventatura con il metodo di Eulero. Non un esercizio svolto, ma un supporto metodologico per la risoluzione di problemi di questa tipologia.</p>
           <a class="open" href="pdf/Asta_di_controventatura___schema_completo.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">ESR · MANOVRA</span><span class="meta">Esercizi proposti</span></div>
           <h3>Diagramma di manovra e di raffica</h3>
           <p class="desc">Esercizio commentato passo passo per la determinazione del diagramma di manovra e del diagramma di raffica, con riferimento all'inviluppo di volo. Guida operativa all'impostazione e allo svolgimento.</p>
           <a class="open" href="pdf/Esercizi_proposti__Diagramma_Manovra.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">ESR · RIVETTI</span><span class="meta">Fascicolo didattico · 6 fasi</span></div>
           <h3>Dimensionamento di una giunzione rivettata</h3>
           <p class="desc">Percorso operativo in 6 fasi: modi di rottura della giunzione, criteri geometrici di progetto e scelta dei rivetti pieni AN 430 e AN 426, con esempi numerici guidati.</p>
           <a class="open" href="pdf/Rivetti.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">ESR · POLARE</span><span class="meta">Esercizi svolti</span></div>
           <h3>Esercizi sulla polare aerodinamica</h3>
           <p class="desc">Calcolo di portanza, resistenza, momento ed efficienza per ali rettangolari e trapezie; polare parabolica di Prandtl e di Oswald, efficienza massima e interpretazione di dati di galleria del vento.</p>
           <a class="open" href="pdf/esercizi_polare.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">ESR · LIBRATO</span><span class="meta">26 esercizi svolti · 40 pp · Meccanica del volo</span></div>
           <h3>Il volo librato — esercizi svolti</h3>
           <p class="desc">Raccolta autoconsistente di ventisei esercizi sulla meccanica del volo dell’aliante, preceduti dai richiami teorici essenziali. Equilibrio in planata, odografa, polare parabolica, massima efficienza, minimo rateo di discesa, distanza di planata, vento, diruttori, zavorra e lettura dei dati di prova di volo, con soluzioni passo passo e interpretazione fisica dei risultati.</p>
           <a class="open" href="pdf/Il_Volo_Librato_Esercizi_svolti_sulla_meccanica_del_volo_dell_aliante.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">ESR · ELICHE</span><span class="meta">Esercizi svolti · richiami teorici</span></div>
           <h3>Le eliche</h3>
           <p class="desc">Gruppo motopropulsore, potenze e rendimenti, coefficienti adimensionali e applicazioni numeriche su trazione, coppia, salita e compensazione della coppia di reazione.</p>
           <a class="open" href="pdf/Esercizi_proposti__Eliche.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">ESR · JET</span><span class="meta">26 esercizi svolti · richiami teorici</span></div>
           <h3>Il velivolo a reazione</h3>
           <p class="desc">Prestazioni del velivolo a getto: curva di resistenza <em>D(V)</em>, massima efficienza e planata, salita e odografa, quote di tangenza e consumi. La spinta è dedotta dal bilancio di quantità di moto (<em>T = ṁ(V<sub>e</sub> − V<sub>0</sub>)</em>) con rendimento propulsivo di Froude; 26 esercizi svolti e commentati, con appendice sulle funzioni caratteristiche del turbogetto (<em>φ</em>, <em>χ</em>, <em>ψ</em>).</p>
           <a class="open" href="pdf/velivolo_a_reazione.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
-        <article class="card" tabindex="-1">
+<article class="card" data-area="aerodinamica" tabindex="-1">
           <div class="card-top"><span class="code">DISP · PROFILI</span><span class="meta">Articolo tecnico-didattico</span></div>
           <h3>Sul funzionamento dei profili alari</h3>
           <p class="desc">Geometria dei profili e famiglie NACA, legame angolo d'attacco–portanza, distribuzione di pressione e genesi della portanza; effetti viscosi dello strato limite, transizione, separazione, stallo e influenza di spessore, curvatura e Reynolds, fino al NACA 2412 sul Cessna 172.</p>
           <a class="open" href="pdf/profili.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
+        </article>
+    </div>
+  </section>
+
+  <section id="approfondimenti" class="wrap filterable approf" data-label="approfondimenti">
+    <div class="sec-head">
+      <p class="tag">Oltre il programma · 3 monografie</p>
+      <h2>Approfondimenti</h2>
+      <hr class="rule">
+      <p class="sec-note">Monografie di <strong>taglio universitario</strong>, pensate come approfondimento avanzato e non come materiale di base per l'istituto tecnico. Per l'inquadramento del terzo anno si parte da «Il linguaggio dell'aerodinamica»; questi fascicoli restano a disposizione di chi voglia spingersi oltre.</p>
+    </div>
+    <div class="grid-feat">
+        <article class="card feat" data-area="approfondimenti" tabindex="-1">
+          <div class="card-top"><span class="code">MON · FLUIDI</span><span class="meta">Monografia didattica · 83 pp · Fluidodinamica · taglio universitario</span></div>
+          <h3>Generalità sui Fluidi</h3>
+          <p class="desc"><em>Livello universitario — approfondimento avanzato.</em> Per una prima introduzione al terzo anno si rimanda a «Il linguaggio dell'aerodinamica»; questo fascicolo è per chi vuole spingersi oltre.<br>Fissa in modo rigoroso il linguaggio e le proprietà fondamentali dei fluidi, base comune ad aerodinamica, propulsione e meccanica del volo. Dalla definizione fenomenologica di fluido (deformazione continua sotto sforzo di taglio) e dalla sua lettura microscopica sul potenziale di <em>Lennard–Jones</em>, all'<em>ipotesi del continuo</em> e al criterio del <em>numero di Knudsen</em>. Seguono densità ed espansione termica, comprimibilità (modulo <em>E</em>, trasformazioni isoterma e isentropica), viscosità e legge di Newton (<em>τ = μ·dU/dy</em>, fluidi newtoniani e non); infine le proprietà d'interfaccia dei liquidi — tensione di vapore e <em>cavitazione</em>, tensione superficiale, legge di <em>Laplace</em>, capillarità e legge di Jurin. Impostazione <em>significato fisico → formulazione matematica → interpretazione tecnica</em>, con un capitolo di esercizi svolti.</p>
+          <a class="open" href="pdf/Generalita_sui_Fluidi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
+        </article>
+<article class="card feat" data-area="approfondimenti" tabindex="-1">
+          <div class="card-top"><span class="code">MON · STATICA</span><span class="meta">Monografia didattica · 37 pp · Fluidodinamica</span></div>
+          <h3>Statica dei fluidi</h3>
+          <p class="desc"><em>Livello universitario — approfondimento avanzato.</em> Secondo capitolo del corso di Fluidodinamica; per l'inquadramento di base al terzo anno resta di riferimento «Il linguaggio dell'aerodinamica».<br>Lo studio delle azioni esercitate da un fluido in quiete o in moto rigido, privo di sforzi di taglio. Dalla natura microscopica della <em>pressione</em> si dimostra, per equilibrio di un elemento, l'<em>isotropia</em> dello sforzo di pressione (principio di Pascal) con la digressione sull'<em>effetto scala</em>. Si ricava l'<em>equazione fondamentale della fluidostatica</em> (<em>−∇p + ρf = ρa</em>) e, come casi particolari, la <em>legge di Stevino</em> e la distribuzione di pressione nei gas (atmosfera isoterma e standard). Nucleo applicativo: le <em>forze di pressione su superfici piane e curve</em> (centro di pressione), la <em>spinta di Archimede</em> e la <em>stabilità del galleggiamento</em> (metacentro), fino ai <em>misuratori di pressione</em>. Molti esempi di ambito aeronautico (pressurizzazione, densità in quota, spinta aerostatica) e un capitolo finale di esercizi svolti.</p>
+          <a class="open" href="pdf/statica_dei_fluidi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
+        </article>
+<article class="card feat" data-area="approfondimenti" tabindex="-1">
+          <div class="card-top"><span class="code">MON · CINEM</span><span class="meta">Monografia didattica · 28 pp · Fluidodinamica</span></div>
+          <h3>Cinematica dei Fluidi</h3>
+          <p class="desc"><em>Livello universitario — approfondimento avanzato.</em> Terzo capitolo del corso di Fluidodinamica, propedeutico alla dinamica; per il terzo anno si parta da «Il linguaggio dell'aerodinamica».<br>La descrizione del moto: confronto tra <em>descrizione lagrangiana</em> ed <em>euleriana</em> e ragioni della scelta euleriana (ipotesi di continuo). Si distinguono le <em>linee caratteristiche</em> del campo — traiettorie, linee di corrente e streaklines — e si introduce la <em>funzione di corrente</em> <em>ψ</em> per il calcolo diretto della portata (<em>Q = ψ<sub>B</sub> − ψ<sub>A</sub></em>). Cuore del capitolo è la <em>derivata materiale</em> (<em>Du/Dt = ∂u/∂t + u·∇u</em>), con la distinzione tra accelerazione <em>locale</em> e <em>convettiva</em> — perché l'aria acceleri sul dorso di un profilo anche in volo stazionario. Chiude l'analisi nell'intorno di un punto: decomposizione del gradiente di velocità in dilatazione, rotazione rigida (vorticità <em>ω</em>) e deformazione angolare, all'origine — in un fluido newtoniano — degli <em>sforzi viscosi</em> e dello strato limite.</p>
+          <a class="open" href="pdf/cinematica_dei_fluidi.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
     </div>
   </section>
@@ -849,49 +945,141 @@
       <hr class="rule">
     </div>
     <div class="panels">
-<div class="panel">
-<h3>Licenza d'uso dei materiali</h3>
-<p>
-          Salvo ove diversamente indicato, i materiali pubblicati in questa sezione sono concessi in licenza
+      <div class="panel">
+        <h3>Licenza d'uso dei materiali</h3>
+        <p>Salvo ove diversamente indicato, i materiali pubblicati in questa sezione sono concessi in licenza
           <strong>Creative Commons Attribuzione – Non commerciale – Non opere derivate 4.0 Internazionale
-          (CC BY-NC-ND 4.0)</strong>.
-        </p>
-<p>
-          È consentita la consultazione e la condivisione dei materiali esclusivamente con
-          <strong>citazione dell'autore</strong>, senza modifiche e per finalità non commerciali.
-        </p>
-<p>
-          Autore: <strong>Prof. Ing. Biagio Raucci</strong> · Licenza:
-          <a class="inline" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener noreferrer" target="_blank">CC BY-NC-ND 4.0</a>
-</p>
-</div>
-<div class="panel">
-<h3>Nota metodologica</h3>
-<p>
-          I materiali pubblicati hanno finalità esclusivamente didattica. Le soluzioni e gli schemi
-          proposti offrono un supporto allo studio, al ripasso e alla comprensione del metodo risolutivo.
-          In presenza di più approcci corretti, viene privilegiato quello più chiaro, ordinato e coerente
-          con l'impostazione tipica della disciplina.
-        </p>
-</div>
+          (CC BY-NC-ND 4.0)</strong>.</p>
+        <p>È consentita la consultazione e la condivisione dei materiali esclusivamente con
+          <strong>citazione dell'autore</strong>, senza modifiche e per finalità non commerciali.</p>
+        <p>Autore: <strong>Prof. Ing. Biagio Raucci</strong> · Licenza:
+          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener noreferrer" target="_blank">CC BY-NC-ND 4.0</a></p>
+      </div>
+      <div class="panel">
+        <h3>Nota metodologica</h3>
+        <p>I materiali pubblicati hanno finalità esclusivamente didattica. Le soluzioni e gli schemi proposti
+          offrono un supporto allo studio, al ripasso e alla comprensione del metodo risolutivo. In presenza di
+          più approcci corretti, viene privilegiato quello più chiaro, ordinato e coerente con l'impostazione
+          tipica della disciplina.</p>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><div class="container">
-<p class="sign">© Biagio Raucci — Archivio didattico di Costruzioni Aeronautiche</p>
-<p>ITIS «E. Majorana» · Cassino (FR)</p>
-</div></div>
+  <div class="wrap">
+    <p class="sign">© Biagio Raucci — Archivio didattico di Costruzioni Aeronautiche</p>
+    <p>ITIS «E. Majorana» · Somma Vesuviana (NA) · raucci.net</p>
+  </div>
 </footer>
 
+<button class="totop" id="totop" type="button" aria-label="Torna in cima" title="Torna in cima">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
 <script>
-  (function(){
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
-    document.querySelectorAll('.card,.panel').forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
-  })();
+(function(){
+  var root = document.documentElement;
+
+  /* theme (in-memory only; artifacts forbid storage) */
+  var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+  if(mq && mq.matches) root.setAttribute('data-theme','dark');
+  document.getElementById('theme').addEventListener('click', function(){
+    root.setAttribute('data-theme', root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+  });
+
+  /* reveal on scroll */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:.06});
+  document.querySelectorAll('.card,.panel,.heroart').forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
+
+  /* expandable descriptions: show toggle only when clamped text overflows */
+  document.querySelectorAll('.card').forEach(function(card){
+    var desc = card.querySelector('.desc'); if(!desc) return;
+    var tog = document.createElement('button');
+    tog.className='toggle'; tog.type='button'; tog.textContent='Mostra tutto';
+    desc.insertAdjacentElement('afterend', tog);
+    requestAnimationFrame(function(){
+      if(desc.scrollHeight - desc.clientHeight > 4){ card.classList.add('clampable'); }
+    });
+    tog.addEventListener('click', function(){
+      var open = card.classList.toggle('expanded');
+      tog.textContent = open ? 'Riduci' : 'Mostra tutto';
+    });
+  });
+
+  /* search + area filter */
+  var q = document.getElementById('q'),
+      clear = document.getElementById('clear'),
+      count = document.getElementById('count'),
+      empty = document.getElementById('empty'),
+      chips = Array.prototype.slice.call(document.querySelectorAll('.chip')),
+      cards = Array.prototype.slice.call(document.querySelectorAll('.card')),
+      sections = Array.prototype.slice.call(document.querySelectorAll('section.filterable')),
+      area = 'all';
+
+  cards.forEach(function(c){ c.dataset.text = c.textContent.toLowerCase().replace(/\s+/g,' '); });
+
+  function norm(s){ return s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+  function apply(){
+    var term = norm(q.value.trim());
+    clear.style.display = q.value ? 'block' : 'none';
+    var visible = 0;
+    cards.forEach(function(c){
+      var okArea = area==='all' || c.dataset.area===area;
+      var okText = !term || norm(c.dataset.text).indexOf(term)>-1;
+      var show = okArea && okText;
+      c.classList.toggle('is-hidden', !show);
+      if(show) visible++;
+    });
+    sections.forEach(function(s){
+      var any = s.querySelector('.card:not(.is-hidden)');
+      s.classList.toggle('is-empty', !any);
+    });
+    var lic = document.getElementById('licenza');
+    var filtering = !!term || area!=='all';
+    if(lic) lic.style.display = filtering ? 'none' : '';
+    empty.classList.toggle('show', visible===0);
+    count.innerHTML = '<b>'+visible+'</b> '+(visible===1?'documento':'documenti');
+  }
+
+  q.addEventListener('input', apply);
+  clear.addEventListener('click', function(){ q.value=''; q.focus(); apply(); });
+  chips.forEach(function(ch){
+    ch.addEventListener('click', function(){
+      area = ch.dataset.area;
+      chips.forEach(function(x){ x.setAttribute('aria-pressed', x===ch ? 'true':'false'); });
+      apply();
+    });
+  });
+  document.getElementById('reset').addEventListener('click', function(){
+    q.value=''; area='all';
+    chips.forEach(function(x){ x.setAttribute('aria-pressed', x.dataset.area==='all'?'true':'false'); });
+    apply(); window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  /* scroll-spy nav */
+  var spies = Array.prototype.slice.call(document.querySelectorAll('.nav a[data-spy]'));
+  var secEls = spies.map(function(a){ return document.getElementById(a.dataset.spy); }).filter(Boolean);
+  var spyIO = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        spies.forEach(function(a){ a.classList.toggle('active', a.dataset.spy===e.target.id); });
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+  secEls.forEach(function(s){ spyIO.observe(s); });
+
+  /* back to top */
+  var tt = document.getElementById('totop');
+  window.addEventListener('scroll', function(){
+    tt.classList.toggle('show', window.scrollY > 700);
+  }, {passive:true});
+  tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
 </script>
 </body>
 </html>
