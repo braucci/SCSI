@@ -119,13 +119,37 @@
   .search .clear:hover{color:var(--accent)}
   .count{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
   .count b{color:var(--accent);font-weight:600}
-  .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+  /* ---- rail dei filtri: nastro orizzontale con frecce ---- */
+  .chips-rail{display:flex;align-items:center;gap:.4rem;margin-top:.9rem}
+  .chips{display:flex;gap:.5rem;flex-wrap:nowrap;overflow-x:auto;flex:1 1 auto;min-width:0;
+    padding:.15rem .1rem;scroll-behavior:smooth;scroll-snap-type:x proximity;
+    scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+  .chips::-webkit-scrollbar{display:none}
+  /* maschera sfumata ai bordi: suggerisce che il nastro continua */
+  .chips-rail.has-prev .chips{-webkit-mask-image:linear-gradient(90deg,transparent,#000 18px);
+    mask-image:linear-gradient(90deg,transparent,#000 18px)}
+  .chips-rail.has-next .chips{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent)}
+  .chips-rail.has-prev.has-next .chips{
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent)}
   .chip{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.03em;color:var(--ink-2);
     background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.34rem .78rem;cursor:pointer;
+    white-space:nowrap;flex:0 0 auto;scroll-snap-align:start;
     transition:color .16s,border-color .16s,background .16s}
   .chip:hover{border-color:var(--accent);color:var(--accent)}
   .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
   :root[data-theme="dark"] .chip[aria-pressed="true"]{color:#08171c}
+  /* frecce di scorrimento */
+  .chips-nav{flex:0 0 auto;display:none;align-items:center;justify-content:center;
+    width:30px;height:30px;padding:0;border:1px solid var(--line);border-radius:999px;
+    background:var(--surface);color:var(--ink-2);cursor:pointer;
+    transition:color .16s,border-color .16s,background .16s,opacity .16s}
+  .chips-nav svg{width:16px;height:16px}
+  .chips-nav:hover{border-color:var(--accent);color:var(--accent)}
+  .chips-nav:disabled{opacity:.32;cursor:default;pointer-events:none}
+  /* le frecce compaiono solo quando il nastro eccede (classe .scrollable via JS) */
+  .chips-rail.scrollable .chips-nav{display:inline-flex}
 
   /* ---------- sections ---------- */
   main section{padding-top:clamp(3rem,6vw,4.4rem);scroll-margin-top:132px}
@@ -247,12 +271,13 @@
     .search{flex:1 1 100%}
     .search input{font-size:1rem;padding:.65rem .8rem .65rem 2.4rem}
     .count{order:2;font-size:.7rem}
-    .chips{flex-wrap:nowrap;overflow-x:auto;margin-top:.65rem;padding-bottom:.2rem;
-      scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    /* su mobile lo scorrimento è touch-nativo: niente frecce, solo la maschera */
+    .chips-rail{margin-top:.65rem}
+    .chips-rail.scrollable .chips-nav{display:none}
+    .chips{margin-top:0;padding-bottom:.2rem;
       -webkit-mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 22px),transparent);
       mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 22px),transparent)}
-    .chips::-webkit-scrollbar{display:none}
-    .chip{flex:0 0 auto;scroll-snap-align:start;padding:.4rem .85rem;font-size:.74rem}
+    .chip{padding:.4rem .85rem;font-size:.74rem}
 
     /* --- sezioni: offset di scroll sotto topbar+console --- */
     main section{scroll-margin-top:150px;padding-top:clamp(2.2rem,7vw,3rem)}
@@ -354,7 +379,11 @@
         </div>
         <span class="count" id="count" aria-live="polite"><b>65</b> documenti</span>
       </div>
-      <div class="chips" id="chips" role="group" aria-label="Filtra per area">
+      <div class="chips-rail" id="chipsRail">
+        <button class="chips-nav prev" id="chipsPrev" type="button" aria-label="Scorri i filtri verso sinistra" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="chips" id="chips" role="group" aria-label="Filtra per area">
         <button class="chip" data-area="all" aria-pressed="true">Tutti</button>
         <button class="chip" data-area="prove" aria-pressed="false">Prove d'esame</button>
         <button class="chip" data-area="fondamenti" aria-pressed="false">Fondamenti</button>
@@ -367,6 +396,10 @@
         <button class="chip" data-area="esercizi" aria-pressed="false">Esercizi</button>
         <button class="chip" data-area="approfondimenti" aria-pressed="false">Approfondimenti</button>
         <button class="chip" data-area="fonti" aria-pressed="false">Fonti storiche</button>
+        </div>
+        <button class="chips-nav next" id="chipsNext" type="button" aria-label="Scorri i filtri verso destra" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -1388,6 +1421,49 @@
     apply(); window.scrollTo({top:0,behavior:'smooth'});
   });
   apply(); /* inizializza il contatore in modo coerente al caricamento */
+
+  /* ---- nastro trasportatore dei filtri: frecce e stato bordi ---- */
+  (function(){
+    var rail = document.getElementById('chipsRail'),
+        track = document.getElementById('chips'),
+        prev = document.getElementById('chipsPrev'),
+        next = document.getElementById('chipsNext');
+    if(!rail || !track || !prev || !next) return;
+
+    function update(){
+      var max = track.scrollWidth - track.clientWidth;
+      var x = track.scrollLeft;
+      var scrollable = max > 4;
+      rail.classList.toggle('scrollable', scrollable);
+      // stato bordi (per maschera sfumata e disabilitazione frecce); tolleranza 4px
+      var atStart = x <= 4, atEnd = x >= max - 4;
+      rail.classList.toggle('has-prev', scrollable && !atStart);
+      rail.classList.toggle('has-next', scrollable && !atEnd);
+      prev.disabled = !scrollable || atStart;
+      next.disabled = !scrollable || atEnd;
+    }
+
+    function step(dir){
+      // scorre di ~80% della larghezza visibile, restando ancorato ai chip
+      var amount = Math.max(track.clientWidth * 0.8, 120);
+      track.scrollBy({left: dir * amount, behavior: 'smooth'});
+    }
+
+    prev.addEventListener('click', function(){ step(-1); });
+    next.addEventListener('click', function(){ step(1); });
+    track.addEventListener('scroll', update, {passive:true});
+    window.addEventListener('resize', update);
+    // se un chip selezionato via tastiera esce dalla vista, riportalo dentro
+    track.addEventListener('focusin', function(e){
+      if(e.target.classList && e.target.classList.contains('chip')){
+        e.target.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
+      }
+    });
+    // ricalcolo dopo il primo layout e (se disponibili) al termine dei webfont
+    update();
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(update); }
+    setTimeout(update, 250);
+  })();
 
   /* scroll-spy nav */
   var spies = Array.prototype.slice.call(document.querySelectorAll('.nav a[data-spy]'));
