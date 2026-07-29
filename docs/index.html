@@ -18,6 +18,9 @@
     --blueprint:rgba(22,105,122,.055);
     --shadow:0 1px 2px rgba(21,36,44,.05), 0 18px 40px -26px rgba(21,36,44,.28);
     --maxw:1180px; --r:14px;
+    /* famiglia "traduzione": verde salvia pastello, sobrio */
+    --trad:#4f8a6d; --trad-2:#3d7358;
+    --trad-bg:#f1f6f1; --trad-tint:#e4efe6; --trad-line:#d5e6d8;
   }
   :root[data-theme="dark"]{
     --paper:#0e1a20; --paper-2:#122129; --surface:#17282f;
@@ -26,6 +29,8 @@
     --accent:#57bccd; --accent-2:#8ad8e4; --accent-tint:#123039;
     --blueprint:rgba(120,200,215,.05);
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 20px 44px -26px rgba(0,0,0,.7);
+    --trad:#7fc59e; --trad-2:#a6dcbd;
+    --trad-bg:#132420; --trad-tint:#16302a; --trad-line:#265041;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -210,6 +215,26 @@
   .card.feat{padding:1.4rem 1.5rem 1.25rem}
   .card.feat h3{font-size:1.32rem;letter-spacing:-.012em}
   .card.feat .desc{--lines:6;font-size:.955rem;line-height:1.68}
+
+  /* ── Evidenziazione sobria dei lavori di traduzione ──────────────
+     Fondo verde salvia pastello + barra sinistra sempre presente,
+     così la famiglia "traduzione" si riconosce a colpo d'occhio senza
+     appesantire il layout. Pensata per essere il primo mattone di un
+     futuro riordino per famiglie di materiali. */
+  .card.card--trad{background:var(--trad-bg);border-color:var(--trad-line)}
+  .card.card--trad::before{background:var(--trad);transform:scaleY(1)}
+  .card.card--trad:hover{border-color:color-mix(in srgb,var(--trad) 42%,var(--trad-line))}
+  .card.card--trad .code{color:var(--trad-2);background:var(--trad-tint)}
+  .card.card--trad .open{color:var(--trad-2)}
+  .card.card--trad .open:hover{color:var(--trad)}
+  .trad-badge{display:inline-flex;align-items:center;gap:.34rem;
+    font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:500;
+    letter-spacing:.09em;text-transform:uppercase;color:var(--trad-2);
+    background:var(--trad-tint);border:1px solid var(--trad-line);
+    padding:.16rem .46rem .14rem;border-radius:6px;line-height:1;white-space:nowrap;
+    align-self:flex-start;margin-bottom:-.15rem}
+  .trad-badge svg{width:.72rem;height:.72rem;stroke:currentColor;fill:none;
+    stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
 
   /* ---------- empty state ---------- */
   .empty{display:none;text-align:center;padding:3.5rem 1rem;color:var(--muted)}
@@ -1280,7 +1305,7 @@
 
   <section id="approfondimenti" class="wrap filterable approf" data-label="approfondimenti">
     <div class="sec-head">
-      <p class="tag">Oltre il programma · 6 monografie</p>
+      <p class="tag">Oltre il programma · 7 monografie</p>
       <h2>Approfondimenti</h2>
       <hr class="rule">
       <p class="sec-note">Monografie di <strong>approfondimento avanzato</strong>, che vanno oltre il programma di base dell'istituto tecnico. I fascicoli di <em>taglio universitario</em> del corso di Fluidodinamica &mdash; per l'inquadramento del terzo anno si parte da «Il linguaggio dell'aerodinamica» &mdash; si affiancano qui agli approfondimenti monografici su singoli temi del programma di Costruzioni, trattati con un'ampiezza che l'ora di lezione non consente.</p>
@@ -1316,7 +1341,16 @@
           <p class="desc"><em>Approfondimento del quarto e quinto anno</em>, complemento naturale alle monografie «Gli impianti di bordo» e «Caratteristiche dei profili alari e dell'ala finita». È un tema che attraversa l'intero programma: termodinamica dei cambiamenti di stato, dinamica del punto materiale, strato limite, prestazioni, impiantistica e normativa convergono tutte su pochi centimetri quadrati di bordo d'attacco.<br>Si parte da una domanda apparentemente ingenua &mdash; <em>come fa l'acqua di una nube a restare liquida a &minus;15&nbsp;°C?</em> &mdash; e dalla risposta, che è uno stato <em>metastabile</em>: è il velivolo stesso a fornire il nucleo di congelamento che mancava. Da lì si costruisce tutto: microfisica della nube (<em>LWC</em>, <em>MVD</em>, spettro di Langmuir), <em>calore latente</em> e <em>riscaldamento cinetico</em> (<em>T<sub>rec</sub> = T<sub>∞</sub> + r·V²/2c<sub>p</sub></em>, da cui la velocità oltre la quale il ghiaccio non si forma affatto), fino alla grandezza che governa il fenomeno: la <em>freezing fraction n</em>. Da essa discendono le tre morfologie &mdash; <em>rime</em> (<em>n</em>≃1, opaco, poroso, relativamente benigno), <em>glaze</em> (<em>n</em>&lt;1, con <em>run back</em> e la temibile formazione a «doppio corno») e <em>beak ice</em>. Il cuore quantitativo è in due passi. Primo, la <strong>cattura</strong>: equazione adimensionale della traiettoria delle goccioline e <em>parametro inerziale K = ρ<sub>w</sub>d²V<sub>∞</sub>/(18μc)</em>, letto come rapporto fra distanza d'arresto e dimensione del corpo, fino all'<em>efficienza di cattura</em> locale <em>β = dy<sub>0</sub>/ds</em> e totale <em>E</em>, con i <em>limiti di impingement</em>. Secondo, il <strong>bilancio termodinamico</strong> su volume di controllo: bilanci di massa ed energia, superficie <em>dry</em> e <em>wet</em>, evaporazione ricavata per analogia di Reynolds con il numero di <em>Lewis</em>, coefficiente di scambio termico <em>h</em> e transizione di <em>Horton&ndash;von Doenhoff</em> &mdash; con la retroazione che rende il fenomeno brusco: il ghiaccio irruvidisce, la rugosità rende turbolento lo strato limite, la turbolenza fa crescere <em>n</em>. Seguono il degrado prestazionale (&minus;40% di <em>C<sub>Lmax</sub></em> con <em>glaze</em>, resistenza fino a cinque volte, corsa di decollo +67%, rateo di salita &minus;36% su turboelica), la dimostrazione quantitativa del perché il ghiaccio sia soprattutto un problema dei velivoli «piccoli e lenti» &mdash; e del perché intere porzioni d'ala dei grandi trasporti siano prive di protezione; i sistemi <em>anti-icing</em> e <em>de-icing</em> (<em>boots</em> pneumatici, fluidi FPD, elettrotermici, aria calda con <em>spray tube</em>) dimensionati sull'energia realmente disponibile a bordo; infine la certificazione FAR/JAR 25.1419 e l'Appendice C. Diciassette esercizi svolti passo passo e tre appendici di richiamo (costanti termofisiche, termodinamica e strato limite, Runge&ndash;Kutta). Tutti i valori numerici sono verificati in Python e le figure sono calcolate, non disegnate: le traiettorie delle goccioline e la curva <em>β(s)</em> vengono da un'integrazione numerica, con la verifica di consistenza <em>∫β&nbsp;ds = E</em> soddisfatta allo 0,1%. Rielaborazione didattica originale.</p>
           <a class="open" href="pdf/Monografia_Ghiaccio_Overleaf.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">→</span></a>
         </article>
-<article class="card feat" data-area="approfondimenti" tabindex="-1">
+<article class="card feat card--trad" data-area="approfondimenti" tabindex="-1">
+          <span class="trad-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7M8 3v2M6 5c0 4 2 7 5 8M4 13c3 0 6-2 7-6"/><path d="M13 21l4-9 4 9M14.5 17.5h5"/></svg>Traduzione integrale</span>
+          <div class="card-top"><span class="code">MON &middot; PRANDTL</span><span class="meta">Traduzione integrale, note ed esercizi &middot; 85 pp &middot; Aerodinamica &middot; Ala finita &middot; Elica</span></div>
+          <h3>Applicazioni dell'idrodinamica moderna all'aeronautica &mdash; L. Prandtl</h3>
+          <p class="byline">Traduzione italiana integrale di <em>Applications of Modern Hydrodynamics to Aeronautics</em> (L. Prandtl, NACA Report No. 116, 1921) &mdash; testo di pubblico dominio, NTRS 19930091180</p>
+          <p class="desc"><em>Quinto anno &mdash; il documento che fonda l'aerodinamica dell'ala finita.</em> La traduzione <strong>integrale e commentata</strong> del rapporto con cui Prandtl presenta al mondo, in un linguaggio sorprendentemente piano, la teoria della portanza e della resistenza indotta sviluppata a Gottinga. Quasi tutto ci&ograve; che si studia in quinta nasce qui: circolazione e teorema di <em>Kutta&ndash;&#381;ukovskij</em>, trasformazioni conformi e profili di <em>Joukowski</em>, il <em>vortice di avviamento</em> e i vortici d'estremit&agrave;, la <em>resistenza indotta</em> con la sua dipendenza da <em>C<sub>L</sub>&sup2;</em> e da <em>1/AR</em>, l'ala <em>ellittica</em>, l'effetto suolo, il biplano ottimo, le correzioni di galleria, fino alla teoria dell'<em>elica</em> con la correzione d'estremit&agrave; di Prandtl. La resa italiana &egrave; fedele in ogni parte &mdash; prefazione, Parte&nbsp;I (fondamenti di idrodinamica, &sect;&sect;1&ndash;11), Parte&nbsp;II (applicazioni, &sect;&sect;12&ndash;33), tavola dei simboli e bibliografia &mdash; con le 91 equazioni numerate come nell'originale e una tavola di corrispondenza fra la notazione di Gottinga (<em>A</em> portanza, <em>W</em> resistenza, <em>F</em> superficie) e quella del corso. A corredo, per l'autoconsistenza del testo: <strong>note del curatore</strong> ben distinte dal testo di Prandtl, che collegano il rapporto al programma; un'<strong>appendice di strumenti</strong> (campi di velocit&agrave;, circolazione, potenziale, numeri complessi e trasformazioni conformi, teorema della quantit&agrave; di moto) al livello di un diplomando; e <strong>quattro esercizi svolti</strong> col metodo dei cinque passi, ciascuno agganciato a una formula numerata del rapporto &mdash; Kutta&ndash;&#381;ukovskij, resistenza indotta del monoplano, biplano ottimo, correzione di getto libero. Complemento diretto della fonte originale (<em>FONTE &middot; 01</em>): stampa i due testi e leggili a fronte. Tutti i valori numerici verificati in Python; figure in TikZ.</p>
+          <a class="open" href="pdf/Prandtl_NACA116.pdf" target="_blank" rel="noopener noreferrer">Apri la monografia <span class="arr">&rarr;</span></a>
+        </article>
+<article class="card feat card--trad" data-area="approfondimenti" tabindex="-1">
+          <span class="trad-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7M8 3v2M6 5c0 4 2 7 5 8M4 13c3 0 6-2 7-6"/><path d="M13 21l4-9 4 9M14.5 17.5h5"/></svg>Traduzione integrale</span>
           <div class="card-top"><span class="code">MON &middot; WRIGHT</span><span class="meta">Traduzione e quaderno tecnico &middot; 21 pp &middot; Storia &middot; Inglese tecnico &middot; Motori</span></div>
           <h3>Come compimmo il primo volo &mdash; Orville Wright, con quaderno tecnico</h3>
           <p class="byline">Traduzione italiana integrale di <em>How We Made the First Flight</em> (Orville Wright, 1913) &mdash; testo di pubblico dominio, edizione FAA/Smithsonian</p>
