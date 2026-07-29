@@ -21,6 +21,9 @@
     /* famiglia "traduzione": verde salvia pastello, sobrio */
     --trad:#4f8a6d; --trad-2:#3d7358;
     --trad-bg:#f1f6f1; --trad-tint:#e4efe6; --trad-line:#d5e6d8;
+    /* famiglia "esercizi": blu pastello molto chiaro */
+    --eserc:#5b8fc9; --eserc-2:#3a6ea5;
+    --eserc-bg:#eef4fb; --eserc-tint:#e2ecf8; --eserc-line:#d6e3f2;
   }
   :root[data-theme="dark"]{
     --paper:#0e1a20; --paper-2:#122129; --surface:#17282f;
@@ -31,6 +34,8 @@
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 20px 44px -26px rgba(0,0,0,.7);
     --trad:#7fc59e; --trad-2:#a6dcbd;
     --trad-bg:#132420; --trad-tint:#16302a; --trad-line:#265041;
+    --eserc:#6fa8d6; --eserc-2:#a5cdec;
+    --eserc-bg:#132330; --eserc-tint:#173247; --eserc-line:#264a63;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -227,6 +232,19 @@
   .card.card--trad .code{color:var(--trad-2);background:var(--trad-tint)}
   .card.card--trad .open{color:var(--trad-2)}
   .card.card--trad .open:hover{color:var(--trad)}
+
+  /* ── Evidenziazione della famiglia "esercizi" ────────────────────
+     Fondo blu pastello molto chiaro + barra sinistra sempre presente,
+     così le schede degli esercizi si distinguono a colpo d'occhio dalle
+     monografie e dalle guide. Applicata a ogni scheda con
+     data-area="esercizi": le future aggiunte la ereditano senza
+     ritocchi. */
+  .card[data-area="esercizi"]{background:var(--eserc-bg);border-color:var(--eserc-line)}
+  .card[data-area="esercizi"]::before{background:var(--eserc);transform:scaleY(1)}
+  .card[data-area="esercizi"]:hover{border-color:color-mix(in srgb,var(--eserc) 42%,var(--eserc-line))}
+  .card[data-area="esercizi"] .code{color:var(--eserc-2);background:var(--eserc-tint)}
+  .card[data-area="esercizi"] .open{color:var(--eserc-2)}
+  .card[data-area="esercizi"] .open:hover{color:var(--eserc)}
   .trad-badge{display:inline-flex;align-items:center;gap:.34rem;
     font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:500;
     letter-spacing:.09em;text-transform:uppercase;color:var(--trad-2);
@@ -402,7 +420,7 @@
           <input id="q" type="search" placeholder="Cerca nell'archivio — es. «longherone», «polare», «Bernoulli»&hellip;" aria-label="Cerca nell'archivio" autocomplete="off">
           <button class="clear" id="clear" type="button" aria-label="Cancella la ricerca">&times;</button>
         </div>
-        <span class="count" id="count" aria-live="polite"><b>79</b> documenti</span>
+        <span class="count" id="count" aria-live="polite"><b>81</b> documenti</span>
       </div>
       <div class="chips-rail" id="chipsRail">
         <button class="chips-nav prev" id="chipsPrev" type="button" aria-label="Scorri i filtri verso sinistra" tabindex="-1">
@@ -523,7 +541,7 @@
 
   <section id="supporto" class="wrap filterable" data-label="supporto">
     <div class="sec-head">
-      <p class="tag">Biblioteca · 55 tra monografie, guide ed esercizi</p>
+      <p class="tag">Biblioteca · 56 tra monografie, guide ed esercizi</p>
       <h2>Materiali di supporto al corso</h2>
       <hr class="rule">
       <p class="sec-note">Monografie autoconsistenti, guide di laboratorio ed esercizi svolti che accompagnano l'intero arco del corso: fondamenti, aerodinamica, meccanica del volo, strutture, propulsione e impianti. Usa la console qui sopra per filtrare per area o cercare un argomento.</p>
@@ -1245,6 +1263,12 @@
           <h3>Diagramma di manovra e di raffica</h3>
           <p class="desc">Esercizio commentato passo passo per la determinazione del diagramma di manovra e del diagramma di raffica, con riferimento all'inviluppo di volo. Guida operativa all'impostazione e allo svolgimento.</p>
           <a class="open" href="pdf/Esercizi_proposti__Diagramma_Manovra.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
+        </article>
+<article class="card" data-area="esercizi" tabindex="-1">
+          <div class="card-top"><span class="code">ESR · VIRATA</span><span class="meta">15 esercizi svolti · 26 pp · Meccanica del volo</span></div>
+          <h3>La virata — esercizi svolti</h3>
+          <p class="desc">Raccolta autoconsistente sulla <em>virata</em>, preceduta da una parte teorica distesa ma rigorosa e da un formulario completo. I richiami muovono dall'equilibrio della <em>virata corretta</em> (le due equazioni fondamentali, verticale e radiale) e dal legame <em>n = 1/cos&nbsp;Φ</em> fra fattore di carico e <em>angolo di sbandamento</em>, per costruire poi il <em>raggio</em> <em>R = V²/(g·√(n²−1))</em>, la <em>velocità angolare</em>, il tempo di inversione e le due strade alternative della manovra — ad <em>assetto costante</em> (<em>V<sub>v</sub> = V·√n</em>) o a <em>velocità costante</em> (<em>C<sub>L,v</sub> = n·C<sub>L</sub></em>) — con l'avvertenza sullo <em>stallo accelerato</em>. Seguono l'aerodinamica della <em>polare parabolica</em>, la <em>spinta</em> (<em>T<sub>v</sub> = n·T</em>) e la <em>potenza necessaria</em> in virata (<em>Π<sub>v</sub>/Π = n³ᐟ²</em>), la <em>virata piatta</em> in derapata con la <em>devianza</em> come forza centripeta (<em>R = 2m/(ρ·S·C'<sub>D</sub>·δ)</em>) e i <em>raccordi virata–salita</em> risolti con il <em>bilancio di potenza</em> (<em>Π<sub>d</sub> = D·V + W·V<sub>z</sub></em>), inclusi i casi ripidi da risolvere per <em>approssimazioni successive</em>. Quindici esercizi risolti passo passo con il metodo dei cinque passi (dati → strategia → svolgimento → verifica): virate corrette a velocità e ad assetto costante, virate piatte, discese a spinta ridotta e concatenamenti salita↔virata a potenza costante, sia per <em>motoelica</em> sia per <em>turbogetto</em>. Nomenclatura internazionale (<em>L, D, W, T, S, AR, C<sub>L</sub>, C<sub>D</sub></em>) e unità SI; ogni valore verificato con script Python indipendente, con le note metodologiche che segnalano dove la soluzione autoconsistente corregge lo schema manualistico. Companion applicativo della monografia <em>I moti curvi — la virata e la richiamata</em>.</p>
+          <a class="open" href="pdf/La_virata_esercizi.pdf" target="_blank" rel="noopener noreferrer">Apri <span class="arr">→</span></a>
         </article>
 <article class="card" data-area="esercizi" tabindex="-1">
           <div class="card-top"><span class="code">ESR · RIVETTI</span><span class="meta">Fascicolo didattico · 6 fasi</span></div>
