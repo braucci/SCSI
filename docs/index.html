@@ -25,6 +25,9 @@
     /* famiglia "esercizi": blu pastello molto chiaro */
     --eserc:#5b8fc9; --eserc-2:#3a6ea5;
     --eserc-bg:#eef4fb; --eserc-tint:#e2ecf8; --eserc-line:#d6e3f2;
+    /* famiglia "slide": ocra caldo, sobrio */
+    --slide:#b07d3a; --slide-2:#875b25;
+    --slide-bg:#faf5ec; --slide-tint:#f4ebdb; --slide-line:#e8dcc4;
   }
   :root[data-theme="dark"]{
     --paper:#0e1a20; --paper-2:#122129; --surface:#17282f;
@@ -37,6 +40,8 @@
     --trad-bg:#132420; --trad-tint:#16302a; --trad-line:#265041;
     --eserc:#6fa8d6; --eserc-2:#a5cdec;
     --eserc-bg:#132330; --eserc-tint:#173247; --eserc-line:#264a63;
+    --slide:#d9ae6b; --slide-2:#ecc98f;
+    --slide-bg:#241d12; --slide-tint:#2f2617; --slide-line:#4d3f26;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -229,6 +234,119 @@
     align-self:flex-start;margin-bottom:-.15rem}
   .trad-badge svg{width:.72rem;height:.72rem;stroke:currentColor;fill:none;
     stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+
+  /* ---------- slide del corso: sottosezioni per anno ---------- */
+  .subsec{margin-top:1.4rem}
+  .subsec+.subsec{margin-top:2.1rem}
+  .subsec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .85rem;
+    padding-bottom:.6rem;border-bottom:1px solid var(--line-2)}
+  .subsec-head h3{font-family:"Fraunces",Georgia,serif;font-size:1.3rem;font-weight:500;
+    color:var(--ink);margin:0;letter-spacing:-.01em}
+  .subsec-tag{font-family:"IBM Plex Mono",monospace;font-size:.67rem;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--slide-2);background:var(--slide-tint);
+    border:1px solid var(--slide-line);padding:.2rem .5rem;border-radius:7px;margin:0;white-space:nowrap}
+  .subsec-note{color:var(--muted);font-size:.92rem;line-height:1.6;margin:.7rem 0 0;max-width:74ch}
+  .subsec-note em{font-style:italic;color:var(--ink-2)}
+  .subsec .grid{margin-top:1.1rem}
+  .subsec-state{margin:0;font-family:"IBM Plex Mono",monospace;font-size:.65rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line-2);
+    padding:.2rem .5rem;border-radius:7px;white-space:nowrap;margin-left:auto}
+  .subsec-state.pub{color:var(--slide-2);background:var(--slide-tint);border-color:var(--slide-line)}
+
+  /* --- sottosezioni collassabili: stessa grammatica delle sezioni, in scala minore --- */
+  .collapsible-subsec{scroll-margin-top:150px}
+  .subsec.collapsible-subsec{margin-top:1.15rem}
+  .subsec.collapsible-subsec+.subsec.collapsible-subsec{margin-top:.65rem}
+  .collapsible-subsec .subsec-head{
+    position:relative;
+    padding:.85rem 3.35rem .85rem 1.05rem;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--paper-2);
+    cursor:pointer;
+    transition:border-color .22s ease,background .22s ease;
+  }
+  .collapsible-subsec .subsec-head:hover{
+    border-color:color-mix(in srgb,var(--slide) 45%,var(--line));
+    background:var(--slide-bg);
+  }
+  .collapsible-subsec.is-open .subsec-head{
+    border-color:color-mix(in srgb,var(--slide) 38%,var(--line));
+    background:var(--slide-bg);
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
+  }
+  .collapsible-subsec .subsec-head h3{font-size:1.2rem}
+  .subsec-toggle{
+    position:absolute;inset:0;width:100%;border:0;border-radius:inherit;
+    background:transparent;cursor:pointer;color:inherit;
+  }
+  .subsec-toggle:focus-visible{outline:2.5px solid var(--slide);outline-offset:3px}
+  .subsec-chevron{
+    position:absolute;right:.95rem;top:50%;
+    width:1.85rem;height:1.85rem;transform:translateY(-50%);
+    display:grid;place-items:center;
+    border:1px solid var(--slide-line);border-radius:999px;
+    background:var(--surface);color:var(--slide-2);pointer-events:none;
+    transition:background .22s ease,border-color .22s ease;
+  }
+  .subsec-chevron svg{width:15px;height:15px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .collapsible-subsec.is-open .subsec-chevron{background:var(--slide-tint)}
+  .collapsible-subsec.is-open .subsec-chevron svg{transform:rotate(180deg)}
+  .subsec-body{
+    display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;
+    transition:grid-template-rows .38s cubic-bezier(.2,.8,.2,1),opacity .26s ease,visibility 0s linear .38s;
+  }
+  .subsec-body-inner{min-height:0;overflow:hidden;padding:0 .1rem}
+  .collapsible-subsec.is-open .subsec-body{
+    grid-template-rows:1fr;opacity:1;visibility:visible;
+    transition:grid-template-rows .42s cubic-bezier(.2,.8,.2,1),opacity .3s ease .05s,visibility 0s;
+  }
+  .collapsible-subsec.is-open .subsec-body-inner{padding-bottom:.35rem}
+  .collapsible-subsec .subsec-note{margin-top:.95rem}
+  @media(max-width:560px){
+    .collapsible-subsec .subsec-head{padding:.8rem 3rem .8rem .9rem}
+    .subsec-state{margin-left:0}
+    .subsec-chevron{right:.75rem;width:1.7rem;height:1.7rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .subsec-body,.subsec-chevron,.subsec-chevron svg{transition:none}
+  }
+  /* una sottosezione con schede scompare se il filtro le nasconde tutte */
+  .subsec:has(.card):not(:has(.card:not(.is-hidden))){display:none}
+
+  /* mappa delle UdA dell'anno: cosa è pubblicato e cosa manca */
+  .uda-list{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:.95rem 0 0;padding:0}
+  .uda-list li{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.02em;
+    color:var(--muted);background:var(--paper-2);border:1px solid var(--line-2);
+    border-radius:999px;padding:.26rem .62rem}
+  .uda-list li.pub{color:var(--slide-2);background:var(--slide-tint);
+    border-color:var(--slide-line);font-weight:500}
+  .uda-list li.pub::before{content:"▸ ";opacity:.75}
+
+  /* segnaposto degli anni ancora senza slide */
+  .subsec-soon{margin:1.05rem 0 0;background:var(--paper-2);border:1px dashed var(--line);
+    border-radius:12px;padding:.85rem 1.05rem;color:var(--muted);font-size:.9rem;line-height:1.6}
+  .subsec-soon b{color:var(--ink-2);font-weight:600}
+
+  /* famiglia visiva delle slide */
+  .card--slide::before{background:var(--slide)}
+  .card--slide .code{color:var(--slide-2);background:var(--slide-tint)}
+  .card--slide:hover{border-color:color-mix(in srgb,var(--slide) 42%,var(--line))}
+  .slide-badge{display:inline-flex;align-items:center;gap:.34rem;
+    font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:500;
+    letter-spacing:.09em;text-transform:uppercase;color:var(--slide-2);
+    background:var(--slide-tint);border:1px solid var(--slide-line);
+    padding:.16rem .46rem .14rem;border-radius:6px;line-height:1;white-space:nowrap;
+    align-self:flex-start;margin-bottom:-.15rem}
+  .slide-badge svg{width:.72rem;height:.72rem;stroke:currentColor;fill:none;
+    stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+  @media(max-width:720px){
+    .subsec-head h3{font-size:1.18rem}
+    .subsec+.subsec{margin-top:1.7rem}
+    .uda-list li{font-size:.64rem}
+  }
 
   /* ---------- empty state ---------- */
   .empty{display:none;text-align:center;padding:3.5rem 1rem;color:var(--muted)}
@@ -445,7 +563,7 @@
 </a>
 <nav aria-label="Navigazione principale" class="nav" id="nav">
 <a data-spy="prove" href="#prove">Prove</a>
-<a data-spy="supporto" href="#supporto">Materiali</a><a data-spy="esercizi" href="#esercizi">Esercizi</a>
+<a data-spy="supporto" href="#supporto">Materiali</a><a data-spy="slide" href="#slide">Slide</a><a data-spy="esercizi" href="#esercizi">Esercizi</a>
 <a data-spy="approfondimenti" href="#approfondimenti">Approfondimenti</a>
 <a data-spy="fonti" href="#fonti">Fonti</a>
 <a data-spy="licenza" href="#licenza">Licenza</a>
@@ -491,7 +609,7 @@
 <input aria-label="Cerca nell'archivio" autocomplete="off" id="q" placeholder="Cerca nell'archivio — es. «longherone», «polare», «Bernoulli»…" type="search"/>
 <button aria-label="Cancella la ricerca" class="clear" id="clear" type="button">×</button>
 </div>
-<span aria-live="polite" class="count" id="count"><b>81</b> documenti</span>
+<span aria-live="polite" class="count" id="count"><b>82</b> documenti</span>
 </div>
 <div class="chips-rail" id="chipsRail">
 <button aria-label="Scorri i filtri verso sinistra" class="chips-nav prev" id="chipsPrev" tabindex="-1" type="button">
@@ -500,6 +618,7 @@
 <div aria-label="Filtra per area" class="chips" id="chips" role="group">
 <button aria-pressed="true" class="chip" data-area="all">Tutti</button>
 <button aria-pressed="false" class="chip" data-area="prove">Prove d'esame</button>
+<button aria-pressed="false" class="chip" data-area="slide">Slide</button>
 <button aria-pressed="false" class="chip" data-area="fondamenti">Fondamenti</button>
 <button aria-pressed="false" class="chip" data-area="aerodinamica">Aerodinamica</button>
 <button aria-pressed="false" class="chip" data-area="meccanica">Meccanica del volo</button>
@@ -1311,6 +1430,83 @@
 </article>
 </div>
 </section>
+<section class="wrap filterable" data-label="slide" id="slide">
+<div class="sec-head">
+<p class="tag">Slide di lezione · 1 documento</p>
+<h2>Le slide del corso</h2>
+<hr class="rule"/>
+<p class="sec-note">Le presentazioni proiettate in aula, ordinate secondo la programmazione annuale di Dipartimento: per ciascun anno le Unità di Apprendimento nella sequenza in cui vengono effettivamente svolte. Le slide non sostituiscono le monografie — sono la traccia della lezione, con i passaggi essenziali e le figure; lo sviluppo completo e gli esercizi stanno nel materiale collegato.</p>
+</div>
+<div class="subsec" id="slide-terzo">
+<div class="subsec-head">
+<h3>Terzo anno</h3>
+<p class="subsec-tag">3ª classe · 165 h · 8 UdA</p>
+<p class="subsec-state">In preparazione</p>
+</div>
+<p class="subsec-note">L'anno in cui si costruisce il linguaggio: vettori, momenti e reazioni vincolari, poi l'atmosfera tipo internazionale, la sostentazione statica e quella dinamica, fino all'ala finita e alla polare del velivolo. Comprende <em>26 ore</em> di laboratorio computazionale in Python distribuite sull'intero anno.</p>
+<ol class="uda-list">
+<li>UdA 1 · Fondamenti vettoriali</li>
+<li>UdA 2 · Architettura del velivolo</li>
+<li>UdA 3 · Atmosfera ISA e sostentazione statica</li>
+<li>UdA 4 · Dinamica dei fluidi e sostentazione dinamica</li>
+<li>UdA 5 · L'ala finita</li>
+<li>UdA 6 · Materiali e tecnologie</li>
+<li>UdA 7 · Strumenti di pilotaggio e navigazione</li>
+<li>UdA 8 · Laboratorio: Python</li>
+</ol>
+<p class="subsec-soon"><b>Slide in preparazione.</b> Le presentazioni di questo anno saranno pubblicate progressivamente, seguendo l'ordine delle UdA. Nel frattempo il materiale di studio è nelle sezioni «Materiali di supporto al corso» ed «Esercizi svolti e schemi metodologici».</p>
+</div>
+<div class="subsec" id="slide-quarto">
+<div class="subsec-head">
+<h3>Quarto anno</h3>
+<p class="subsec-tag">4ª classe · 165 h · 8 UdA</p>
+<p class="subsec-state pub">1 slide</p>
+</div>
+<p class="subsec-note">L'anno dei sistemi e dei carichi: si apre sull'ipersostentazione e sul volo a bassa velocità, attraversa il comprimibile, l'elica e l'ala rotante, e si chiude sull'inviluppo di volo e sul dimensionamento delle strutture. Comprende <em>22 ore</em> di laboratorio con XFLR5 e Python.</p>
+<ol class="uda-list">
+<li class="pub">UdA 1 · L'ipersostentazione</li>
+<li>UdA 2 · Il volo supersonico</li>
+<li>UdA 3 · Le eliche</li>
+<li>UdA 4 · Accoppiamento elica–velivolo</li>
+<li>UdA 5 · Gli elicotteri</li>
+<li>UdA 6 · Carichi e inviluppo di volo</li>
+<li>UdA 7 · Struttura del velivolo e dimensionamenti</li>
+<li>UdA 8 · Laboratorio: XFLR5 e Python</li>
+</ol>
+<div class="grid">
+<article class="card feat card--slide" data-area="slide" tabindex="-1">
+<span class="slide-badge"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 4h16v11H4zM12 15v4M8.5 21h7"></path></svg>Slide di lezione</span>
+<div class="card-top"><span class="code">SLIDE · IPERSOST</span><span class="meta">Presentazione · Aerodinamica · IV anno · UdA 1</span></div>
+<h3>Gli ipersostentatori</h3>
+<p class="byline">Traccia proiettata della lezione — accompagna la monografia «Gli ipersostentatori» (<em>MON · IPERSOST</em>)</p>
+<p class="desc">Presentazione dell'<em>UdA 1 del quarto anno</em>. Si apre dalla posta in gioco — <em>V<sub>s</sub> = √(2W/ρSC<sub>L,max</sub>)</em> — e dalla lettura che va fatta capire in aula: la velocità di stallo dipende dalla <em>radice</em> del <em>C<sub>L,max</sub></em>, per cui raddoppiare il coefficiente massimo non dimezza <em>V<sub>s</sub></em> ma la riduce di circa il <em>29%</em>. Da qui il conflitto di progetto che giustifica la geometria variabile: l'ala giusta in crociera — piccola, poco curva, ottimizzata per bassi <em>C<sub>L</sub></em> — è l'ala sbagliata per il decollo e l'atterraggio. Seguono le due famiglie passive, <strong>bordo di uscita</strong> (<em>plain</em>, <em>split</em>, <em>slotted</em>, <em>Fowler</em>, doppia e tripla fessura) e <strong>bordo di attacco</strong> (<em>slat</em>, <em>fixed slot</em>, <em>droop nose</em>, <em>Krüger</em>), lette con i tre meccanismi di Anderson: incidenza virtuale, curvatura, superficie. Poi il posizionamento in apertura e la ragione per cui la radice non è flappata — far stallare l'ala <em>dalla radice</em>, non dall'estremità, per conservare l'efficacia degli alettoni — con la convivenza fra flap, alettoni e spoiler. Chiudono il metodo semi-empirico in tre passi per la stima del <em>ΔC<sub>L,max</sub></em>, la correzione di freccia e la costruzione grafica della curva di portanza dell'ala flappata. Da usare come traccia della lezione: le dimostrazioni per esteso e i sei esercizi svolti passo passo sono nella monografia collegata.</p>
+<div class="card-links">
+<a class="open" href="slide/slide_ipersostentatori.pdf" rel="noopener noreferrer" target="_blank">Apri le slide <span class="arr">→</span></a>
+<a class="open sub" href="pdf/ipersostentatori.pdf" rel="noopener noreferrer" target="_blank">Monografia collegata <span class="arr">→</span></a>
+</div>
+</article>
+</div>
+</div>
+<div class="subsec" id="slide-quinto">
+<div class="subsec-head">
+<h3>Quinto anno</h3>
+<p class="subsec-tag">5ª classe · 264 h · 8 UdA</p>
+<p class="subsec-state">In preparazione</p>
+</div>
+<p class="subsec-note">L'anno dell'Esame di Stato: meccanica del volo completa, il modulo strutturale con le esercitazioni canoniche <em>ES.1–ES.8</em>, centraggio e stabilità, impianti di bordo, corrosione e normativa. Comprende <em>42 ore</em> di laboratorio fra aerodinamica numerica e uso verificato degli strumenti di IA.</p>
+<ol class="uda-list">
+<li>UdA 1 · Volo librato e volo livellato</li>
+<li>UdA 2 · Moti curvi, decollo, atterraggio, autonomie</li>
+<li>UdA 3 · Progetto di strutture (ES.1–ES.8)</li>
+<li>UdA 4 · Centraggio, controllo e stabilità</li>
+<li>UdA 5 · Impianti di bordo</li>
+<li>UdA 6 · Fenomeni di corrosione</li>
+<li>UdA 7 · Normativa e manutenzione</li>
+<li>UdA 8 · Laboratorio: IA e aerodinamica numerica</li>
+</ol>
+<p class="subsec-soon"><b>Slide in preparazione.</b> Le presentazioni di questo anno saranno pubblicate progressivamente, seguendo l'ordine delle UdA. Per la preparazione alla seconda prova sono già disponibili l'archivio delle prove d'esame e le raccolte di esercizi svolti.</p>
+</div>
+</section>
 <section class="wrap filterable" data-label="esercizi" id="esercizi"><div class="sec-head"><p class="tag">Raccolte applicative · 16 documenti</p><h2>Esercizi svolti e schemi metodologici</h2><hr class="rule"/><p class="sec-note">Raccolte autoconsistenti, esercizi risolti passo passo e schemi operativi per consolidare i metodi di calcolo del corso, dai fondamenti alla meccanica del volo e alle strutture.</p></div><div class="grid-feat"><article class="card feat" data-area="esercizi" tabindex="-1">
 <div class="card-top"><span class="code">RIF · MIN</span><span class="meta">Raccolta ragionata · risorsa web</span></div>
 <h3>Raccolta ragionata delle prove ministeriali</h3>
@@ -1764,6 +1960,71 @@
     update();
     if(document.fonts && document.fonts.ready){ document.fonts.ready.then(update); }
     setTimeout(update, 250);
+  })();
+
+  /* ---- sottosezioni collassabili (le annate delle slide) ---- */
+  (function(){
+    var subs = Array.prototype.slice.call(document.querySelectorAll('.subsec'));
+    if(!subs.length) return;
+
+    subs.forEach(function(sub, i){
+      var head = sub.querySelector(':scope > .subsec-head');
+      if(!head) return;
+
+      var body = document.createElement('div');
+      body.className = 'subsec-body';
+      body.id = 'subsec-body-' + (sub.id || i);
+      var inner = document.createElement('div');
+      inner.className = 'subsec-body-inner';
+      while(head.nextSibling){ inner.appendChild(head.nextSibling); }
+      body.appendChild(inner);
+      sub.appendChild(body);
+
+      var title = head.querySelector('h3');
+      var label = title ? title.textContent.trim() : '';
+
+      var toggle = document.createElement('button');
+      toggle.className = 'subsec-toggle';
+      toggle.type = 'button';
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-controls', body.id);
+      toggle.setAttribute('aria-label','Apri la sottosezione ' + label);
+      head.appendChild(toggle);
+
+      var chevron = document.createElement('span');
+      chevron.className = 'subsec-chevron';
+      chevron.setAttribute('aria-hidden','true');
+      chevron.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+      head.appendChild(chevron);
+
+      function setOpen(open){
+        sub.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', (open ? 'Chiudi la sottosezione ' : 'Apri la sottosezione ') + label);
+      }
+      sub._setSubsecOpen = setOpen;
+      /* apertura indipendente: le annate non si escludono a vicenda */
+      toggle.addEventListener('click', function(){ setOpen(!sub.classList.contains('is-open')); });
+      sub.classList.add('collapsible-subsec');
+    });
+
+    /* durante ricerca o filtro si apre da sola l'annata che contiene risultati:
+       i gestori sono registrati dopo quelli originali, quindi apply() ha gia'
+       aggiornato le classi is-hidden quando questo codice viene eseguito */
+    function sync(){
+      if(!q.value.trim() && area === 'all') return;
+      subs.forEach(function(sub){
+        if(!sub._setSubsecOpen || !sub.querySelector('.card')) return;
+        sub._setSubsecOpen(!!sub.querySelector('.card:not(.is-hidden)'));
+      });
+    }
+    function closeAll(){
+      subs.forEach(function(sub){ if(sub._setSubsecOpen) sub._setSubsecOpen(false); });
+    }
+    q.addEventListener('input', sync);
+    chips.forEach(function(ch){ ch.addEventListener('click', sync); });
+    var rst = document.getElementById('reset');
+    if(rst) rst.addEventListener('click', closeAll);
   })();
 
   /* scroll-spy nav */
