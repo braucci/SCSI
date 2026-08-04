@@ -609,7 +609,7 @@
 <input aria-label="Cerca nell'archivio" autocomplete="off" id="q" placeholder="Cerca nell'archivio — es. «longherone», «polare», «Bernoulli»…" type="search"/>
 <button aria-label="Cancella la ricerca" class="clear" id="clear" type="button">×</button>
 </div>
-<span aria-live="polite" class="count" id="count"><b>89</b> documenti</span>
+<span aria-live="polite" class="count" id="count"><b>91</b> documenti</span>
 </div>
 <div class="chips-rail" id="chipsRail">
 <button aria-label="Scorri i filtri verso sinistra" class="chips-nav prev" id="chipsPrev" tabindex="-1" type="button">
@@ -728,7 +728,7 @@
 </section>
 <section class="wrap filterable" data-label="supporto" id="supporto">
 <div class="sec-head">
-<p class="tag">Biblioteca · 40 tra monografie, guide ed esercizi</p>
+<p class="tag">Biblioteca · 41 tra monografie, guide ed esercizi</p>
 <h2>Materiali di supporto al corso</h2>
 <hr class="rule"/>
 <p class="sec-note">Monografie autoconsistenti e guide di laboratorio che accompagnano l’intero arco del corso: fondamenti, aerodinamica, meccanica del volo, strutture, propulsione, impianti e normativa. Le raccolte applicative sono ora riunite nella sezione autonoma «Esercizi».</p>
@@ -1257,6 +1257,40 @@
               (flessione, taglio, stabilità). Diagrammi verificati numericamente; web-app interattiva
               collegata per il confronto «what-if».</p>
 <a class="open" href="pdf/sollecitazione_ala.pdf" rel="noopener noreferrer" target="_blank">Apri la monografia <span class="arr">→</span></a>
+</article>
+<article class="card feat" data-area="strutture" tabindex="-1">
+<div class="card-top"><span class="code">MON · TAGLIO</span><span class="meta">Monografia didattica · 31 pp · Strutture &amp; Carichi · IV anno · UdA 6–7</span></div>
+<h3>Diagrammi di taglio e di momento flettente — ala trapezia con carrello</h3>
+<p class="desc">Monografia autoconsistente che porta un tema d'esame classico dall'impostazione fisica
+              fino ai diagrammi quotati, sostituendo il vecchio <em>metodo grafico</em> del poligono
+              funicolare con l'integrazione numerica in <em>Python</em>. Il percorso è quello canonico
+              <em>carichi → taglio → momento flettente</em>, svolto su un bimotore leggero da
+              <em>6160 kg<sub>f</sub></em> con ala trapezia (<em>AR = 7</em>, <em>λ = 0,6</em>) e carrello
+              retrattile in ala. Il capitolo iniziale costruisce il modello di <em>semiala incastrata in
+              mezzeria</em> e chiarisce un punto che genera spesso confusione: la geometria si quota nella
+              <em>vista in pianta</em> (piano <em>x y</em>), mentre le forze — portanza, peso proprio,
+              carico del carrello — vivono nel piano <em>y z</em> a essa <em>perpendicolare</em>, dove si
+              traccia il vero diagramma di corpo libero. Seguono le definizioni integrali di
+              <em>T(y)</em> ed <em>M(y)</em> come risultante e momento dei <em>carichi esterni alla
+              sezione</em>, le relazioni differenziali <em>dT/dy = −w(y)</em> e <em>dM/dy = −T(y)</em> e le
+              quattro regole di tracciamento (gradi delle curve, salto in corrispondenza dei carichi
+              concentrati, zeri all'estremità, verifica globale in mezzeria). Il capitolo dei carichi
+              introduce l'ipotesi di <em>c<sub>ℓ</sub></em> costante in apertura — discussa criticamente
+              rispetto a <em>Schrenk</em> (NACA TM 948) e al <em>Report NACA 572</em> — il punto A del
+              diagramma di manovra e la formula statistica del peso alare, con l'avvertenza sulle unità
+              obbligate delle formule empiriche. L'<em>esercizio guidato</em> si svolge in sei fasi (A–F)
+              interamente in <em>unità SI</em>, con equivalenze in kg<sub>f</sub> e verifica di sensatezza a
+              ogni passo: <em>V<sub>A</sub> = 82,3 m/s</em>, <em>w<sub>r</sub> = 12,62 kN/m</em>,
+              <em>T(0) = 64,6 kN</em>, <em>M(0) = 217,7 kN·m</em>. Un capitolo dedicato presenta il
+              <em>programma Python completo</em>, spiegato blocco per blocco, che integra col metodo dei
+              trapezi e disegna i tre diagrammi; chiudono tre esercizi proposti con risultati, l'appendice
+              sul <em>sistema tecnico di unità</em> e l'appendice con le <em>forme chiuse</em> polinomiali di
+              <em>T(y)</em> ed <em>M(y)</em>. La monografia adotta la <em>simbologia aeronautica
+              internazionale</em> (<em>L</em>, <em>D</em>, <em>W</em>, <em>AR</em>, <em>c<sub>r</sub></em>,
+              <em>c<sub>t</sub></em>, <em>L′</em>, <em>W′</em>, <em>w</em>) e si apre con una pagina di
+              <em>Simbologia</em> che ne dà la corrispondenza con la notazione tradizionale dei testi
+              italiani. Tutti i valori numerici sono verificati con script Python indipendente.</p>
+<a class="open" href="pdf/monografia_taglio_momento.pdf" rel="noopener noreferrer" target="_blank">Apri la monografia <span class="arr">→</span></a>
 </article>
 <article class="card feat" data-area="aerodinamica" tabindex="-1">
 <div class="card-top"><span class="code">MON · GASD 1</span><span class="meta">Gasdinamica comprimibile · 51 pp · Onde d'urto, calore e attrito</span></div>
