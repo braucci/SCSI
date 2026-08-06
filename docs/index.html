@@ -609,7 +609,7 @@
 <input aria-label="Cerca nell'archivio" autocomplete="off" id="q" placeholder="Cerca nell'archivio — es. «longherone», «polare», «Bernoulli»…" type="search"/>
 <button aria-label="Cancella la ricerca" class="clear" id="clear" type="button">×</button>
 </div>
-<span aria-live="polite" class="count" id="count"><b>94</b> documenti</span>
+<span aria-live="polite" class="count" id="count"><b>95</b> documenti</span>
 </div>
 <div class="chips-rail" id="chipsRail">
 <button aria-label="Scorri i filtri verso sinistra" class="chips-nav prev" id="chipsPrev" tabindex="-1" type="button">
@@ -646,7 +646,7 @@
 </div>
 <section class="wrap filterable" data-label="prove" id="prove">
 <div class="sec-head">
-<p class="tag">Archivio · 13 documenti</p>
+<p class="tag">Archivio · 14 documenti</p>
 <h2>Archivio delle prove d'esame</h2>
 <hr class="rule"/>
 <p class="sec-note">Tracce e svolgimenti commentati delle sessioni d'esame, dalla più recente alle storiche. Impostazione metodologica, ipotesi motivate ed esempi numerici.</p>
@@ -657,6 +657,12 @@
 <h3>Sessione ordinaria 2026 — Alettone</h3>
 <p class="desc">Progetto preliminare di un alettone a sbalzo in lega 2024-T3 per un bireattore di linea in crociera: carico di manovra, schema su due cerniere, dimensionamento di solette e anima del longherone a «C». Quesiti su aileron reversal, compositi, fly-by-wire e PND.</p>
 <a class="open" href="pdf/ordinara_2026.pdf" rel="noopener noreferrer" target="_blank">Apri il PDF <span class="arr">→</span></a>
+</article>
+<article class="card" data-area="prove" tabindex="-1">
+<div class="card-top"><span class="code">ES · 2026-SUP</span><span class="meta">Sessione suppletiva · Prova</span></div>
+<h3>Sessione suppletiva 2026 — La catena di comando dell'equilibratore</h3>
+<p class="desc">Velivolo motoelica da 4000 kg: soluzione ragionata della <em>prima parte</em>, dallo schema cinematico del comando di beccheggio fino alla richiamata. Si parte dal nodo più formativo della traccia — le <em>ipotesi aggiuntive</em>, tutte dichiarate e motivate: categoria <em>utility</em> CS-23 (perché <em>n</em> = 4 eccede il limite 3,8 della categoria normale), sforzo di barra confrontato con la CS 23.397, lunghezze delle aste lette dalla figura del tema, acciaio AISI 4130. Segue lo <strong>schema cinematico</strong> completo (cloche, due aste da 4 m con <em>rompitratta</em> intermedio, squadretta di rinvio a 90°, asta verticale in deriva, leva calettata sulla barra) con la spiegazione del perché il rompitratta esista: il carico critico euleriano scala con 1/<em>l</em>², e spezzare la luce lo <em>quadruplica</em>. Il <strong>dimensionamento</strong> propaga la forza lungo tutta la catena — rapporto di leva 7, da 280 N a 1960 N di contingenza — e progetta le aste a <em>instabilità euleriana</em> con i carichi di robustezza (perché è un fenomeno di rottura), con verifica <em>a posteriori</em> di validità del campo elastico (λ ≃ 231 ≫ λ<sub>lim</sub> ≃ 67). La <strong>barra di torsione</strong> è modellata come trave appoggiata con forza e coppia concentrate in mezzeria e dimensionata a <em>flesso-torsione</em> con il momento ideale di von Mises, nel doppio controllo canonico contingenza/snervamento e robustezza/rottura, più una verifica di <em>rigidezza</em> torsionale (0,5°) che di norma manca nelle soluzioni circolanti. Seguono i tre <strong>diagrammi</strong> di taglio, momento flettente e momento torcente, chiusi dai tre controlli di coerenza che ogni studente dovrebbe saper fare a mente. Il quesito di meccanica del volo — <em>raggio</em> e <em>spinta</em> in richiamata a 380 kt e 3500 m con <em>n</em> = 4 — è risolto per passi con polare parabolica e atmosfera ISA, e <em>commentato criticamente</em>: la potenza richiesta (2,7 MW) e il Mach di volo (0,60) mostrano che la manovra sarebbe sostenibile solo in transitorio. Due appendici completano il quadro: i <em>richiami di teoria</em> in sei schede (leve, Eulero, contingenza e robustezza, diagrammi di sollecitazione, torsione e von Mises, richiamata e polare) e la <em>soluzione integrale</em> delle tre varianti proposte, fra cui quella che scopre l'anello debole della catena. Valori tutti verificati con script Python indipendente.</p>
+<a class="open" href="pdf/suppletiva_2026.pdf" rel="noopener noreferrer" target="_blank">Apri il PDF <span class="arr">→</span></a>
 </article>
 <article class="card" data-area="prove" tabindex="-1">
 <div class="card-top"><span class="code">ES · 2025</span><span class="meta">Sessione ordinaria · Prova</span></div>
