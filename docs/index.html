@@ -553,6 +553,28 @@
     .section-body,.section-chevron,.section-chevron svg{transition:none}
   }
 
+
+  /* ---------- sezione "Prove ministeriali" ---------- */
+  .min-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    padding:1.35rem 1.5rem;box-shadow:var(--shadow)}
+  .min-row{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:flex-end}
+  .min-field{display:flex;flex-direction:column;gap:.4rem;flex:1 1 220px;min-width:200px}
+  .min-field label{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted)}
+  .min-select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper-2);
+    border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;width:100%;
+    transition:border-color .16s ease}
+  .min-select:focus{outline:none;border-color:var(--accent)}
+  .min-select:disabled{opacity:.55;cursor:not-allowed}
+  .min-dl{font-family:"IBM Plex Mono",monospace;font-size:.82rem;letter-spacing:.03em;font-weight:500;
+    display:inline-flex;align-items:center;gap:.5rem;padding:.62rem 1.1rem;border-radius:10px;
+    background:var(--accent);color:#fff;border:1px solid var(--accent-2);white-space:nowrap;
+    transition:background .16s ease,opacity .16s ease;flex:0 0 auto}
+  .min-dl:hover{background:var(--accent-2);color:#fff}
+  .min-dl[aria-disabled="true"]{opacity:.45;pointer-events:none}
+  .min-status{margin:.85rem 0 0;font-size:.86rem;color:var(--muted)}
+  .min-status a{color:var(--accent)}
+  .min-status.err{color:var(--eserc-2)}
 </style>
 </head>
 <body>
@@ -563,6 +585,7 @@
 </a>
 <nav aria-label="Navigazione principale" class="nav" id="nav">
 <a data-spy="prove" href="#prove">Prove</a>
+<a data-spy="ministeriali" href="#ministeriali">Ministeriali</a>
 <a data-spy="supporto" href="#supporto">Materiali</a><a data-spy="slide" href="#slide">Slide</a><a data-spy="esercizi" href="#esercizi">Esercizi</a>
 <a data-spy="approfondimenti" href="#approfondimenti">Approfondimenti</a>
 <a data-spy="fonti" href="#fonti">Fonti</a>
@@ -742,6 +765,28 @@
 <p class="desc">Documento relativo alla prova d'esame 2015 di Costruzioni Aeronautiche.</p>
 <a class="open" href="pdf/esercizio_longherone.pdf" rel="noopener noreferrer" target="_blank">Apri il PDF <span class="arr">→</span></a>
 </article>
+</div>
+</section>
+<section class="wrap" data-label="ministeriali" id="ministeriali">
+<div class="sec-head">
+<p class="tag">Tracce ufficiali · archivio auto-aggiornante</p>
+<h2>Prove ministeriali</h2>
+<hr class="rule"/>
+<p class="sec-note">Le tracce originali del Ministero, organizzate per anno scolastico. L'elenco si aggiorna da solo leggendo l'archivio del corso: scegli l'anno, poi la sessione, e scarica il PDF della prova.</p>
+</div>
+<div class="min-panel">
+<div class="min-row">
+<div class="min-field">
+<label for="minAnno">Anno scolastico</label>
+<select class="min-select" id="minAnno"><option value="">Caricamento…</option></select>
+</div>
+<div class="min-field">
+<label for="minFile">Sessione / prova</label>
+<select class="min-select" disabled="" id="minFile"><option value="">— prima scegli l'anno —</option></select>
+</div>
+<a aria-disabled="true" class="min-dl" download="" href="#" id="minDl">Scarica il PDF <span class="arr">↓</span></a>
+</div>
+<p class="min-status" id="minStatus"></p>
 </div>
 </section>
 <section class="wrap filterable" data-label="supporto" id="supporto">
@@ -2069,8 +2114,10 @@
       if((term || area!=='all') && s._setAccordionOpen){ s._setAccordionOpen(!!any,false); }
     });
     var lic = document.getElementById('licenza');
+    var minsec = document.getElementById('ministeriali');
     var filtering = !!term || area!=='all';
     if(lic) lic.style.display = filtering ? 'none' : '';
+    if(minsec) minsec.style.display = filtering ? 'none' : '';
     empty.classList.toggle('show', visible===0);
     count.innerHTML = '<b>'+visible+'</b> '+(visible===1?'documento':'documenti');
   }
@@ -2219,6 +2266,138 @@
     tt.classList.toggle('show', window.scrollY > 700);
   }, {passive:true});
   tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+<script>
+/* ---------- Prove ministeriali: scansione automatica via API GitHub ---------- */
+(function(){
+  'use strict';
+  var API = 'https://api.github.com/repos/braucci/SCSI/contents/docs/prove_itct';
+  var GH  = 'https://github.com/braucci/SCSI/tree/main/docs/prove_itct';
+  var selAnno = document.getElementById('minAnno'),
+      selFile = document.getElementById('minFile'),
+      btnDl   = document.getElementById('minDl'),
+      status  = document.getElementById('minStatus');
+  if(!selAnno || !selFile || !btnDl || !status) return;
+
+  var RE_ANNO = /^\d{4}-\d{4}$/;
+
+  function cacheGet(k){
+    try{ var v = sessionStorage.getItem(k); return v ? JSON.parse(v) : null; }
+    catch(e){ return null; }
+  }
+  function cacheSet(k,v){
+    try{ sessionStorage.setItem(k, JSON.stringify(v)); }catch(e){}
+  }
+
+  function ghFetch(url, key){
+    var hit = cacheGet(key);
+    if(hit) return Promise.resolve(hit);
+    return fetch(url, {headers:{'Accept':'application/vnd.github+json'}})
+      .then(function(r){
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        return r.json();
+      })
+      .then(function(d){
+        if(!Array.isArray(d)) throw new Error('risposta inattesa');
+        cacheSet(key, d.map(function(x){ return {name:x.name, type:x.type}; }));
+        return d;
+      });
+  }
+
+  function setStatus(msg, isErr){
+    status.innerHTML = msg;
+    status.classList.toggle('err', !!isErr);
+  }
+  function fallback(){
+    setStatus('Elenco momentaneamente non disponibile (limite di richieste raggiunto). ' +
+      'Puoi scaricare le prove direttamente <a href="'+GH+'" target="_blank" rel="noopener noreferrer">dall\u2019archivio su GitHub \u2197</a> ' +
+      'oppure riprovare tra qualche minuto.', true);
+    selAnno.innerHTML = '<option value="">non disponibile</option>';
+    selAnno.disabled = true;
+  }
+
+  function etichetta(nome){
+    var s = nome.replace(/\.pdf$/i,'').replace(/^\d{4}-\d{4}_ITCT_/i,'');
+    s = s.replace(/_/g,' ').toLowerCase();
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  function popolaAnni(items){
+    var anni = items.filter(function(x){ return x.type==='dir' && RE_ANNO.test(x.name); })
+                    .map(function(x){ return x.name; })
+                    .sort().reverse();
+    if(!anni.length){ fallback(); return; }
+    var html = '<option value="">\u2014 scegli l\u2019anno \u2014</option>';
+    anni.forEach(function(a){ html += '<option value="'+a+'">'+a+'</option>'; });
+    selAnno.innerHTML = html;
+    selAnno.disabled = false;
+    setStatus(anni.length + ' anni scolastici in archivio (' + anni[anni.length-1] + ' \u2192 ' + anni[0] + ').');
+  }
+
+  function resetFile(msg){
+    selFile.innerHTML = '<option value="">'+msg+'</option>';
+    selFile.disabled = true;
+    btnDl.setAttribute('aria-disabled','true');
+    btnDl.setAttribute('href','#');
+    btnDl.removeAttribute('download');
+  }
+
+  function popolaFile(anno, items){
+    var pdf = items.filter(function(x){ return x.type==='file' && /\.pdf$/i.test(x.name); })
+                   .map(function(x){ return x.name; })
+                   .sort();
+    if(!pdf.length){ resetFile('nessun PDF per quest\u2019anno'); return; }
+    var html = '<option value="">\u2014 scegli la sessione \u2014</option>';
+    pdf.forEach(function(f){
+      html += '<option value="'+encodeURIComponent(f)+'">'+etichetta(f)+'</option>';
+    });
+    selFile.innerHTML = html;
+    selFile.disabled = false;
+    setStatus(pdf.length + (pdf.length===1 ? ' prova disponibile' : ' prove disponibili') +
+              ' per l\u2019anno ' + anno + '.');
+  }
+
+  selAnno.addEventListener('change', function(){
+    var anno = selAnno.value;
+    resetFile(anno ? 'caricamento\u2026' : '\u2014 prima scegli l\u2019anno \u2014');
+    if(!anno) return;
+    ghFetch(API + '/' + anno, 'minFiles:'+anno)
+      .then(function(d){ popolaFile(anno, d); })
+      .catch(function(){
+        resetFile('elenco non disponibile');
+        setStatus('Impossibile leggere la cartella ' + anno + '. ' +
+          '<a href="'+GH+'/'+anno+'" target="_blank" rel="noopener noreferrer">Aprila su GitHub \u2197</a>.', true);
+      });
+  });
+
+  selFile.addEventListener('change', function(){
+    var f = selFile.value;
+    if(!f){
+      btnDl.setAttribute('aria-disabled','true');
+      btnDl.setAttribute('href','#');
+      btnDl.removeAttribute('download');
+      return;
+    }
+    var nome = decodeURIComponent(f);
+    btnDl.setAttribute('href', 'prove_itct/' + selAnno.value + '/' + f);
+    btnDl.setAttribute('download', nome);
+    btnDl.setAttribute('aria-disabled','false');
+    setStatus('Pronto: <b>' + etichetta(nome) + ' ' + selAnno.value + '</b> \u2014 premi il pulsante per scaricare.');
+  });
+
+  /* avvio pigro: la scansione parte quando la sezione entra in vista (o subito, senza IntersectionObserver) */
+  var avviato = false;
+  function avvia(){
+    if(avviato) return; avviato = true;
+    ghFetch(API, 'minYears').then(popolaAnni).catch(fallback);
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ avvia(); io.disconnect(); } });
+    }, {rootMargin:'400px'});
+    io.observe(document.getElementById('ministeriali'));
+  } else { avvia(); }
 })();
 </script>
 </body>
