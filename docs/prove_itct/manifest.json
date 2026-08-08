@@ -1,0 +1,171 @@
+{
+  "indirizzo": "ITCT",
+  "documenti": [
+    {
+      "anno": "2025/2026",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/202526/Istituti tecnici/Ordinaria/A061_ORD26.pdf",
+      "file": "prove_itct/2025-2026/2025-2026_ITCT_ORDINARIA.pdf",
+      "byte": 271303,
+      "sha256": "bf3adf6292ea8ca11b463a6f2cebc85dc2792beacab8f0ae1b82048c7ebbd6be"
+    },
+    {
+      "anno": "2025/2026",
+      "sessione": "Suppletiva",
+      "url": "https://www.istruzione.it/esame_di_stato/202526/Istituti tecnici/Suppletiva/A061_SUP26.pdf",
+      "file": "prove_itct/2025-2026/2025-2026_ITCT_SUPPLETIVA.pdf",
+      "byte": 347528,
+      "sha256": "394160ef9eefaa9bffc54cfff58484a753d16fb3a9cdb9603eb97ef41cc49036"
+    },
+    {
+      "anno": "2024/2025",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/202425/Istituti tecnici/Ordinaria/A061_ORD25.pdf",
+      "file": "prove_itct/2024-2025/2024-2025_ITCT_ORDINARIA.pdf",
+      "byte": 168727,
+      "sha256": "b7b5ad1f85761e1ba74d196e40816daea2e854a024a0d076fd9cae7b7332fab1"
+    },
+    {
+      "anno": "2024/2025",
+      "sessione": "Suppletiva",
+      "url": "https://www.istruzione.it/esame_di_stato/202425/Istituti tecnici/Suppletiva/A061_SUP25.pdf",
+      "file": "prove_itct/2024-2025/2024-2025_ITCT_SUPPLETIVA.pdf",
+      "byte": 127063,
+      "sha256": "98deeb1c74b7d5111fde604ff82beecb2c47f37e5c8167150cdcd9d8fe5b71a9"
+    },
+    {
+      "anno": "2024/2025",
+      "sessione": "Straordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/202425/Istituti tecnici/Straordinaria/A061_STR25.pdf",
+      "file": "prove_itct/2024-2025/2024-2025_ITCT_STRAORDINARIA.pdf",
+      "byte": 139530,
+      "sha256": "1d847a12971d3557e949a908743701b63ebb6799dc2feedbd7472b773f6961a1"
+    },
+    {
+      "anno": "2023/2024",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/202324/Istituti tecnici/Ordinaria/A061_ORD24.pdf",
+      "file": "prove_itct/2023-2024/2023-2024_ITCT_ORDINARIA.pdf",
+      "byte": 154073,
+      "sha256": "7ca847bcf9636e260b621abe79f680cb69e62042e002495b4ee0f118bda759be"
+    },
+    {
+      "anno": "2022/2023",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/202223/Istituti tecnici/Ordinaria/A061_ORD23.pdf",
+      "file": "prove_itct/2022-2023/2022-2023_ITCT_ORDINARIA.pdf",
+      "byte": 153944,
+      "sha256": "3d80fc825cc74c5b78f040801352891eab08f784a86c82d91e2e931f752b53cf"
+    },
+    {
+      "anno": "2022/2023",
+      "sessione": "Straordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/202223/Istituti tecnici/Straordinaria/A061_STR23.pdf",
+      "file": "prove_itct/2022-2023/2022-2023_ITCT_STRAORDINARIA.pdf",
+      "byte": 155806,
+      "sha256": "3745dfbedfd3ce4179d6e929894a9eb47f2a17be6137f6c0c800848576304259"
+    },
+    {
+      "anno": "2018/2019",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/201819/Istituti tecnici/Ordinaria/A014_ORD19.pdf",
+      "file": "prove_itct/2018-2019/2018-2019_ITCT_ORDINARIA.pdf",
+      "byte": 227863,
+      "sha256": "fb16f4b9b5d229ed4b149d7e764fc584ef34c5af2646f158e8bb584b5ad34565"
+    },
+    {
+      "anno": "2017/2018",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/201718/Istituti tecnici/Ordinaria/I241_ORD18.pdf",
+      "file": "prove_itct/2017-2018/2017-2018_ITCT_ORDINARIA.pdf",
+      "byte": 361552,
+      "sha256": "88fe26c41ca31c440281819322423482f83ae3069aba2854a6f251fe40cca482"
+    },
+    {
+      "anno": "2017/2018",
+      "sessione": "Suppletiva",
+      "url": "https://www.istruzione.it/esame_di_stato/201718/Istituti tecnici/Suppletiva/I241_SUP18.pdf",
+      "file": "prove_itct/2017-2018/2017-2018_ITCT_SUPPLETIVA.pdf",
+      "byte": 277643,
+      "sha256": "70a153206acf7841dd90b6aa9695e0236c2dc5af7924cda64cc239c17084a62e"
+    },
+    {
+      "anno": "2016/2017",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/201617/Istituti tecnici/Ordinaria/I241_ORD17.pdf",
+      "file": "prove_itct/2016-2017/2016-2017_ITCT_ORDINARIA.pdf",
+      "byte": 193475,
+      "sha256": "3abb7cfc2b88f7c2312f34cb0c1949ba9cf031cf49c135e8f9bab017e0a07506"
+    },
+    {
+      "anno": "2015/2016",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/201516/Istituti tecnici/Ordinaria/M001_ORD16.pdf",
+      "file": "prove_itct/2015-2016/2015-2016_ITCT_ORDINARIA.pdf",
+      "byte": 250821,
+      "sha256": "5517b8a9e1aea3956c162403ed76069a285d4da16132d08f1a1e590562e03576"
+    },
+    {
+      "anno": "2014/2015",
+      "sessione": "Ordinaria",
+      "url": "https://www.istruzione.it/esame_di_stato/201415/Istituti tecnici/Ordinaria/M543_ORD.pdf",
+      "file": "prove_itct/2014-2015/2014-2015_ITCT_ORDINARIA.pdf",
+      "byte": 196357,
+      "sha256": "c346d36b49af21c5d0966833645e5610957dafbeb8eecdbbc8cf9a31717c00ff"
+    },
+    {
+      "anno": "2014/2015",
+      "sessione": "Esempio di prova",
+      "url": "https://www.istruzione.it/esame_di_stato/201415/Istituti tecnici/Esempio di prova/M543_SIM.pdf",
+      "file": "prove_itct/2014-2015/2014-2015_ITCT_ESEMPIO_DI_PROVA.pdf",
+      "byte": 40852,
+      "sha256": "3d5d93014ced5d911d81d01fb57fef5567c7ce5ebea361130337dd214773d754"
+    }
+  ],
+  "annate_senza_download": [
+    {
+      "anno": "2021/2022",
+      "motivo": "Trovate 0 voci ITCT: impossibile scegliere in modo sicuro."
+    },
+    {
+      "anno": "2013/2014",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2012/2013",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2011/2012",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2010/2011",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2009/2010",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2008/2009",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2007/2008",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2006/2007",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2005/2006",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    },
+    {
+      "anno": "2004/2005",
+      "motivo": "La sezione 'Istituti Tecnici' non è presente per questo anno."
+    }
+  ]
+}
