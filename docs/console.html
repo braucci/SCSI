@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171d24">
+  <meta name="description" content="L'archivio di Costruzioni Aeronautiche del Prof. Ing. Biagio Raucci: lezioni, monografie, slide ed esercizi in una console portatile retrò.">
+  <title>Aero Pocket — Costruzioni Aeronautiche · B. Raucci</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="portal-switch.css">
+  <script src="catalog.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="signature" href="https://www.raucci.net/" target="_blank" rel="noopener noreferrer">B. Raucci<span>ARCHIVIO DIDATTICO</span></a>
+    <div class="top-actions"><button id="sound" class="sound" aria-pressed="false" aria-label="Attiva i suoni">SUONO <span>OFF</span></button><a href="classico.html">Portale classico ↗</a><a href="index.html">Scelta portale</a></div>
+  </header>
+  <main>
+    <div class="console-wrap">
+      <div class="power-bar"><button id="power" aria-label="Spegni la console" aria-pressed="true"><span></span></button><span>OFF · ON</span></div>
+      <section class="console" aria-label="Aero Pocket, console dell'archivio didattico">
+        <div class="seam" aria-hidden="true"></div>
+        <div class="bezel">
+          <div class="bezel-label"><i></i><span>DOT MATRIX WITH STEREO SOUND</span><i></i></div>
+          <div class="battery"><span id="led"></span><small>BATTERY</small></div>
+          <div class="lcd" id="lcd" tabindex="-1" aria-label="Schermo della console">
+            <div id="screen"></div>
+            <div class="lcd-glass" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="device-brand"><strong>RAUCCI</strong><span>AERO POCKET</span><sup>01</sup></div>
+        <div class="controls">
+          <div class="dpad" role="group" aria-label="Croce direzionale">
+            <button class="direction up" data-key="up" aria-label="Su">▲</button>
+            <button class="direction left" data-key="left" aria-label="Pagina precedente">◀</button>
+            <span class="dpad-center" aria-hidden="true"></span>
+            <button class="direction right" data-key="right" aria-label="Pagina successiva">▶</button>
+            <button class="direction down" data-key="down" aria-label="Giù">▼</button>
+          </div>
+          <div class="action-well"><div class="action-unit"><button class="action b" data-key="b" aria-label="B — Indietro">B</button><span>B</span></div><div class="action-unit"><button class="action a" data-key="a" aria-label="A — Apri o conferma">A</button><span>A</span></div></div>
+        </div>
+        <div class="system-controls"><div><button data-key="select" aria-label="Select — Cerca nell'archivio"></button><span>SELECT</span></div><div><button data-key="start" aria-label="Start — Menu principale"></button><span>START</span></div></div>
+        <div class="speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="phones" aria-hidden="true">PHONES</span>
+      </section>
+    </div>
+    <div class="instructions" aria-label="Comandi"><span><kbd>↑ ↓</kbd> scegli</span><span><kbd>A</kbd> apri</span><span><kbd>B</kbd> indietro</span><span><kbd>START</kbd> menu</span><span><kbd>SELECT</kbd> cerca</span></div>
+    <p class="keyboard-note">Usa i pulsanti, tocca lo schermo o premi le frecce e Invio.</p>
+    <p id="notice" class="notice" role="status" aria-live="polite"></p>
+  </main>
+  <footer><span>Prof. Ing. Biagio Raucci</span><span>Costruzioni Aeronautiche <b>·</b> CC BY-NC-ND 4.0</span></footer>
+  <noscript>Attiva JavaScript per caricare il catalogo condiviso dei documenti.</noscript>
+</body>
+</html>
