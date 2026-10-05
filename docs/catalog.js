@@ -1277,6 +1277,27 @@ window.CORSO_CATALOG = {
       "byline": "Traccia proiettata della lezione — accompagna la monografia «Punti caratteristici e polari tecniche» (<em>MON · PUNTI</em>)"
     },
     {
+      "id": "slide-volo-livellato",
+      "section": "slide",
+      "area": "slide",
+      "title": "Volo livellato — calcolo delle velocità e inviluppo di volo",
+      "code": "SLIDE · LIVELLATO",
+      "meta": "Presentazione · Meccanica del volo · V anno · UdA 1 · 61 slide · 10 parti",
+      "description": "Volo rettilineo uniforme orizzontale: dalle <em>equazioni di equilibrio</em> alle curve di <em>spinta e potenza necessarie</em>, con la distinzione fra resistenza parassita e indotta. Velocità e assetti caratteristici, primo e secondo regime, influenza della quota e caratteristiche propulsive disponibili. Determinazione <strong>grafica e analitica delle velocità minima e massima</strong>: equazione biquadratica per i velivoli a getto e soluzione iterativa per quelli ad elica. Effetti della comprimibilità, limiti operativi e costruzione dell’<em>inviluppo di volo</em> nelle rappresentazioni TAS, Mach e CAS/EAS. Chiudono il collegamento fra crociera e parametri di progetto <em>T/W</em> e <em>W/S</em>, un formulario di sintesi e domande per il lavoro in classe.",
+      "links": [
+        {
+          "label": "Apri le slide",
+          "url": "slide/volo_livellato_slide.pdf"
+        },
+        {
+          "label": "Monografia collegata",
+          "url": "pdf/volo_livellato.pdf"
+        }
+      ],
+      "year": 5,
+      "byline": "Volo rettilineo uniforme orizzontale — metodo grafico, metodo analitico e inviluppo di volo; accompagna la monografia «Volo livellato — calcolo delle velocità»."
+    },
+    {
       "id": "doc-070",
       "section": "esercizi",
       "area": "esercizi",
