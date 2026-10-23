@@ -126,6 +126,21 @@ window.CORSO_CATALOG = {
   },
   "records": [
     {
+      "id": "doc-100",
+      "section": "prove",
+      "area": "prove",
+      "title": "Raccolta ragionata di temi d'esame di Aerotecnica — 1939–1993",
+      "code": "ES · 1939-93",
+      "meta": "Archivio storico · 59 prove · 598 pp",
+      "description": "Cinquantanove prove di Aerotecnica e Costruzioni Aeronautiche degli Esami di Stato, dalla sessione estiva del 1939-40 all'ultima del 1992-93, trascritte nel SI e nella notazione internazionale e risolte per intero. Ogni prova è un capitolo autonomo con la stessa struttura: il <em>testo originale</em>, la traduzione della traccia in domande tecniche precise («che cosa ci sta chiedendo davvero»), l'<strong>apparato teorico</strong> ricostruito da zero — le formule si ricavano, non si citano —, i dati con le ipotesi mancanti dichiarate e motivate, lo <strong>svolgimento a passi</strong> con la verifica finale di omogeneità, coerenza e ordini di grandezza, e una <em>discussione</em> che confronta i risultati con lo svolgimento d'epoca. Il confronto non è di cortesia: dove gli originali sbagliano — una convenzione dei coefficienti d'elica che porta a un rendimento di 1,48, una velocità di virata usata al posto di quella livellata, una planata assegnata sotto lo stallo, i gradi centesimali scambiati per sessagesimali — lo si dice e si spiega <em>perché</em>. Attraverso le prove si attraversa mezzo secolo di meccanica del volo: curve delle potenze, indice di quota, virata corretta nelle sue tre varianti e il supero di potenza <em>n</em><sup>3/2</sup>, coppia di reazione e semiali diseguali, eliche a passo fisso e variabile, autonomie di Bréguet, fino ai turboreattori, al decollo e all'intercettazione degli ultimi anni. In appendice il <strong>formulario</strong>, costruito voce per voce da ciò che le prove hanno insegnato e corredato dei controlli rapidi che hanno smascherato gli errori, l'<em>indice ragionato</em> che collega ogni voce alle prove in cui compare e viceversa, la tabella dell'atmosfera standard e l'elenco dei simboli. Ogni valore numerico è ricalcolato con uno script Python indipendente.",
+      "links": [
+        {
+          "label": "Apri il PDF",
+          "url": "pdf/temi_esame.pdf"
+        }
+      ]
+    },
+    {
       "id": "doc-001",
       "section": "prove",
       "area": "prove",
