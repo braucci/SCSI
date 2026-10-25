@@ -31,6 +31,11 @@ window.CORSO_CATALOG = {
       "heading": "Esercizi svolti e schemi metodologici"
     },
     {
+      "id": "cfd",
+      "label": "CFD",
+      "heading": "Fluidodinamica numerica (CFD)"
+    },
+    {
       "id": "approfondimenti",
       "label": "Approfondimenti",
       "heading": "Approfondimenti"
@@ -53,6 +58,7 @@ window.CORSO_CATALOG = {
     "normativa": "Normativa",
     "laboratorio": "Laboratorio",
     "esercizi": "Esercizi",
+    "cfd": "Fluidodinamica numerica (CFD)",
     "approfondimenti": "Approfondimenti",
     "fonti": "Fonti storiche"
   },
@@ -1552,6 +1558,22 @@ window.CORSO_CATALOG = {
           "url": "pdf/decollo_e_atterraggio_esercizi.pdf"
         }
       ]
+    },
+    {
+      "id": "cfd-portale",
+      "section": "cfd",
+      "area": "cfd",
+      "title": "Monografie di fluidodinamica numerica",
+      "code": "CFD · MODULI 0–4",
+      "meta": "5 monografie · PDF, programmi Python ed esercizi svolti",
+      "description": "Un percorso modulare di fluidodinamica numerica: dagli strumenti Python e dai problemi ai valori iniziali ai flussi non viscosi e viscosi, fino alla soluzione numerica delle equazioni di Navier–Stokes. Il portale CFD raccoglie per ogni modulo la monografia in PDF, i programmi commentati e gli esercizi svolti.",
+      "links": [
+        {
+          "label": "Apri il portale CFD",
+          "url": "https://braucci.github.io/CFD/"
+        }
+      ],
+      "featured": true
     },
     {
       "id": "doc-086",
